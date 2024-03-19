@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Group _$GroubFromJson(Map<String, dynamic> json) {
+Group _$GroupFromJson(Map<String, dynamic> json) {
   return _Group.fromJson(json);
 }
 
@@ -25,21 +25,21 @@ mixin _$Group {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GroubCopyWith<Group> get copyWith => throw _privateConstructorUsedError;
+  $GroupCopyWith<Group> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GroubCopyWith<$Res> {
-  factory $GroubCopyWith(Group value, $Res Function(Group) then) =
-      _$GroubCopyWithImpl<$Res, Group>;
+abstract class $GroupCopyWith<$Res> {
+  factory $GroupCopyWith(Group value, $Res Function(Group) then) =
+      _$GroupCopyWithImpl<$Res, Group>;
   @useResult
   $Res call({String? id, String name});
 }
 
 /// @nodoc
-class _$GroubCopyWithImpl<$Res, $Val extends Group>
-    implements $GroubCopyWith<$Res> {
-  _$GroubCopyWithImpl(this._value, this._then);
+class _$GroupCopyWithImpl<$Res, $Val extends Group>
+    implements $GroupCopyWith<$Res> {
+  _$GroupCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -66,21 +66,21 @@ class _$GroubCopyWithImpl<$Res, $Val extends Group>
 }
 
 /// @nodoc
-abstract class _$$GroubImplCopyWith<$Res> implements $GroubCopyWith<$Res> {
-  factory _$$GroubImplCopyWith(
-          _$GroubImpl value, $Res Function(_$GroubImpl) then) =
-      __$$GroubImplCopyWithImpl<$Res>;
+abstract class _$$GroupImplCopyWith<$Res> implements $GroupCopyWith<$Res> {
+  factory _$$GroupImplCopyWith(
+          _$GroupImpl value, $Res Function(_$GroupImpl) then) =
+      __$$GroupImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? id, String name});
 }
 
 /// @nodoc
-class __$$GroubImplCopyWithImpl<$Res>
-    extends _$GroubCopyWithImpl<$Res, _$GroubImpl>
-    implements _$$GroubImplCopyWith<$Res> {
-  __$$GroubImplCopyWithImpl(
-      _$GroubImpl _value, $Res Function(_$GroubImpl) _then)
+class __$$GroupImplCopyWithImpl<$Res>
+    extends _$GroupCopyWithImpl<$Res, _$GroupImpl>
+    implements _$$GroupImplCopyWith<$Res> {
+  __$$GroupImplCopyWithImpl(
+      _$GroupImpl _value, $Res Function(_$GroupImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -89,7 +89,7 @@ class __$$GroubImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = null,
   }) {
-    return _then(_$GroubImpl(
+    return _then(_$GroupImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -104,11 +104,11 @@ class __$$GroubImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GroubImpl with DiagnosticableTreeMixin implements _Group {
-  const _$GroubImpl({this.id, required this.name});
+class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
+  const _$GroupImpl({this.id, required this.name});
 
-  factory _$GroubImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GroubImplFromJson(json);
+  factory _$GroupImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GroupImplFromJson(json);
 
   @override
   final String? id;
@@ -117,14 +117,14 @@ class _$GroubImpl with DiagnosticableTreeMixin implements _Group {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Groub(id: $id, name: $name)';
+    return 'Group(id: $id, name: $name)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Groub'))
+      ..add(DiagnosticsProperty('type', 'Group'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name));
   }
@@ -133,7 +133,7 @@ class _$GroubImpl with DiagnosticableTreeMixin implements _Group {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GroubImpl &&
+            other is _$GroupImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -145,12 +145,12 @@ class _$GroubImpl with DiagnosticableTreeMixin implements _Group {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$GroubImplCopyWith<_$GroubImpl> get copyWith =>
-      __$$GroubImplCopyWithImpl<_$GroubImpl>(this, _$identity);
+  _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>
+      __$$GroupImplCopyWithImpl<_$GroupImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$GroubImplToJson(
+    return _$$GroupImplToJson(
       this,
     );
   }
@@ -158,9 +158,9 @@ class _$GroubImpl with DiagnosticableTreeMixin implements _Group {
 
 abstract class _Group implements Group {
   const factory _Group({final String? id, required final String name}) =
-      _$GroubImpl;
+      _$GroupImpl;
 
-  factory _Group.fromJson(Map<String, dynamic> json) = _$GroubImpl.fromJson;
+  factory _Group.fromJson(Map<String, dynamic> json) = _$GroupImpl.fromJson;
 
   @override
   String? get id;
@@ -168,6 +168,6 @@ abstract class _Group implements Group {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$GroubImplCopyWith<_$GroubImpl> get copyWith =>
+  _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

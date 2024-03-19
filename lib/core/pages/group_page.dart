@@ -1,5 +1,6 @@
 import 'package:ayad/core/models/group.dart';
 import 'package:ayad/core/pages/page_template.dart';
+import 'package:ayad/core/pages/products_page.dart';
 import 'package:ayad/core/providers/get_sub_groub_provider.dart';
 import 'package:ayad/core/widgets/group_button_widget.dart';
 import 'package:ayad/core/widgets/type_ahead_widget.dart';
@@ -37,21 +38,14 @@ class SubGroupPage extends ConsumerWidget {
                                         group: e,
                                         onTap: () {
                                           // if (group == fakeGroups.first) {
+                                          if (group == fakeSub2Group.first) {
+                                            context.push(ProductsPage.routePath,
+                                                extra: data.first);
+                                          } else {
                                             context.push(routePath,
                                                 extra: data.first);
-                                          // }
-                                          // else if (group ==
-                                          //     fakeSubGroup.first) {
-                                          //   context.push(routePath,
-                                          //       extra: fakeSub2Group.first);
-                                          // } else if (group ==
-                                          //     fakeSub2Group.first) {
-                                          //       context.push(routePath,
-                                          //       extra: fakeSub3Group.first);
-                                          // } else if (group ==
-                                          //     fakeSub3Group.first) {
-                                          //       //Push To List Proudects Page
-                                          // }
+                                          }
+                                          
                                         },
                                       ))
                                   .toList(),

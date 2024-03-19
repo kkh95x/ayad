@@ -345,8 +345,9 @@ class MainTextFieldWidget extends ConsumerWidget {
                                               : 1,
                                     ),
                             //floatingLabelBehavior: FloatingLabelBehavior.never,
-                            suffixStyle: textThemeLight.labelSmall!.copyWith(
-                                color: colorProvider.greyish.shade400),
+                            
+                            // suffixStyle: textThemeLight.labelSmall!.copyWith(
+                            //     color: colorProvider.greyish.shade400),
                             suffixIcon: (suffixIcon != null)
                                 ? suffixIcon
                                 : obscure

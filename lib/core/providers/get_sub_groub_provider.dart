@@ -55,14 +55,7 @@ final fakeSub3Group = const <Group>[
         Group(name: "A${i}e"),
       ]
     ];
-const fakeSub4Group= <Group>[
-  Group(name: "WF"),
-  Group(name: "أومليد"),
-  Group(name: "أصلي"),
-  Group(name: "سيرفس صيني"),
-  Group(name: "TFT"),
 
-];
 final getSubGroupProvider =
     FutureProvider.family<List<Group>, Group>((ref, arge) async {
   await Future.delayed(const Duration(seconds: 2));
@@ -72,8 +65,8 @@ final getSubGroupProvider =
     return fakeSub2Group;
   } else if (arge == fakeSub2Group.first) {
     return fakeSub3Group;
-  }else if(arge == fakeSub3Group.first){
-    return fakeSub4Group;
   }
+  // else if(arge == fakeSub3Group.first){
+  // }
   return [];
 });

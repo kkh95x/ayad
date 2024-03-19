@@ -28,17 +28,27 @@ class LoginPage extends ConsumerWidget {
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 100.h,),
-          LottieBuilder.asset(Assets.json.login, repeat: true,height: 200.h,),
+          SizedBox(
+            height: 150.h,
+          ),
+          LottieBuilder.asset(
+            Assets.json.login,
+            repeat: true,
+            height: 150.h,
+            fit: BoxFit.cover,
+          ),
           MainTextFieldWidget(
-            placeholder: "username",
+            
+            suffixIcon: const Icon(Icons.person),
+            placeholder: "اسم المستخدم",
             control: "username",
           ),
           SizedBox(
             height: 10.h,
           ),
           MainTextFieldWidget(
-            placeholder: "password",
+            suffixIcon: const Icon(Icons.password),
+            placeholder: "كلمة المرور",
             control: "password",
           ),
           SizedBox(

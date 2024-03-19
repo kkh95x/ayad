@@ -16,5 +16,5 @@ class Group with _$Group {
   }) = _Group;
 
   factory Group.fromJson(Map<String, Object?> json)
-      => _$GroubFromJson(json);
+      => _$GroupFromJson(json);
 }

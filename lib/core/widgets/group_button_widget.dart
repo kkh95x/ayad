@@ -5,14 +5,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GroupButtonWidget extends ConsumerWidget {
-  const GroupButtonWidget({super.key, required this.group,this.onTap});
+  const GroupButtonWidget({super.key, required this.group, this.onTap});
   final Group group;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
     return InkWell(
-      onTap:() {
+       borderRadius: BorderRadius.circular(8.r),
+      onTap: () {
         onTap?.call();
       },
       child: Container(

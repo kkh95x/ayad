@@ -33,11 +33,22 @@ class $AssetsPngGen {
   List<AssetGenImage> get values => [background, logo];
 }
 
+class $AssetsSvgGen {
+  const $AssetsSvgGen();
+
+  /// File path: assets/svg/whatsapp-white-icon.svg
+  String get whatsappWhiteIcon => 'assets/svg/whatsapp-white-icon.svg';
+
+  /// List of all assets
+  List<String> get values => [whatsappWhiteIcon];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsJsonGen json = $AssetsJsonGen();
   static const $AssetsPngGen png = $AssetsPngGen();
+  static const $AssetsSvgGen svg = $AssetsSvgGen();
 }
 
 class AssetGenImage {
