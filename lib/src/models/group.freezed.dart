@@ -22,6 +22,10 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
 mixin _$Group {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get name2 => throw _privateConstructorUsedError;
+  bool get isHiden => throw _privateConstructorUsedError;
+  String? get groupCode => throw _privateConstructorUsedError;
+  String? get groupNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +37,13 @@ abstract class $GroupCopyWith<$Res> {
   factory $GroupCopyWith(Group value, $Res Function(Group) then) =
       _$GroupCopyWithImpl<$Res, Group>;
   @useResult
-  $Res call({String? id, String name});
+  $Res call(
+      {String? id,
+      String name,
+      String name2,
+      bool isHiden,
+      String? groupCode,
+      String? groupNumber});
 }
 
 /// @nodoc
@@ -51,6 +61,10 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
   $Res call({
     Object? id = freezed,
     Object? name = null,
+    Object? name2 = null,
+    Object? isHiden = null,
+    Object? groupCode = freezed,
+    Object? groupNumber = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -61,6 +75,22 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      name2: null == name2
+          ? _value.name2
+          : name2 // ignore: cast_nullable_to_non_nullable
+              as String,
+      isHiden: null == isHiden
+          ? _value.isHiden
+          : isHiden // ignore: cast_nullable_to_non_nullable
+              as bool,
+      groupCode: freezed == groupCode
+          ? _value.groupCode
+          : groupCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      groupNumber: freezed == groupNumber
+          ? _value.groupNumber
+          : groupNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -72,7 +102,13 @@ abstract class _$$GroupImplCopyWith<$Res> implements $GroupCopyWith<$Res> {
       __$$GroupImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String name});
+  $Res call(
+      {String? id,
+      String name,
+      String name2,
+      bool isHiden,
+      String? groupCode,
+      String? groupNumber});
 }
 
 /// @nodoc
@@ -88,6 +124,10 @@ class __$$GroupImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = null,
+    Object? name2 = null,
+    Object? isHiden = null,
+    Object? groupCode = freezed,
+    Object? groupNumber = freezed,
   }) {
     return _then(_$GroupImpl(
       id: freezed == id
@@ -98,6 +138,22 @@ class __$$GroupImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      name2: null == name2
+          ? _value.name2
+          : name2 // ignore: cast_nullable_to_non_nullable
+              as String,
+      isHiden: null == isHiden
+          ? _value.isHiden
+          : isHiden // ignore: cast_nullable_to_non_nullable
+              as bool,
+      groupCode: freezed == groupCode
+          ? _value.groupCode
+          : groupCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      groupNumber: freezed == groupNumber
+          ? _value.groupNumber
+          : groupNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -105,7 +161,13 @@ class __$$GroupImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
-  const _$GroupImpl({this.id, required this.name});
+  const _$GroupImpl(
+      {this.id,
+      required this.name,
+      required this.name2,
+      required this.isHiden,
+      this.groupCode,
+      this.groupNumber});
 
   factory _$GroupImpl.fromJson(Map<String, dynamic> json) =>
       _$$GroupImplFromJson(json);
@@ -114,10 +176,18 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
   final String? id;
   @override
   final String name;
+  @override
+  final String name2;
+  @override
+  final bool isHiden;
+  @override
+  final String? groupCode;
+  @override
+  final String? groupNumber;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Group(id: $id, name: $name)';
+    return 'Group(id: $id, name: $name, name2: $name2, isHiden: $isHiden, groupCode: $groupCode, groupNumber: $groupNumber)';
   }
 
   @override
@@ -126,7 +196,11 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
     properties
       ..add(DiagnosticsProperty('type', 'Group'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name));
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('name2', name2))
+      ..add(DiagnosticsProperty('isHiden', isHiden))
+      ..add(DiagnosticsProperty('groupCode', groupCode))
+      ..add(DiagnosticsProperty('groupNumber', groupNumber));
   }
 
   @override
@@ -135,12 +209,19 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
         (other.runtimeType == runtimeType &&
             other is _$GroupImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.name2, name2) || other.name2 == name2) &&
+            (identical(other.isHiden, isHiden) || other.isHiden == isHiden) &&
+            (identical(other.groupCode, groupCode) ||
+                other.groupCode == groupCode) &&
+            (identical(other.groupNumber, groupNumber) ||
+                other.groupNumber == groupNumber));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, name2, isHiden, groupCode, groupNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -157,8 +238,13 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
 }
 
 abstract class _Group implements Group {
-  const factory _Group({final String? id, required final String name}) =
-      _$GroupImpl;
+  const factory _Group(
+      {final String? id,
+      required final String name,
+      required final String name2,
+      required final bool isHiden,
+      final String? groupCode,
+      final String? groupNumber}) = _$GroupImpl;
 
   factory _Group.fromJson(Map<String, dynamic> json) = _$GroupImpl.fromJson;
 
@@ -166,6 +252,14 @@ abstract class _Group implements Group {
   String? get id;
   @override
   String get name;
+  @override
+  String get name2;
+  @override
+  bool get isHiden;
+  @override
+  String? get groupCode;
+  @override
+  String? get groupNumber;
   @override
   @JsonKey(ignore: true)
   _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>

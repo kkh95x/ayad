@@ -1,4 +1,4 @@
-import 'package:ayad/core/models/product.dart';
+import 'package:ayad/src/models/product.dart';
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/theme.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +15,9 @@ class WhatsAppButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
     return Container(
-      height: 40.h,
+      height: 35.h,
       decoration: BoxDecoration(
-          color: appColor.greenish, borderRadius: BorderRadius.circular(16.r)),
+          color: appColor.greenish, borderRadius: BorderRadius.circular(8.r)),
       padding: EdgeInsets.symmetric(horizontal: 20.h),
       child: InkWell(
         onTap: () async {

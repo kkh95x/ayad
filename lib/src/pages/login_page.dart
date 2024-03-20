@@ -1,6 +1,6 @@
-import 'package:ayad/core/pages/page_template.dart';
-import 'package:ayad/core/widgets/dynamic_button.dart';
-import 'package:ayad/core/widgets/main_text_input_widget.dart';
+import 'package:ayad/src/pages/page_template.dart';
+import 'package:ayad/src/widgets/dynamic_button.dart';
+import 'package:ayad/src/widgets/main_text_input_widget.dart';
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/users/auth/auth_notifier.dart';
 import 'package:flutter/material.dart';

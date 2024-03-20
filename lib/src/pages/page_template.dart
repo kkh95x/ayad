@@ -1,4 +1,4 @@
-import 'package:ayad/core/pages/home_page.dart';
+import 'package:ayad/src/pages/home_page.dart';
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/router.dart';
 import 'package:ayad/theme.dart';
@@ -151,6 +151,11 @@ class CustomAppBar extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
                               color: colorProvider.redish, width: 1)),
+                      child: Assets.png.logo.image(
+                        fit: BoxFit.cover,
+                        width: 52.r,
+                        height: 45.r,
+                      ),
                     ),
                   ),
                   if (title != null) ...[
@@ -170,17 +175,17 @@ class CustomAppBar extends ConsumerWidget {
                           .textTheme
                           .bodySmall
                           ?.copyWith(fontSize: 10.sp)),
-              IconButton(
-                icon: const Icon(Icons.arrow_forward_ios),
-                onPressed: onPressedBack ??
-                    () {
-                      if (context.canPop()) {
-                        context.pop();
-                      } else {
-                        context.go(HomePage.routePath);
-                      }
-                    },
-              ),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_forward_ios),
+                    onPressed: onPressedBack ??
+                        () {
+                          if (context.canPop()) {
+                            context.pop();
+                          } else {
+                            context.go(HomePage.routePath);
+                          }
+                        },
+                  ),
                 ],
               ),
             ],

@@ -1,4 +1,4 @@
-import 'package:ayad/core/models/product.dart';
+import 'package:ayad/src/models/product.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const fakeSubProducts = <Product>[
@@ -33,7 +33,7 @@ const fakeSubProducts = <Product>[
       makfol: true,      groupName: "شاشات سامسونغ A01",
 
       imageUrl:
-          "https://ae01.alicdn.com/kf/S214c97682eec48e3820898c6b4b81f29u/LCD-For-BLUBOO-S8-Plus-Touch-Screen-Display-Original-MTK6750T-Octa-Core-6-0Inch-Mobile-Phone.jpg",
+          "https://ae01.alicdn.com/kf/S214c97682eec48e3820898c6b4b81f29u/LCD-For-BLUBOO-S8-Plus-Touch-Screen-Display-Original-MTK6750T-Octa-src-6-0Inch-Mobile-Phone.jpg",
       price: 60,
       productCode: "LC232334",
       type: "أصلي",

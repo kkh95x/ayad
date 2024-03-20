@@ -20,6 +20,7 @@ class Product with _$Product {
       String? imageUrl,
       String? type,
       bool? makfol,
+    
       String? description}) = _Product;
 
   factory Product.fromJson(Map<String, Object?> json) =>

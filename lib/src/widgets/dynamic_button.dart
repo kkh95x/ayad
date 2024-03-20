@@ -59,10 +59,7 @@ class DynamicButton extends ConsumerWidget {
                             width: 1, color: colorProvider.greenish.shade200)
                         : BorderSide.none),
                 borderRadius: BorderRadius.all(
-                  Radius.circular(type == ButtonTypes.onPrimary ||
-                          type == ButtonTypes.Alternative
-                      ? 20
-                      : radius),
+                  Radius.circular(radius),
                 ),
               ),
         ),

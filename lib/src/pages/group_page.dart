@@ -1,9 +1,11 @@
-import 'package:ayad/core/models/group.dart';
-import 'package:ayad/core/pages/page_template.dart';
-import 'package:ayad/core/pages/products_page.dart';
-import 'package:ayad/core/providers/get_sub_groub_provider.dart';
-import 'package:ayad/core/widgets/group_button_widget.dart';
-import 'package:ayad/core/widgets/type_ahead_widget.dart';
+import 'package:ayad/src/components/dialogs.dart';
+import 'package:ayad/src/models/group.dart';
+import 'package:ayad/src/pages/page_template.dart';
+import 'package:ayad/src/pages/products_page.dart';
+import 'package:ayad/src/providers/get_sub_groub_provider.dart';
+import 'package:ayad/src/widgets/dynamic_button.dart';
+import 'package:ayad/src/widgets/group_button_widget.dart';
+import 'package:ayad/src/widgets/type_ahead_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,6 +25,35 @@ class SubGroupPage extends ConsumerWidget {
           child: Column(
             children: [
               const TextSearchWidget(),
+              SizedBox(
+                height: 10.h,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: DynamicButton(
+                      type: ButtonTypes.Secondary,
+                      title: "إضافة مجموعة جديدة",
+                      onPressed: () async {
+                        await DilogsHelper.showGroupForm(context);
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  Expanded(
+                    child: DynamicButton(
+                      type: ButtonTypes.Secondary,
+                      title: "إضافة منتج جديد",
+                      onPressed: () async{ await DilogsHelper.showProductForm(context);},
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
               Expanded(
                 child: Consumer(
                   builder: (context, ref, child) {
@@ -45,7 +76,6 @@ class SubGroupPage extends ConsumerWidget {
                                             context.push(routePath,
                                                 extra: data.first);
                                           }
-                                          
                                         },
                                       ))
                                   .toList(),

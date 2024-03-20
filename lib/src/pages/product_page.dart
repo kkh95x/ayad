@@ -1,6 +1,8 @@
-import 'package:ayad/core/models/product.dart';
-import 'package:ayad/core/pages/page_template.dart';
-import 'package:ayad/core/widgets/whats_app_button.dart';
+import 'package:ayad/src/components/dialogs.dart';
+import 'package:ayad/src/models/product.dart';
+import 'package:ayad/src/pages/page_template.dart';
+import 'package:ayad/src/widgets/dynamic_button.dart';
+import 'package:ayad/src/widgets/whats_app_button.dart';
 import 'package:ayad/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -126,6 +128,16 @@ class ProductPage extends ConsumerWidget {
                           height: 40.h,
                         ),
                         WhatsAppButton(product: product),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        DynamicButton(
+                          title: "تحديث",
+                          onPressed: () async {
+                            await DilogsHelper.showProductForm(context,
+                                product: product);
+                          },
+                        ),
                         SizedBox(
                           height: 30.h,
                         )

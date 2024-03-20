@@ -11,6 +11,10 @@ class Group with _$Group {
   const factory Group({
     String? id,
     required String name,
+    required String name2,
+    required bool isHiden,
+    String? groupCode,
+    String? groupNumber,
     
 
   }) = _Group;

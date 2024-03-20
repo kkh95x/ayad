@@ -1,4 +1,4 @@
-import 'package:ayad/core/models/product.dart';
+import 'package:ayad/src/models/product.dart';
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';

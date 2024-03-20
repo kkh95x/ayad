@@ -1,4 +1,4 @@
-import 'package:ayad/core/models/group.dart';
+import 'package:ayad/src/models/group.dart';
 import 'package:ayad/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

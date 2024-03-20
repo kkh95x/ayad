@@ -1,4 +1,4 @@
-import 'package:ayad/core/providers/search_provider.dart';
+import 'package:ayad/src/providers/search_provider.dart';
 import 'package:ayad/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

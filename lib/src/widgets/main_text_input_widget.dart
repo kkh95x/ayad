@@ -403,13 +403,13 @@ class MainTextFieldWidget extends ConsumerWidget {
                           validationMessages: validationMessages ??
                               {
                                 ValidationMessage.required: (error) =>
-                                    "required" ,
+                                    "حقل مطلوب" ,
                                 ValidationMessage.mustMatch: (error) =>
-                                    "Must match" ,
+                                    "يجب ان تكون القيمة متطابقة" ,
                                 ValidationMessage.minLength: (error) =>
-                                    "MinLength 8" ,
+                                    "اقل طول مسموح هو 6 خانات" ,
                                 ValidationMessage.email: (error) =>
-                                    "Email format error" ,
+                                    "البريد الإلكتروني مرفوض" ,
                               },
                           textInputAction: textInputAction,
                           textAlign: TextAlign.start,
