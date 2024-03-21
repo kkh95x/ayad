@@ -2,6 +2,7 @@ import 'package:ayad/src/components/dialogs.dart';
 import 'package:ayad/src/models/product.dart';
 import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
+import 'package:ayad/src/widgets/loading_widget.dart';
 import 'package:ayad/src/widgets/whats_app_button.dart';
 import 'package:ayad/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -68,7 +69,7 @@ class ProductPage extends ConsumerWidget {
                                     progressIndicatorBuilder: (context, url,
                                             progress) =>
                                         const Center(
-                                          child: CircularProgressIndicator(),
+                                          child: LoadingWidget(),
                                         ),
                                     width: MediaQuery.of(context).size.width,
                                     imageUrl: product.imageUrl!),

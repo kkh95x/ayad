@@ -12,7 +12,7 @@ class GroupButtonWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
     return InkWell(
-       borderRadius: BorderRadius.circular(8.r),
+      borderRadius: BorderRadius.circular(8.r),
       onTap: () {
         onTap?.call();
       },
@@ -25,12 +25,28 @@ class GroupButtonWidget extends ConsumerWidget {
               color: appColor.greyish,
               offset: const Offset(1, 1))
         ], color: appColor.redish, borderRadius: BorderRadius.circular(8.r)),
-        child: Text(
-          group.name,
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium
-              ?.copyWith(color: appColor.whiteish),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(),
+            
+            Text(
+              group.name,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: appColor.whiteish),
+            ),
+            if(group.name2.isNotEmpty)...[
+            SizedBox(height: 10.h,),
+            Text(
+              group.name2,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: appColor.whiteish,fontSize: 12),
+            ),]
+          ],
         ),
       ),
     );

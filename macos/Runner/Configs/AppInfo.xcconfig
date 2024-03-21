@@ -8,7 +8,7 @@
 PRODUCT_NAME = ayad
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.ayad
+PRODUCT_BUNDLE_IDENTIFIER = com.karimkhatib.ayad
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2024 com.example. All rights reserved.

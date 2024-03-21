@@ -1,6 +1,7 @@
 import 'package:ayad/src/pages/home_page.dart';
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/router.dart';
+import 'package:ayad/src/pages/profile_page.dart';
 import 'package:ayad/theme.dart';
 import 'package:ayad/users/auth/auth_notifier.dart';
 import 'package:flutter/foundation.dart';
@@ -141,7 +142,7 @@ class CustomAppBar extends ConsumerWidget {
                 children: [
                   InkWell(
                     onTap: () async {
-                      await ref.read(authNotifierProvider.notifier).logout();
+                      context.push(ProfilePage.routePath);
                     },
                     child: Container(
                       width: 52.r,
@@ -166,7 +167,9 @@ class CustomAppBar extends ConsumerWidget {
                     ),
                   ]
                 ],
-              ),
+              )else
+              const SizedBox(),
+
             if (context.canPop()) ...[
               Row(
                 children: [

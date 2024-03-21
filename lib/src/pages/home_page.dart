@@ -2,6 +2,7 @@ import 'package:ayad/src/pages/group_page.dart';
 import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/providers/get_all_main_group_provider.dart';
 import 'package:ayad/src/widgets/group_button_widget.dart';
+import 'package:ayad/src/widgets/loading_widget.dart';
 import 'package:ayad/src/widgets/type_ahead_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,7 +53,7 @@ class HomePage extends ConsumerWidget {
                       },
                       loading: () {
                         return const Center(
-                          child: CircularProgressIndicator(),
+                          child: LoadingWidget(),
                         );
                       },
                     );

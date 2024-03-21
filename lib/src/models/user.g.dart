@@ -7,14 +7,22 @@ part of 'user.dart';
 // **************************************************************************
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-      firstName: json['firstName'] as String,
-      lastName: json['lastName'] as String,
-      age: json['age'] as int,
+      id: json['id'] as String?,
+      fullName: json['fullName'] as String,
+      phone: json['phone'] as String,
+      username: json['username'] as String,
+      password: json['password'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      isAdmin: json['isAdmin'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
-      'age': instance.age,
+      'id': instance.id,
+      'fullName': instance.fullName,
+      'phone': instance.phone,
+      'username': instance.username,
+      'password': instance.password,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'isAdmin': instance.isAdmin,
     };

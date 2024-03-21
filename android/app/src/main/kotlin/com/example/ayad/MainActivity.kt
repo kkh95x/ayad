@@ -1,4 +1,4 @@
-package com.example.ayad
+package com.karimkhatib.ayad
 
 import io.flutter.embedding.android.FlutterActivity
 

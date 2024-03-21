@@ -29,18 +29,24 @@ class $AssetsPngGen {
   /// File path: assets/png/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/png/logo.png');
 
+  /// File path: assets/png/person.png
+  AssetGenImage get person => const AssetGenImage('assets/png/person.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [background, logo];
+  List<AssetGenImage> get values => [background, logo, person];
 }
 
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/loading.json
+  String get loading => 'assets/svg/loading.json';
+
   /// File path: assets/svg/whatsapp-white-icon.svg
   String get whatsappWhiteIcon => 'assets/svg/whatsapp-white-icon.svg';
 
   /// List of all assets
-  List<String> get values => [whatsappWhiteIcon];
+  List<String> get values => [loading, whatsappWhiteIcon];
 }
 
 class Assets {

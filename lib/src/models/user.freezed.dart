@@ -20,9 +20,13 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get firstName => throw _privateConstructorUsedError;
-  String get lastName => throw _privateConstructorUsedError;
-  int get age => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String get fullName => throw _privateConstructorUsedError;
+  String get phone => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  bool get isAdmin => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +38,14 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String firstName, String lastName, int age});
+  $Res call(
+      {String? id,
+      String fullName,
+      String phone,
+      String username,
+      String password,
+      DateTime createdAt,
+      bool isAdmin});
 }
 
 /// @nodoc
@@ -50,23 +61,43 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? age = null,
+    Object? id = freezed,
+    Object? fullName = null,
+    Object? phone = null,
+    Object? username = null,
+    Object? password = null,
+    Object? createdAt = null,
+    Object? isAdmin = null,
   }) {
     return _then(_value.copyWith(
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
               as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
+      phone: null == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      age: null == age
-          ? _value.age
-          : age // ignore: cast_nullable_to_non_nullable
-              as int,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isAdmin: null == isAdmin
+          ? _value.isAdmin
+          : isAdmin // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -78,7 +109,14 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String firstName, String lastName, int age});
+  $Res call(
+      {String? id,
+      String fullName,
+      String phone,
+      String username,
+      String password,
+      DateTime createdAt,
+      bool isAdmin});
 }
 
 /// @nodoc
@@ -91,23 +129,43 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? age = null,
+    Object? id = freezed,
+    Object? fullName = null,
+    Object? phone = null,
+    Object? username = null,
+    Object? password = null,
+    Object? createdAt = null,
+    Object? isAdmin = null,
   }) {
     return _then(_$UserImpl(
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
               as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
+      phone: null == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      age: null == age
-          ? _value.age
-          : age // ignore: cast_nullable_to_non_nullable
-              as int,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isAdmin: null == isAdmin
+          ? _value.isAdmin
+          : isAdmin // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -116,21 +174,36 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl with DiagnosticableTreeMixin implements _User {
   const _$UserImpl(
-      {required this.firstName, required this.lastName, required this.age});
+      {this.id,
+      required this.fullName,
+      required this.phone,
+      required this.username,
+      required this.password,
+      required this.createdAt,
+      this.isAdmin = false});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
   @override
-  final String firstName;
+  final String? id;
   @override
-  final String lastName;
+  final String fullName;
   @override
-  final int age;
+  final String phone;
+  @override
+  final String username;
+  @override
+  final String password;
+  @override
+  final DateTime createdAt;
+  @override
+  @JsonKey()
+  final bool isAdmin;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(firstName: $firstName, lastName: $lastName, age: $age)';
+    return 'User(id: $id, fullName: $fullName, phone: $phone, username: $username, password: $password, createdAt: $createdAt, isAdmin: $isAdmin)';
   }
 
   @override
@@ -138,9 +211,13 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'User'))
-      ..add(DiagnosticsProperty('firstName', firstName))
-      ..add(DiagnosticsProperty('lastName', lastName))
-      ..add(DiagnosticsProperty('age', age));
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('fullName', fullName))
+      ..add(DiagnosticsProperty('phone', phone))
+      ..add(DiagnosticsProperty('username', username))
+      ..add(DiagnosticsProperty('password', password))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('isAdmin', isAdmin));
   }
 
   @override
@@ -148,16 +225,23 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
-            (identical(other.lastName, lastName) ||
-                other.lastName == lastName) &&
-            (identical(other.age, age) || other.age == age));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, firstName, lastName, age);
+  int get hashCode => Object.hash(
+      runtimeType, id, fullName, phone, username, password, createdAt, isAdmin);
 
   @JsonKey(ignore: true)
   @override
@@ -175,18 +259,30 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final String firstName,
-      required final String lastName,
-      required final int age}) = _$UserImpl;
+      {final String? id,
+      required final String fullName,
+      required final String phone,
+      required final String username,
+      required final String password,
+      required final DateTime createdAt,
+      final bool isAdmin}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String get firstName;
+  String? get id;
   @override
-  String get lastName;
+  String get fullName;
   @override
-  int get age;
+  String get phone;
+  @override
+  String get username;
+  @override
+  String get password;
+  @override
+  DateTime get createdAt;
+  @override
+  bool get isAdmin;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
