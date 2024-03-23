@@ -32,8 +32,10 @@ dependencies:
   cached_network_image: ^3.3.1
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
+  fan_carousel_image_slider: ^0.1.2
   flutter:
     sdk: flutter
+  flutter_custom_carousel_slider: ^1.2.0
   flutter_gen: ^5.4.0
   flutter_localizations:
     sdk: flutter
@@ -46,13 +48,15 @@ dependencies:
   image_picker: ^1.0.7
   json_annotation: ^4.8.1
   lottie: ^3.1.0
+  marquee: ^2.2.3
   reactive_date_time_picker: ^3.0.0
   reactive_forms: ^16.1.1
   reactive_phone_form_field: ^2.0.1
   supabase_flutter: ^2.3.4
   svg_flutter: ^0.0.1
   whatsapp_unilink: ^2.1.0
-
+  auto_size_text_plus: ^3.0.1
+  reactive_color_picker: ^2.0.0
 dev_dependencies:
   build_runner: ^2.4.8
   flutter_gen_runner: null
@@ -71,7 +75,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
 flutter_icons:
   android: true
-  image_path: "assets/png/logo_red.png"
+  image_path: "assets/png/logo.png"
 flutter_gen:
   output: lib/gen/ # Optional (default: lib/gen/)
   line_length: 80

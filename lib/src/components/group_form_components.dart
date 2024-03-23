@@ -2,10 +2,12 @@ import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/providers/group_form_provider.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/main_text_input_widget.dart';
+import 'package:ayad/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:reactive_color_picker/reactive_color_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class GroupFormComponent extends ConsumerWidget {
@@ -23,20 +25,57 @@ class GroupFormComponent extends ConsumerWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                const Row(
+                  children: [
+                    Text("*اسم المنتح"),
+                  ],
+                ),
                 MainTextFieldWidget(
                   control: "name",
-                  placeholder: "*اسم المنتح",
+                  placeholder: "",
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
-                MainTextFieldWidget(
-                    control: "name", placeholder: "*الاسم الثاني للمنتج"),
+                const Row(
+                  children: [
+                    Text("*الاسم الثاني للمنتج"),
+                  ],
+                ),
+                MainTextFieldWidget(control: "name", placeholder: ""),
                 SizedBox(
                   height: 10.h,
                 ),
+                const Row(
+                  children: [
+                    Text("كود المجموعة"),
+                  ],
+                ),
                 MainTextFieldWidget(
-                    control: "groupCode", placeholder: "كود المجموعة"),
+                    control: "groupCode", placeholder:""),
+                SizedBox(
+                  height: 10.h,
+                ),
+                const Row(
+                  children: [
+                    Text("اللون"),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ReactiveSliderColorPicker(
+                      formControlName: "color",
+                      contrastIconColorDark:
+                          ref.read(appColorLightProvider).redish,
+                    ),
+                  ),
+                ),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -46,7 +85,6 @@ class GroupFormComponent extends ConsumerWidget {
                       formControlName: "isHidn",
                     ),
                     const Text("إخفاء المجموعة")
-                  
                   ],
                 ),
                 SizedBox(

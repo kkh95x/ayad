@@ -2,6 +2,8 @@ import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/main_text_input_widget.dart';
 import 'package:ayad/gen/assets.gen.dart';
+import 'package:ayad/src/widgets/whats_app_button.dart';
+import 'package:ayad/theme.dart';
 import 'package:ayad/users/auth/auth_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,7 +40,6 @@ class LoginPage extends ConsumerWidget {
             fit: BoxFit.cover,
           ),
           MainTextFieldWidget(
-            
             suffixIcon: const Icon(Icons.person),
             placeholder: "اسم المستخدم",
             control: "username",
@@ -59,6 +60,30 @@ class LoginPage extends ConsumerWidget {
             onPressed: () {
               ref.read(authNotifierProvider.notifier).login();
             },
+          ),
+          SizedBox(
+            height: 30.h,
+          ),
+          SizedBox(
+            width: 335,
+            child:  Column(
+              children: [
+                Text(
+                    "للتسجيل ضمن البرنامج يمكنكم التواصل معنا عبر الوتساب أو زيارتنا في المتجر الواقع في :\n شارع - حي - مقابل بناء 200متر",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+
+                      height: 1.3,
+                      color: ref.read(appColorLightProvider).greyish.shade400,
+                      
+                    ),
+                    ),
+                    SizedBox(height: 10.h,),
+                const WhatsAptButton(
+                  message: "مرحبا هل يمكنني الأشتراك في البرنامج",
+                )
+              ],
+            ),
           )
         ],
       ),

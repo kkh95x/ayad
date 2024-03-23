@@ -3,11 +3,11 @@ import 'package:ayad/src/providers/get_all_main_group_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const fakeSubGroup = <Group>[
-  Group(name: "سامسونع", name2: "samsong",isHiden: false),
-  Group(name: "شاومي", name2: "xiami",isHiden: false),
+  Group(name: "سامسونع", name2: "samsong",isHiden: false,hexColor: "#152270"),
+  Group(name: "شاومي", name2: "xiami",isHiden: false,hexColor: "#f5821f"),
   Group(name: "هواوي", name2: "hawai",isHiden: false),
-  Group(name: "أيفون", name2: "iphone",isHiden: false),
-  Group(name: "أنفنكس", name2: "infinix",isHiden: false),
+  Group(name: "أيفون", name2: "iphone",isHiden: false,hexColor: "#0E2087"),
+  Group(name: "أنفنكس", name2: "infinix",isHiden: false,hexColor: "#73F440"),
   Group(name: "أيتيل", name2: "itel",isHiden: false),
   Group(name: "TCL", name2: "tcl",isHiden: false),
   Group(name: "تكنو", name2: "tikno",isHiden: false),

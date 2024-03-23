@@ -68,6 +68,9 @@ class SubGroupPage extends ConsumerWidget {
                               children: data
                                   .map((e) => GroupButtonWidget(
                                         group: e,
+                                        onLongPress: ()async {
+                                         await DilogsHelper.showGroupForm(context,group: e);
+                                        },
                                         onTap: () {
                                           // if (group == fakeGroups.first) {
                                           if (group == fakeSub2Group.first) {

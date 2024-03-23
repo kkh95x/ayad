@@ -19,7 +19,7 @@ class ProductsListTileWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
     return InkWell(
-      borderRadius: BorderRadius.circular(16.r),
+      borderRadius: BorderRadius.circular(4.r),
       onTap: () {
         onTap?.call();
       },
@@ -28,7 +28,7 @@ class ProductsListTileWidget extends ConsumerWidget {
         margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 12.h),
         decoration: BoxDecoration(
             color: appColor.whiteish,
-            borderRadius: BorderRadius.circular(16.r)),
+            borderRadius: BorderRadius.circular(4.r)),
         height: 77.h,
         child: Stack(
           children: [
@@ -46,7 +46,7 @@ class ProductsListTileWidget extends ConsumerWidget {
       height: 77.h,
       decoration: BoxDecoration(
           color: appColor.whiteish,
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(4.r),
           boxShadow: [
             BoxShadow(
                 color: appColor.greyish,
@@ -99,12 +99,12 @@ class ProductsListTileWidget extends ConsumerWidget {
                       ),
                       InkWell(
                         onTap: () => onTap?.call(),
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(4.r),
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               vertical: 5.h, horizontal: 10.w),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.r),
+                              borderRadius: BorderRadius.circular(4),
                               color: appColor.redish),
                           child: Text(
                             "عرض التفاصيل",
@@ -150,7 +150,7 @@ class ProductsListTileWidget extends ConsumerWidget {
       height: 77.h,
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(4.r),
           border: Border.all(color: appColor.redish, width: 2.0),
           color: appColor.redish.shade200),
       child: ClipRRect(
@@ -159,9 +159,9 @@ class ProductsListTileWidget extends ConsumerWidget {
             ? Hero(
                 tag: product.imageUrl!,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(4.r),
                   child: CachedNetworkImage(
-                    imageUrl: product.imageUrl ?? Assets.png.logo.path,
+                    imageUrl: product.imageUrl ?? Assets.png.logoWhite.path,
                     width: 67.h,
                     height: 69.h,
                     fit: BoxFit.cover,
@@ -179,7 +179,7 @@ class ProductsListTileWidget extends ConsumerWidget {
                     },
                     errorWidget: (context, error, stackTrace) {
                       return Image.asset(
-                        Assets.png.logo.path,
+                        Assets.png.logoWhite.path,
                         width: 67.h,
                         height: 69.h,
                       );
@@ -188,8 +188,8 @@ class ProductsListTileWidget extends ConsumerWidget {
                 ),
               )
             : ClipRRect(
-                  borderRadius: BorderRadius.circular(16.r),
-              child: Assets.png.logo.image(
+                  borderRadius: BorderRadius.circular(4.r),
+              child: Assets.png.logoWhite.image(
                   width: 67.h,
                   height: 69.h,
                   fit: BoxFit.cover,

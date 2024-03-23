@@ -23,6 +23,9 @@ mixin _$Group {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get name2 => throw _privateConstructorUsedError;
+  bool get isMainGroup => throw _privateConstructorUsedError;
+  String? get hexColor => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
   bool get isHiden => throw _privateConstructorUsedError;
   String? get groupCode => throw _privateConstructorUsedError;
   String? get groupNumber => throw _privateConstructorUsedError;
@@ -41,6 +44,9 @@ abstract class $GroupCopyWith<$Res> {
       {String? id,
       String name,
       String name2,
+      bool isMainGroup,
+      String? hexColor,
+      String? imageUrl,
       bool isHiden,
       String? groupCode,
       String? groupNumber});
@@ -62,6 +68,9 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
     Object? id = freezed,
     Object? name = null,
     Object? name2 = null,
+    Object? isMainGroup = null,
+    Object? hexColor = freezed,
+    Object? imageUrl = freezed,
     Object? isHiden = null,
     Object? groupCode = freezed,
     Object? groupNumber = freezed,
@@ -79,6 +88,18 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String,
+      isMainGroup: null == isMainGroup
+          ? _value.isMainGroup
+          : isMainGroup // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hexColor: freezed == hexColor
+          ? _value.hexColor
+          : hexColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       isHiden: null == isHiden
           ? _value.isHiden
           : isHiden // ignore: cast_nullable_to_non_nullable
@@ -106,6 +127,9 @@ abstract class _$$GroupImplCopyWith<$Res> implements $GroupCopyWith<$Res> {
       {String? id,
       String name,
       String name2,
+      bool isMainGroup,
+      String? hexColor,
+      String? imageUrl,
       bool isHiden,
       String? groupCode,
       String? groupNumber});
@@ -125,6 +149,9 @@ class __$$GroupImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = null,
     Object? name2 = null,
+    Object? isMainGroup = null,
+    Object? hexColor = freezed,
+    Object? imageUrl = freezed,
     Object? isHiden = null,
     Object? groupCode = freezed,
     Object? groupNumber = freezed,
@@ -142,6 +169,18 @@ class __$$GroupImplCopyWithImpl<$Res>
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String,
+      isMainGroup: null == isMainGroup
+          ? _value.isMainGroup
+          : isMainGroup // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hexColor: freezed == hexColor
+          ? _value.hexColor
+          : hexColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       isHiden: null == isHiden
           ? _value.isHiden
           : isHiden // ignore: cast_nullable_to_non_nullable
@@ -165,6 +204,9 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
       {this.id,
       required this.name,
       required this.name2,
+      this.isMainGroup = false,
+      this.hexColor,
+      this.imageUrl,
       required this.isHiden,
       this.groupCode,
       this.groupNumber});
@@ -179,6 +221,13 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
   @override
   final String name2;
   @override
+  @JsonKey()
+  final bool isMainGroup;
+  @override
+  final String? hexColor;
+  @override
+  final String? imageUrl;
+  @override
   final bool isHiden;
   @override
   final String? groupCode;
@@ -187,7 +236,7 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Group(id: $id, name: $name, name2: $name2, isHiden: $isHiden, groupCode: $groupCode, groupNumber: $groupNumber)';
+    return 'Group(id: $id, name: $name, name2: $name2, isMainGroup: $isMainGroup, hexColor: $hexColor, imageUrl: $imageUrl, isHiden: $isHiden, groupCode: $groupCode, groupNumber: $groupNumber)';
   }
 
   @override
@@ -198,6 +247,9 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('name2', name2))
+      ..add(DiagnosticsProperty('isMainGroup', isMainGroup))
+      ..add(DiagnosticsProperty('hexColor', hexColor))
+      ..add(DiagnosticsProperty('imageUrl', imageUrl))
       ..add(DiagnosticsProperty('isHiden', isHiden))
       ..add(DiagnosticsProperty('groupCode', groupCode))
       ..add(DiagnosticsProperty('groupNumber', groupNumber));
@@ -211,6 +263,12 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.name2, name2) || other.name2 == name2) &&
+            (identical(other.isMainGroup, isMainGroup) ||
+                other.isMainGroup == isMainGroup) &&
+            (identical(other.hexColor, hexColor) ||
+                other.hexColor == hexColor) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
             (identical(other.isHiden, isHiden) || other.isHiden == isHiden) &&
             (identical(other.groupCode, groupCode) ||
                 other.groupCode == groupCode) &&
@@ -220,8 +278,8 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, name2, isHiden, groupCode, groupNumber);
+  int get hashCode => Object.hash(runtimeType, id, name, name2, isMainGroup,
+      hexColor, imageUrl, isHiden, groupCode, groupNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -242,6 +300,9 @@ abstract class _Group implements Group {
       {final String? id,
       required final String name,
       required final String name2,
+      final bool isMainGroup,
+      final String? hexColor,
+      final String? imageUrl,
       required final bool isHiden,
       final String? groupCode,
       final String? groupNumber}) = _$GroupImpl;
@@ -254,6 +315,12 @@ abstract class _Group implements Group {
   String get name;
   @override
   String get name2;
+  @override
+  bool get isMainGroup;
+  @override
+  String? get hexColor;
+  @override
+  String? get imageUrl;
   @override
   bool get isHiden;
   @override

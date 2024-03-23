@@ -26,14 +26,26 @@ class $AssetsPngGen {
   AssetGenImage get background =>
       const AssetGenImage('assets/png/background.png');
 
+  /// File path: assets/png/group_default.jpg
+  AssetGenImage get groupDefault =>
+      const AssetGenImage('assets/png/group_default.jpg');
+
   /// File path: assets/png/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/png/logo.png');
+
+  /// File path: assets/png/logo_s.png
+  AssetGenImage get logoS => const AssetGenImage('assets/png/logo_s.png');
+
+  /// File path: assets/png/logo_white.png
+  AssetGenImage get logoWhite =>
+      const AssetGenImage('assets/png/logo_white.png');
 
   /// File path: assets/png/person.png
   AssetGenImage get person => const AssetGenImage('assets/png/person.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [background, logo, person];
+  List<AssetGenImage> get values =>
+      [background, groupDefault, logo, logoS, logoWhite, person];
 }
 
 class $AssetsSvgGen {

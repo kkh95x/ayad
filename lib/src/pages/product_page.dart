@@ -3,7 +3,7 @@ import 'package:ayad/src/models/product.dart';
 import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/loading_widget.dart';
-import 'package:ayad/src/widgets/whats_app_button.dart';
+import 'package:ayad/src/widgets/whats_app_product_button.dart';
 import 'package:ayad/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ class ProductPage extends ConsumerWidget {
                             offset: const Offset(1, 1),
                             blurRadius: 3)
                       ],
-                      borderRadius: BorderRadius.circular(16.r)),
+                      borderRadius: BorderRadius.circular(4.r)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -59,11 +59,11 @@ class ProductPage extends ConsumerWidget {
                                       offset: const Offset(1, 1),
                                       blurRadius: 3)
                                 ],
-                                borderRadius: BorderRadius.circular(16.r)),
+                                borderRadius: BorderRadius.circular(4.r)),
                             child: Hero(
                               tag: product.imageUrl!,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(16.r),
+                                borderRadius: BorderRadius.circular(4.r),
                                 child: CachedNetworkImage(
                                     fit: BoxFit.cover,
                                     progressIndicatorBuilder: (context, url,
@@ -128,7 +128,7 @@ class ProductPage extends ConsumerWidget {
                         SizedBox(
                           height: 40.h,
                         ),
-                        WhatsAppButton(product: product),
+                        WhatsAppProductButton(product: product),
                         SizedBox(
                           height: 10.h,
                         ),

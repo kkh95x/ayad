@@ -46,9 +46,9 @@ class ProductFormComponent extends ConsumerWidget {
                             width:double.infinity,
                             decoration: BoxDecoration(
                                 color: appColor.greyish.shade200,
-                                borderRadius: BorderRadius.circular(16.r)),
+                                borderRadius: BorderRadius.circular(4.r)),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16.r),
+                              borderRadius: BorderRadius.circular(4.r),
                               child: CachedNetworkImage(
                                 imageUrl: imageUrl,
                                 fit: BoxFit.cover,
@@ -68,9 +68,9 @@ class ProductFormComponent extends ConsumerWidget {
                             width: double.infinity,
                             decoration: BoxDecoration(
                                 color: appColor.greyish.shade200,
-                                borderRadius: BorderRadius.circular(16.r)),
+                                borderRadius: BorderRadius.circular(4.r)),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16.r),
+                              borderRadius: BorderRadius.circular(4.r),
                               child: Image.file(
                                 File(imageUrl),
                                 fit: BoxFit.cover,
@@ -236,7 +236,7 @@ class ProductFormComponent extends ConsumerWidget {
       width: double.infinity,
       decoration: BoxDecoration(
           color: appColor.greyish.shade200,
-          borderRadius: BorderRadius.circular(16.r)),
+          borderRadius: BorderRadius.circular(4.r)),
       child: TextButton(
           onPressed: () async {
             final ImagePicker picker = ImagePicker();

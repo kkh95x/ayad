@@ -10,7 +10,7 @@ class DynamicButton extends ConsumerWidget {
     this.icon,
     this.iconPosition = IconPosition.end,
     required this.onPressed,
-    this.radius = 8,
+    this.radius =4,
     this.height = 40,
     this.type = ButtonTypes.Primary,
     this.isDisabled = false,

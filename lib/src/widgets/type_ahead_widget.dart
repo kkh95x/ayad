@@ -11,9 +11,8 @@ class TextSearchWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
+    return SizedBox(
       height: 40,
-      padding: EdgeInsets.symmetric(horizontal: 30.w),
       child: TypeAheadField<String>(
         suggestionsCallback: (search) =>
             ref.read(searchProvider(search).future),
@@ -25,21 +24,38 @@ class TextSearchWidget extends ConsumerWidget {
               decoration: InputDecoration(
                 fillColor: ref.read(appColorLightProvider).whiteish,
                 filled: true,
+                contentPadding: EdgeInsets.only(right: 20.w),
+              
                 label: Text(
-                  "البحث",
+                  "  البحث",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ref.read(appColorLightProvider).greyish.shade400),
+                      color: ref.read(appColorLightProvider).greyish),
                 ),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: ref.read(appColorLightProvider).greyish.shade400,
+                prefixIcon: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: ref.read(appColorLightProvider).greyish),
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(4),
+                          
+                          bottomRight: Radius.circular(4)),
+                      color: ref.read(appColorLightProvider).redish),
+                  child: Icon(
+                    Icons.search,
+                    color: ref.read(appColorLightProvider).whiteish,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: ref.read(appColorLightProvider).greyish),
+                    borderRadius: BorderRadius.circular(
+                      4,
+                    ) ,
                 ),
                 border: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color:
-                            ref.read(appColorLightProvider).greyish.shade400),
+                        color: ref.read(appColorLightProvider).redish),
                     borderRadius: BorderRadius.circular(
-                      16.r,
+                      4,
                     )),
               ));
         },

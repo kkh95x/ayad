@@ -6,6 +6,7 @@ import 'package:ayad/src/pages/login_page.dart';
 import 'package:ayad/src/pages/product_page.dart';
 import 'package:ayad/src/pages/products_page.dart';
 import 'package:ayad/src/pages/profile_page.dart';
+import 'package:ayad/src/pages/service_part_page.dart';
 import 'package:ayad/src/pages/splash_page.dart';
 import 'package:ayad/src/pages/users_page.dart';
 import 'package:ayad/users/auth/auth_notifier.dart';
@@ -74,8 +75,9 @@ final routeProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => buildPageWithDefaultTransition(
             context: context,
             state: state,
-            child:
-                ProfilePage(key: state.pageKey,)),
+            child: ProfilePage(
+              key: state.pageKey,
+            )),
       ),
       GoRoute(
         path: UsersPage.routePath,
@@ -83,8 +85,19 @@ final routeProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => buildPageWithDefaultTransition(
             context: context,
             state: state,
-            child:
-                UsersPage(key: state.pageKey,)),
+            child: UsersPage(
+              key: state.pageKey,
+            )),
+      ),
+      GoRoute(
+        path: ServicePartPage.routePath,
+        name: ServicePartPage.routeName,
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+            context: context,
+            state: state,
+            child: ServicePartPage(
+              key: state.pageKey,
+            )),
       ),
       GoRoute(
         path: ProductPage.routePath,
@@ -128,7 +141,7 @@ CustomTransitionPage buildPageWithDefaultTransition<T>({
   return CustomTransitionPage<T>(
       key: state.pageKey,
       child: child,
-      transitionDuration: const Duration(milliseconds: 500),
+      // transitionDuration: const Duration(milliseconds:50),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(-0.1, 0.0);
         const end = Offset.zero;
@@ -149,15 +162,11 @@ CustomTransitionPage buildPageTransition<T>({
   return CustomTransitionPage<T>(
       key: state.pageKey,
       child: child,
-      transitionDuration: const Duration(milliseconds: 600),
+      // transitionDuration: const Duration(milliseconds: 600),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-     
         return FadeTransition(opacity: animation, child: child);
       });
 }
-
-
-
 
 CustomTransitionPage buildPageWitTransition<T>({
   required BuildContext context,

@@ -1,12 +1,11 @@
+import 'package:auto_size_text_plus/auto_size_text.dart';
 import 'package:ayad/src/pages/home_page.dart';
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/router.dart';
 import 'package:ayad/src/pages/profile_page.dart';
 import 'package:ayad/theme.dart';
-import 'package:ayad/users/auth/auth_notifier.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -97,7 +96,7 @@ class PageTemplate extends ConsumerWidget {
                           },
                         ),
                         SizedBox(
-                          height: 30.h,
+                          height: 10.h,
                         ),
                         Expanded(
                           child: child,
@@ -147,29 +146,46 @@ class CustomAppBar extends ConsumerWidget {
                     child: Container(
                       width: 52.r,
                       height: 45.r,
+                      padding: EdgeInsets.all(5.r),
                       decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 3,
+                                color: ref
+                                    .read(appColorLightProvider)
+                                    .blackish
+                                    .withOpacity(.4),
+                                offset: const Offset(1, 1))
+                          ],
                           color: colorProvider.redish.shade300,
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(4),
                           border: Border.all(
                               color: colorProvider.redish, width: 1)),
-                      child: Assets.png.logo.image(
-                        fit: BoxFit.cover,
-                        width: 52.r,
+                      child: Assets.png.logoS.image(
+                        fit: BoxFit.fitHeight,
                         height: 45.r,
                       ),
                     ),
                   ),
                   if (title != null) ...[
                     SizedBox(width: 15.w),
-                    Text(
-                      title!,
-                      style: Theme.of(context).textTheme.displaySmall,
+                    Container(
+                      alignment: Alignment.center,
+                      height: 25.h,
+                      width:150.w,
+                      child: AutoSizeText(
+                        title!,
+                        minFontSize: 8,
+                        maxFontSize: 20,
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
                     ),
                   ]
                 ],
-              )else
+              )
+            else
               const SizedBox(),
-
             if (context.canPop()) ...[
               Row(
                 children: [

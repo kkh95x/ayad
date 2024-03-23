@@ -17,7 +17,7 @@ static String get routeName=>"splash";
         height: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: Center(
-          child:Assets.png.logo.image(fit: BoxFit.fitWidth) ,
+          child:Assets.png.logoWhite.image(fit: BoxFit.fitWidth) ,
         ),
       ),
     );
