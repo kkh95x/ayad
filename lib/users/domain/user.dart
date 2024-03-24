@@ -7,20 +7,20 @@ part 'user.freezed.dart';
 // optional: Since our Person class is serializable, we must add this line.
 // But if Person was not serializable, we could skip it.
 part 'user.g.dart';
-
+enum UserType{anon,admin,customer}
 @freezed
-class User with _$User {
-  const factory User({
+class AppUser with _$AppUser {
+  const factory AppUser({
     String? id,
     required String fullName,
     required String phone,
     required String username,
     required String password,
     required DateTime createdAt,
-    @Default(false) bool isAdmin,
+    required UserType type,
 
   }) = _User;
 
-  factory User.fromJson(Map<String, Object?> json)
-      => _$UserFromJson(json);
+  factory AppUser.fromJson(Map<String, Object?> json)
+      => _$AppUserFromJson(json);
 }

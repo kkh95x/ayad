@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -42,30 +43,55 @@ class ProfilePage extends ConsumerWidget {
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w400, color: appColor.greyish.shade400),
           ),
-           SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
           DynamicButton(
             title: "تغيير كلمة المرور",
-            onPressed: () async{
+            onPressed: () async {
               await DilogsHelper.showForgetPasswordForm(context);
             },
           ),
-
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
           DynamicButton(
             title: "عرض قائمة الزبائن",
             onPressed: () {
               context.push(UsersPage.routePath);
             },
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
           DynamicButton(
-
             title: "عرض الأعدادات ",
-            onPressed: () async{
+            onPressed: () async {
               await DilogsHelper.showSettingsForm(context);
             },
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
+          DynamicButton(
+            // icon: Icon(
+            //   Icons.location_on,
+            //   color: appColor.whiteish,
+            // ),
+            title: "عرض موقع المتجر على الخريطة",
+            onPressed: () async {
+              double latitude=36.58741348746436;
+              double longitude= 37.04609160000916;
+              String googleUrl =
+                  'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+              if (await canLaunchUrl(Uri.parse(googleUrl))) {
+                await launchUrl(Uri.parse(googleUrl));
+              } else {}
+            },
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
           DynamicButton(
             title: "تسجيل الخروج",
             onPressed: () {},

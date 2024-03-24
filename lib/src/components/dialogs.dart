@@ -6,7 +6,7 @@ import 'package:ayad/src/components/user_form_componet.dart';
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/models/product.dart';
 import 'package:ayad/src/models/settings.dart';
-import 'package:ayad/src/models/user.dart';
+import 'package:ayad/users/domain/user.dart';
 import 'package:flutter/material.dart';
 
 class DilogsHelper {
@@ -34,7 +34,7 @@ class DilogsHelper {
     );
   }
 
-  static Future<void> showUserForm(BuildContext context, {User? user}) async {
+  static Future<void> showUserForm(BuildContext context, {AppUser? user}) async {
     await showDialog(
       context: context,
       builder: (context) {

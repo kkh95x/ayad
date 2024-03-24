@@ -13,7 +13,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       username: json['username'] as String,
       password: json['password'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      isAdmin: json['isAdmin'] as bool? ?? false,
+      type: $enumDecode(_$UserTypeEnumMap, json['type']),
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -24,5 +24,11 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'username': instance.username,
       'password': instance.password,
       'createdAt': instance.createdAt.toIso8601String(),
-      'isAdmin': instance.isAdmin,
+      'type': _$UserTypeEnumMap[instance.type]!,
     };
+
+const _$UserTypeEnumMap = {
+  UserType.anon: 'anon',
+  UserType.admin: 'admin',
+  UserType.customer: 'customer',
+};

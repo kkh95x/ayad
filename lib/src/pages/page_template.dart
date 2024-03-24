@@ -129,8 +129,8 @@ class CustomAppBar extends ConsumerWidget {
     // final pageCount = ref.watch(pageCountProvider);
     // ref.watch(selectedTeacherProvider);
     return Container(
-        width: 400,
-        padding: EdgeInsets.only(right: 25.w, left: 15.w),
+        // width: 335,
+          padding: EdgeInsets.symmetric( horizontal:  10.0.w),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

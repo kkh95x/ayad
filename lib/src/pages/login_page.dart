@@ -27,65 +27,69 @@ class LoginPage extends ConsumerWidget {
     return PageTemplate(
         child: ReactiveForm(
       formGroup: form,
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 150.h,
-          ),
-          LottieBuilder.asset(
-            Assets.json.login,
-            repeat: true,
-            height: 150.h,
-            fit: BoxFit.cover,
-          ),
-          MainTextFieldWidget(
-            suffixIcon: const Icon(Icons.person),
-            placeholder: "اسم المستخدم",
-            control: "username",
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          MainTextFieldWidget(
-            suffixIcon: const Icon(Icons.password),
-            placeholder: "كلمة المرور",
-            control: "password",
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          DynamicButton(
-            title: "تسجيل الدخول",
-            onPressed: () {
-              ref.read(authNotifierProvider.notifier).login();
-            },
-          ),
-          SizedBox(
-            height: 30.h,
-          ),
-          SizedBox(
-            width: 335,
-            child:  Column(
-              children: [
-                Text(
-                    "للتسجيل ضمن البرنامج يمكنكم التواصل معنا عبر الوتساب أو زيارتنا في المتجر الواقع في :\n شارع - حي - مقابل بناء 200متر",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-
-                      height: 1.3,
-                      color: ref.read(appColorLightProvider).greyish.shade400,
-                      
-                    ),
-                    ),
-                    SizedBox(height: 10.h,),
-                const WhatsAptButton(
-                  message: "مرحبا هل يمكنني الأشتراك في البرنامج",
-                )
-              ],
+      child: SingleChildScrollView(
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 150.h,
             ),
-          )
-        ],
+            LottieBuilder.asset(
+              Assets.json.login,
+              repeat: true,
+              height: 150.h,
+              fit: BoxFit.cover,
+            ),
+            MainTextFieldWidget(
+              suffixIcon: const Icon(Icons.person),
+              placeholder: "اسم المستخدم",
+              control: "username",
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            MainTextFieldWidget(
+              suffixIcon: const Icon(Icons.password),
+              placeholder: "كلمة المرور",
+              control: "password",
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            DynamicButton(
+              title: "تسجيل الدخول",
+              onPressed: () {
+                ref.read(authNotifierProvider.notifier).login();
+              },
+            ),
+            SizedBox(
+              height: 40.h,
+            ),
+            SizedBox(
+              width: 335,
+              child:  Column(
+                children: [
+                  Text(
+                      "للتسجيل ضمن البرنامج يمكنكم التواصل معنا عن طريق النقر على زر الوتساب  أو زيارتنا في المتجر الواقع في :  شارع - حي - مقابل بناء 200متر",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+        
+                        height: 1.3,
+                        color: ref.read(appColorLightProvider).greenish.shade100,
+                        
+                      ),
+                      ),
+                      SizedBox(height: 10.h,),
+                   WhatsAptButton(
+                    isCircle: true,
+                    color: ref.read(appColorLightProvider).greenish.shade100,
+                    message: "مرحبا هل يمكنني الأشتراك في البرنامج",
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     ));
   }

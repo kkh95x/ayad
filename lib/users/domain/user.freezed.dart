@@ -14,29 +14,29 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-User _$UserFromJson(Map<String, dynamic> json) {
+AppUser _$AppUserFromJson(Map<String, dynamic> json) {
   return _User.fromJson(json);
 }
 
 /// @nodoc
-mixin _$User {
+mixin _$AppUser {
   String? get id => throw _privateConstructorUsedError;
   String get fullName => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
-  bool get isAdmin => throw _privateConstructorUsedError;
+  UserType get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
+  $AppUserCopyWith<AppUser> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res, User>;
+abstract class $AppUserCopyWith<$Res> {
+  factory $AppUserCopyWith(AppUser value, $Res Function(AppUser) then) =
+      _$AppUserCopyWithImpl<$Res, AppUser>;
   @useResult
   $Res call(
       {String? id,
@@ -45,13 +45,13 @@ abstract class $UserCopyWith<$Res> {
       String username,
       String password,
       DateTime createdAt,
-      bool isAdmin});
+      UserType type});
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res, $Val extends User>
-    implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
+    implements $AppUserCopyWith<$Res> {
+  _$AppUserCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -67,7 +67,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? username = null,
     Object? password = null,
     Object? createdAt = null,
-    Object? isAdmin = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -94,16 +94,16 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isAdmin: null == isAdmin
-          ? _value.isAdmin
-          : isAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as UserType,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
+abstract class _$$UserImplCopyWith<$Res> implements $AppUserCopyWith<$Res> {
   factory _$$UserImplCopyWith(
           _$UserImpl value, $Res Function(_$UserImpl) then) =
       __$$UserImplCopyWithImpl<$Res>;
@@ -116,12 +116,12 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String username,
       String password,
       DateTime createdAt,
-      bool isAdmin});
+      UserType type});
 }
 
 /// @nodoc
 class __$$UserImplCopyWithImpl<$Res>
-    extends _$UserCopyWithImpl<$Res, _$UserImpl>
+    extends _$AppUserCopyWithImpl<$Res, _$UserImpl>
     implements _$$UserImplCopyWith<$Res> {
   __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
       : super(_value, _then);
@@ -135,7 +135,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? username = null,
     Object? password = null,
     Object? createdAt = null,
-    Object? isAdmin = null,
+    Object? type = null,
   }) {
     return _then(_$UserImpl(
       id: freezed == id
@@ -162,10 +162,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isAdmin: null == isAdmin
-          ? _value.isAdmin
-          : isAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as UserType,
     ));
   }
 }
@@ -180,7 +180,7 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
       required this.username,
       required this.password,
       required this.createdAt,
-      this.isAdmin = false});
+      required this.type});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -198,26 +198,25 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   @override
   final DateTime createdAt;
   @override
-  @JsonKey()
-  final bool isAdmin;
+  final UserType type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, fullName: $fullName, phone: $phone, username: $username, password: $password, createdAt: $createdAt, isAdmin: $isAdmin)';
+    return 'AppUser(id: $id, fullName: $fullName, phone: $phone, username: $username, password: $password, createdAt: $createdAt, type: $type)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'User'))
+      ..add(DiagnosticsProperty('type', 'AppUser'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('fullName', fullName))
       ..add(DiagnosticsProperty('phone', phone))
       ..add(DiagnosticsProperty('username', username))
       ..add(DiagnosticsProperty('password', password))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('isAdmin', isAdmin));
+      ..add(DiagnosticsProperty('type', type));
   }
 
   @override
@@ -235,13 +234,13 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
                 other.password == password) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin));
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, fullName, phone, username, password, createdAt, isAdmin);
+      runtimeType, id, fullName, phone, username, password, createdAt, type);
 
   @JsonKey(ignore: true)
   @override
@@ -257,7 +256,7 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   }
 }
 
-abstract class _User implements User {
+abstract class _User implements AppUser {
   const factory _User(
       {final String? id,
       required final String fullName,
@@ -265,7 +264,7 @@ abstract class _User implements User {
       required final String username,
       required final String password,
       required final DateTime createdAt,
-      final bool isAdmin}) = _$UserImpl;
+      required final UserType type}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -282,7 +281,7 @@ abstract class _User implements User {
   @override
   DateTime get createdAt;
   @override
-  bool get isAdmin;
+  UserType get type;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

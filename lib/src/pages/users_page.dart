@@ -1,10 +1,11 @@
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/src/components/dialogs.dart';
 import 'package:ayad/src/pages/page_template.dart';
-import 'package:ayad/src/providers/get_all_users_provider.dart';
+import 'package:ayad/src/providers/user_management.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/loading_widget.dart';
 import 'package:ayad/theme.dart';
+import 'package:ayad/users/domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,15 +41,15 @@ class UsersPage extends ConsumerWidget {
           height: 20.h,
         ),
         Expanded(child: Consumer(builder: (context, ref, child) {
-          return ref.watch(getAllUserProvider).when(
+          return ref.watch(userManagmentProvider).when(
                 data: (data) {
-                  if (data.isEmpty) {
+                  if (data?.isEmpty??true) {
                     return const Center(
                       child: Text("لايوجد زبائن"),
                     );
                   }
                   return ListView.builder(
-                    itemCount: data.length,
+                    itemCount: data!.length,
                     itemBuilder: (context, index) {
                       final user = data[index];
                       return Card(
@@ -59,7 +60,7 @@ class UsersPage extends ConsumerWidget {
                             await DilogsHelper.showUserForm(context,
                                 user: user);
                           },
-                          trailing: user.isAdmin
+                          trailing: user.type==UserType.admin
                               ? Icon(
                                   Icons.policy_sharp,
                                   color: appColor.redish,

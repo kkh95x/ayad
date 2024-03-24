@@ -28,7 +28,7 @@ class HomePage extends ConsumerWidget {
           child: Column(
             children: [
               Container(
-                height: 40,
+                height: 27,
                 decoration: BoxDecoration(
                     color: ref.read(appColorLightProvider).redish,
                     borderRadius: BorderRadius.circular(4)),
@@ -39,16 +39,15 @@ class HomePage extends ConsumerWidget {
                     text:
                         "بسم الله الرحمن الرحيم , الحمد لله رب العالمين , الرحمن الرحيم , مالك يوم الدين , إياك نعبد وإياك نستعين "),
               ),
-               SizedBox(
-                height: 10.h,
+              SizedBox(
+                height: 2.h,
               ),
               const SlidesComponent(),
               SizedBox(
-                height: 10.h,
+                height: 2.h,
               ),
               const TextSearchWidget(),
-             
-              
+
               // SizedBox(
               //   height: 20.h,
               // ),
@@ -58,7 +57,7 @@ class HomePage extends ConsumerWidget {
               //   ],
               // ),
               SizedBox(
-                height: 20.h,
+                height: 4.h,
               ),
               Expanded(
                 child: Consumer(
@@ -69,12 +68,13 @@ class HomePage extends ConsumerWidget {
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisSpacing: 3,
-                                  mainAxisSpacing: 3,
+                                  mainAxisSpacing: 5,
+                                  childAspectRatio: (3/2),
                                   crossAxisCount: 2),
                           itemCount: data.length + 1,
                           itemBuilder: (context, index) {
                             if (index == data.length) {
-                             return GroupButtonWidget(
+                              return GroupButtonWidget(
                                 group: const Group(
                                     isMainGroup: true,
                                     name: "التواصي للقطع الغير موجودة",

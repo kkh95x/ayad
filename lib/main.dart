@@ -5,9 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
-  runApp(const ProviderScope(child:  MyApp()));
+Future<void> main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+      url: "https://vrclircgjpkyvnvsonwn.supabase.co",
+      anonKey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyY2xpcmNnanBreXZudnNvbnduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTEyNzY0MzEsImV4cCI6MjAyNjg1MjQzMX0.QH1TTUIVnOOF56Z708MCRXXKKeJLW9BvjVrv3Pv5P_Q");
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {
@@ -15,14 +22,13 @@ class MyApp extends ConsumerWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-     final botToastBuilder = BotToastInit();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final botToastBuilder = BotToastInit();
 
     final router = ref.watch(routeProvider);
 
     return ScreenUtilInit(
-        designSize:
-             ScreenUtil.defaultSize,
+        designSize: ScreenUtil.defaultSize,
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, _) {
@@ -51,10 +57,10 @@ class MyApp extends ConsumerWidget {
             supportedLocales: const [
               Locale('ar', 'AE'),
             ],
-           
             themeMode: ThemeMode.light,
             theme: lightThemeData,
             routerConfig: router,
           );
-        });}
+        });
+  }
 }

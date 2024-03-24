@@ -73,7 +73,7 @@ class _SlidesComponentState extends State<SlidesComponent> {
               autoplayDuration: const Duration(seconds: 5),
               indicatorShape: BoxShape.circle,
               selectedDotColor: appColor.redish,
-              unselectedDotColor: appColor.whiteish,
+              unselectedDotColor: appColor.whiteish
             ),
           ),
         );
