@@ -107,6 +107,17 @@ class GroupButtonWidget extends ConsumerWidget {
                     //         ?.copyWith(color: appColor.whiteish, fontSize: 12),
                     //   ),
                     // ]
+                    if(group.isHiden)
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child:  Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: appColor.blackish.withOpacity(.3)
+                        ),
+                        child: Icon(Icons.visibility_off,color: appColor.redish,)),
+                    )
                   ],
                 )
               : Column(
@@ -124,12 +135,12 @@ class GroupButtonWidget extends ConsumerWidget {
                               .bodyMedium
                               ?.copyWith(color: appColor.whiteish),
                         ),
-                      if (group.name2.isNotEmpty) ...[
+                      if (group.name2?.isNotEmpty==true) ...[
                         SizedBox(
                           height: 10.h,
                         ),
                         Text(
-                          group.name2,
+                          group.name2??"",
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium

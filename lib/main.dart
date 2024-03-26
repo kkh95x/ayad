@@ -1,5 +1,6 @@
 import 'package:ayad/router.dart';
 import 'package:ayad/theme.dart';
+import 'package:ayad/users/auth/shared_prefrance_service.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,7 +10,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
-
+  await SharedPrefranceServce.initial();
   await Supabase.initialize(
       url: "https://vrclircgjpkyvnvsonwn.supabase.co",
       anonKey:

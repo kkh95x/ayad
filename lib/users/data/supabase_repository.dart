@@ -32,9 +32,15 @@ class SupabaseUserRepository implements UserRepository {
   }
 
   @override
-  Future<AppUser?> loginIn(String username, String password) {
-    // TODO: implement loginIn
-    throw UnimplementedError();
+  Future<AppUser?> loginIn(String username, String password)async {
+   final response=await  _supabaseClient.from(_tableName).select().eq("username", username)
+   .eq("password", password);
+   if(response.isEmpty){
+    return null;
+   }else{
+    return AppUser.fromJson(response.first);
+   }
+
   }
 
   @override

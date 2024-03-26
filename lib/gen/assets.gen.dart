@@ -9,6 +9,25 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsCaptchaImagesGen {
+  const $AssetsCaptchaImagesGen();
+
+  /// File path: assets/captcha_images/image1.jpg
+  AssetGenImage get image1 =>
+      const AssetGenImage('assets/captcha_images/image1.jpg');
+
+  /// File path: assets/captcha_images/image2.jpeg
+  AssetGenImage get image2 =>
+      const AssetGenImage('assets/captcha_images/image2.jpeg');
+
+  /// File path: assets/captcha_images/image3.jpg
+  AssetGenImage get image3 =>
+      const AssetGenImage('assets/captcha_images/image3.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [image1, image2, image3];
+}
+
 class $AssetsJsonGen {
   const $AssetsJsonGen();
 
@@ -64,6 +83,8 @@ class $AssetsSvgGen {
 class Assets {
   Assets._();
 
+  static const $AssetsCaptchaImagesGen captchaImages =
+      $AssetsCaptchaImagesGen();
   static const $AssetsJsonGen json = $AssetsJsonGen();
   static const $AssetsPngGen png = $AssetsPngGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();

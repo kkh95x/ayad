@@ -128,7 +128,7 @@ final routeProvider = Provider<GoRouter>((ref) {
           }
         }
       }
-      return null;
+      return isAuth ? null : LoginPage.routePath;
     },
   );
 });

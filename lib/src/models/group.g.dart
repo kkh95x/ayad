@@ -9,24 +9,38 @@ part of 'group.dart';
 _$GroupImpl _$$GroupImplFromJson(Map<String, dynamic> json) => _$GroupImpl(
       id: json['id'] as String?,
       name: json['name'] as String,
-      name2: json['name2'] as String,
+      type: $enumDecode(_$GroupTypeEnumMap, json['type']),
+      subType: $enumDecode(_$SubTypeEnumMap, json['subType']),
+      parentGroupId: json['parentGroupId'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
       isMainGroup: json['isMainGroup'] as bool? ?? false,
       hexColor: json['hexColor'] as String?,
       imageUrl: json['imageUrl'] as String?,
+      name2: json['name2'] as String?,
       isHiden: json['isHiden'] as bool,
-      groupCode: json['groupCode'] as String?,
-      groupNumber: json['groupNumber'] as String?,
     );
 
 Map<String, dynamic> _$$GroupImplToJson(_$GroupImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'name2': instance.name2,
+      'type': _$GroupTypeEnumMap[instance.type]!,
+      'subType': _$SubTypeEnumMap[instance.subType]!,
+      'parentGroupId': instance.parentGroupId,
+      'createdAt': instance.createdAt.toIso8601String(),
       'isMainGroup': instance.isMainGroup,
       'hexColor': instance.hexColor,
       'imageUrl': instance.imageUrl,
+      'name2': instance.name2,
       'isHiden': instance.isHiden,
-      'groupCode': instance.groupCode,
-      'groupNumber': instance.groupNumber,
     };
+
+const _$GroupTypeEnumMap = {
+  GroupType.customer: 'customer',
+  GroupType.vistor: 'vistor',
+};
+
+const _$SubTypeEnumMap = {
+  SubType.groups: 'groups',
+  SubType.products: 'products',
+};

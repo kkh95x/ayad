@@ -22,13 +22,15 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
 mixin _$Group {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get name2 => throw _privateConstructorUsedError;
+  GroupType get type => throw _privateConstructorUsedError;
+  SubType get subType => throw _privateConstructorUsedError;
+  String get parentGroupId => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
   bool get isMainGroup => throw _privateConstructorUsedError;
   String? get hexColor => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
+  String? get name2 => throw _privateConstructorUsedError;
   bool get isHiden => throw _privateConstructorUsedError;
-  String? get groupCode => throw _privateConstructorUsedError;
-  String? get groupNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,13 +45,15 @@ abstract class $GroupCopyWith<$Res> {
   $Res call(
       {String? id,
       String name,
-      String name2,
+      GroupType type,
+      SubType subType,
+      String parentGroupId,
+      DateTime createdAt,
       bool isMainGroup,
       String? hexColor,
       String? imageUrl,
-      bool isHiden,
-      String? groupCode,
-      String? groupNumber});
+      String? name2,
+      bool isHiden});
 }
 
 /// @nodoc
@@ -67,13 +71,15 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
   $Res call({
     Object? id = freezed,
     Object? name = null,
-    Object? name2 = null,
+    Object? type = null,
+    Object? subType = null,
+    Object? parentGroupId = null,
+    Object? createdAt = null,
     Object? isMainGroup = null,
     Object? hexColor = freezed,
     Object? imageUrl = freezed,
+    Object? name2 = freezed,
     Object? isHiden = null,
-    Object? groupCode = freezed,
-    Object? groupNumber = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -84,10 +90,22 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      name2: null == name2
-          ? _value.name2
-          : name2 // ignore: cast_nullable_to_non_nullable
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as GroupType,
+      subType: null == subType
+          ? _value.subType
+          : subType // ignore: cast_nullable_to_non_nullable
+              as SubType,
+      parentGroupId: null == parentGroupId
+          ? _value.parentGroupId
+          : parentGroupId // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       isMainGroup: null == isMainGroup
           ? _value.isMainGroup
           : isMainGroup // ignore: cast_nullable_to_non_nullable
@@ -100,18 +118,14 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      name2: freezed == name2
+          ? _value.name2
+          : name2 // ignore: cast_nullable_to_non_nullable
+              as String?,
       isHiden: null == isHiden
           ? _value.isHiden
           : isHiden // ignore: cast_nullable_to_non_nullable
               as bool,
-      groupCode: freezed == groupCode
-          ? _value.groupCode
-          : groupCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      groupNumber: freezed == groupNumber
-          ? _value.groupNumber
-          : groupNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -126,13 +140,15 @@ abstract class _$$GroupImplCopyWith<$Res> implements $GroupCopyWith<$Res> {
   $Res call(
       {String? id,
       String name,
-      String name2,
+      GroupType type,
+      SubType subType,
+      String parentGroupId,
+      DateTime createdAt,
       bool isMainGroup,
       String? hexColor,
       String? imageUrl,
-      bool isHiden,
-      String? groupCode,
-      String? groupNumber});
+      String? name2,
+      bool isHiden});
 }
 
 /// @nodoc
@@ -148,13 +164,15 @@ class __$$GroupImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = null,
-    Object? name2 = null,
+    Object? type = null,
+    Object? subType = null,
+    Object? parentGroupId = null,
+    Object? createdAt = null,
     Object? isMainGroup = null,
     Object? hexColor = freezed,
     Object? imageUrl = freezed,
+    Object? name2 = freezed,
     Object? isHiden = null,
-    Object? groupCode = freezed,
-    Object? groupNumber = freezed,
   }) {
     return _then(_$GroupImpl(
       id: freezed == id
@@ -165,10 +183,22 @@ class __$$GroupImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      name2: null == name2
-          ? _value.name2
-          : name2 // ignore: cast_nullable_to_non_nullable
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as GroupType,
+      subType: null == subType
+          ? _value.subType
+          : subType // ignore: cast_nullable_to_non_nullable
+              as SubType,
+      parentGroupId: null == parentGroupId
+          ? _value.parentGroupId
+          : parentGroupId // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       isMainGroup: null == isMainGroup
           ? _value.isMainGroup
           : isMainGroup // ignore: cast_nullable_to_non_nullable
@@ -181,18 +211,14 @@ class __$$GroupImplCopyWithImpl<$Res>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      name2: freezed == name2
+          ? _value.name2
+          : name2 // ignore: cast_nullable_to_non_nullable
+              as String?,
       isHiden: null == isHiden
           ? _value.isHiden
           : isHiden // ignore: cast_nullable_to_non_nullable
               as bool,
-      groupCode: freezed == groupCode
-          ? _value.groupCode
-          : groupCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      groupNumber: freezed == groupNumber
-          ? _value.groupNumber
-          : groupNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -203,13 +229,15 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
   const _$GroupImpl(
       {this.id,
       required this.name,
-      required this.name2,
+      required this.type,
+      required this.subType,
+      required this.parentGroupId,
+      required this.createdAt,
       this.isMainGroup = false,
       this.hexColor,
       this.imageUrl,
-      required this.isHiden,
-      this.groupCode,
-      this.groupNumber});
+      this.name2,
+      required this.isHiden});
 
   factory _$GroupImpl.fromJson(Map<String, dynamic> json) =>
       _$$GroupImplFromJson(json);
@@ -219,7 +247,13 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
   @override
   final String name;
   @override
-  final String name2;
+  final GroupType type;
+  @override
+  final SubType subType;
+  @override
+  final String parentGroupId;
+  @override
+  final DateTime createdAt;
   @override
   @JsonKey()
   final bool isMainGroup;
@@ -228,15 +262,13 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
   @override
   final String? imageUrl;
   @override
+  final String? name2;
+  @override
   final bool isHiden;
-  @override
-  final String? groupCode;
-  @override
-  final String? groupNumber;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Group(id: $id, name: $name, name2: $name2, isMainGroup: $isMainGroup, hexColor: $hexColor, imageUrl: $imageUrl, isHiden: $isHiden, groupCode: $groupCode, groupNumber: $groupNumber)';
+    return 'Group(id: $id, name: $name, type: $type, subType: $subType, parentGroupId: $parentGroupId, createdAt: $createdAt, isMainGroup: $isMainGroup, hexColor: $hexColor, imageUrl: $imageUrl, name2: $name2, isHiden: $isHiden)';
   }
 
   @override
@@ -246,13 +278,15 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
       ..add(DiagnosticsProperty('type', 'Group'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('name2', name2))
+      ..add(DiagnosticsProperty('type', type))
+      ..add(DiagnosticsProperty('subType', subType))
+      ..add(DiagnosticsProperty('parentGroupId', parentGroupId))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('isMainGroup', isMainGroup))
       ..add(DiagnosticsProperty('hexColor', hexColor))
       ..add(DiagnosticsProperty('imageUrl', imageUrl))
-      ..add(DiagnosticsProperty('isHiden', isHiden))
-      ..add(DiagnosticsProperty('groupCode', groupCode))
-      ..add(DiagnosticsProperty('groupNumber', groupNumber));
+      ..add(DiagnosticsProperty('name2', name2))
+      ..add(DiagnosticsProperty('isHiden', isHiden));
   }
 
   @override
@@ -262,24 +296,37 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
             other is _$GroupImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.name2, name2) || other.name2 == name2) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.subType, subType) || other.subType == subType) &&
+            (identical(other.parentGroupId, parentGroupId) ||
+                other.parentGroupId == parentGroupId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
             (identical(other.isMainGroup, isMainGroup) ||
                 other.isMainGroup == isMainGroup) &&
             (identical(other.hexColor, hexColor) ||
                 other.hexColor == hexColor) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
-            (identical(other.isHiden, isHiden) || other.isHiden == isHiden) &&
-            (identical(other.groupCode, groupCode) ||
-                other.groupCode == groupCode) &&
-            (identical(other.groupNumber, groupNumber) ||
-                other.groupNumber == groupNumber));
+            (identical(other.name2, name2) || other.name2 == name2) &&
+            (identical(other.isHiden, isHiden) || other.isHiden == isHiden));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, name2, isMainGroup,
-      hexColor, imageUrl, isHiden, groupCode, groupNumber);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      type,
+      subType,
+      parentGroupId,
+      createdAt,
+      isMainGroup,
+      hexColor,
+      imageUrl,
+      name2,
+      isHiden);
 
   @JsonKey(ignore: true)
   @override
@@ -299,13 +346,15 @@ abstract class _Group implements Group {
   const factory _Group(
       {final String? id,
       required final String name,
-      required final String name2,
+      required final GroupType type,
+      required final SubType subType,
+      required final String parentGroupId,
+      required final DateTime createdAt,
       final bool isMainGroup,
       final String? hexColor,
       final String? imageUrl,
-      required final bool isHiden,
-      final String? groupCode,
-      final String? groupNumber}) = _$GroupImpl;
+      final String? name2,
+      required final bool isHiden}) = _$GroupImpl;
 
   factory _Group.fromJson(Map<String, dynamic> json) = _$GroupImpl.fromJson;
 
@@ -314,7 +363,13 @@ abstract class _Group implements Group {
   @override
   String get name;
   @override
-  String get name2;
+  GroupType get type;
+  @override
+  SubType get subType;
+  @override
+  String get parentGroupId;
+  @override
+  DateTime get createdAt;
   @override
   bool get isMainGroup;
   @override
@@ -322,11 +377,9 @@ abstract class _Group implements Group {
   @override
   String? get imageUrl;
   @override
+  String? get name2;
+  @override
   bool get isHiden;
-  @override
-  String? get groupCode;
-  @override
-  String? get groupNumber;
   @override
   @JsonKey(ignore: true)
   _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>

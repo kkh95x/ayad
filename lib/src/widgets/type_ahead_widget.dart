@@ -33,7 +33,7 @@ class TextSearchWidget extends ConsumerWidget {
                 ),
                 prefixIcon: Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: ref.read(appColorLightProvider).greyish),
+                    border: Border.all(color: ref.read(appColorLightProvider).redish),
                       borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(4),
                           

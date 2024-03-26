@@ -1,3 +1,4 @@
+import 'package:ayad/src/components/slide_captcha_component.dart';
 import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/main_text_input_widget.dart';
@@ -5,6 +6,7 @@ import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/src/widgets/whats_app_button.dart';
 import 'package:ayad/theme.dart';
 import 'package:ayad/users/auth/auth_notifier.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,8 +14,10 @@ import 'package:lottie/lottie.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 final formProvider = Provider((ref) => FormGroup({
-      "username": FormControl<String>(),
-      "password": FormControl<String>(),
+      "username": FormControl<String>(
+          validators: [Validators.minLength(6), Validators.required]),
+      "password": FormControl<String>(
+          validators: [Validators.required, Validators.minLength(8)]),
       "obs": FormControl<bool>(value: false)
     }));
 
@@ -56,31 +60,41 @@ class LoginPage extends ConsumerWidget {
             SizedBox(
               height: 20.h,
             ),
-            DynamicButton(
-              title: "تسجيل الدخول",
-              onPressed: () {
-                ref.read(authNotifierProvider.notifier).login();
-              },
-            ),
+            ReactiveFormConsumer(builder: (context, formGroup, child) {
+              return DynamicButton(
+                isDisabled: form.invalid,
+                title: "تسجيل الدخول",
+                onPressed: () async {
+                  final result = await showSlideCaptchaSlider(context);
+                  if (result) {
+                    ref.read(authNotifierProvider.notifier).login(form);
+                  } else {
+                    BotToast.showText(
+                        text: "فشل أختبار الروبوت",
+                        contentColor: ref.read(appColorLightProvider).redish);
+                  }
+                },
+              );
+            }),
             SizedBox(
               height: 40.h,
             ),
             SizedBox(
               width: 335,
-              child:  Column(
+              child: Column(
                 children: [
                   Text(
-                      "للتسجيل ضمن البرنامج يمكنكم التواصل معنا عن طريق النقر على زر الوتساب  أو زيارتنا في المتجر الواقع في :  شارع - حي - مقابل بناء 200متر",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-        
-                        height: 1.3,
-                        color: ref.read(appColorLightProvider).greenish.shade100,
-                        
-                      ),
-                      ),
-                      SizedBox(height: 10.h,),
-                   WhatsAptButton(
+                    "للتسجيل ضمن البرنامج يمكنكم التواصل معنا عن طريق النقر على زر الوتساب  أو زيارتنا في المتجر الواقع في :  شارع - حي - مقابل بناء 200متر",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      height: 1.3,
+                      color: ref.read(appColorLightProvider).greenish.shade100,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  WhatsAptButton(
                     isCircle: true,
                     color: ref.read(appColorLightProvider).greenish.shade100,
                     message: "مرحبا هل يمكنني الأشتراك في البرنامج",

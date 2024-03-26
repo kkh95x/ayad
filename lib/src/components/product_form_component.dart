@@ -30,59 +30,7 @@ class ProductFormComponent extends ConsumerWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                ReactiveFormConsumer(
-                  builder: (context, formGroup, child) {
-                    final imageUrl = formGroup.control("imageUrl").value;
-                    if (imageUrl == null) {
-                      return _buildPickImageWidget(appColor, formGroup);
-                    }
-                    if (isUrl(imageUrl)) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(10.r),
-                            height: 200.r,
-                            width:double.infinity,
-                            decoration: BoxDecoration(
-                                color: appColor.greyish.shade200,
-                                borderRadius: BorderRadius.circular(4.r)),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(4.r),
-                              child: CachedNetworkImage(
-                                imageUrl: imageUrl,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          _buildReplaceImage(formGroup),
-                        ],
-                      );
-                    } else {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(10.r),
-                            height: 200.r,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: appColor.greyish.shade200,
-                                borderRadius: BorderRadius.circular(4.r)),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(4.r),
-                              child: Image.file(
-                                File(imageUrl),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          _buildReplaceImage(formGroup),
-                        ],
-                      );
-                    }
-                  },
-                ),
+                _imageWidget(appColor),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -206,6 +154,62 @@ class ProductFormComponent extends ConsumerWidget {
             ),
           )),
     );
+  }
+
+  ReactiveFormConsumer _imageWidget(AppColor appColor) {
+    return ReactiveFormConsumer(
+                builder: (context, formGroup, child) {
+                  final imageUrl = formGroup.control("imageUrl").value;
+                  if (imageUrl == null) {
+                    return _buildPickImageWidget(appColor, formGroup);
+                  }
+                  if (isUrl(imageUrl)) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10.r),
+                          height: 200.r,
+                          width:double.infinity,
+                          decoration: BoxDecoration(
+                              color: appColor.greyish.shade200,
+                              borderRadius: BorderRadius.circular(4.r)),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(4.r),
+                            child: CachedNetworkImage(
+                              imageUrl: imageUrl,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        _buildReplaceImage(formGroup),
+                      ],
+                    );
+                  } else {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10.r),
+                          height: 200.r,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: appColor.greyish.shade200,
+                              borderRadius: BorderRadius.circular(4.r)),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(4.r),
+                            child: Image.file(
+                              File(imageUrl),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        _buildReplaceImage(formGroup),
+                      ],
+                    );
+                  }
+                },
+              );
   }
 
   TextButton _buildReplaceImage(FormGroup formGroup) {

@@ -4,6 +4,7 @@ import 'package:ayad/src/pages/group_page.dart';
 import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/pages/service_part_page.dart';
 import 'package:ayad/src/providers/get_all_main_group_provider.dart';
+import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/group_button_widget.dart';
 import 'package:ayad/src/widgets/loading_widget.dart';
 import 'package:ayad/src/widgets/type_ahead_widget.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:marquee/marquee.dart';
+import '../components/dialogs.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -28,12 +30,13 @@ class HomePage extends ConsumerWidget {
           child: Column(
             children: [
               Container(
-                height: 27,
+                height: 30,
                 decoration: BoxDecoration(
                     color: ref.read(appColorLightProvider).redish,
                     borderRadius: BorderRadius.circular(4)),
                 child: Marquee(
                     style: TextStyle(
+                        fontSize: 16,
                         color: ref.read(appColorLightProvider).whiteish),
                     blankSpace: MediaQuery.of(context).size.width,
                     text:
@@ -56,6 +59,12 @@ class HomePage extends ConsumerWidget {
               //     Text("الأقسام الرئيسية",style: Theme.of(context).textTheme.titleMedium?.copyWith(color: ref.read(appColorLightProvider).redish),)
               //   ],
               // ),
+              TextButton(
+                child: const Text("إضافة قسم جديد"),
+                onPressed: () async {
+                  await DilogsHelper.showGroupForm(context, isMain: true);
+                },
+              ),
               SizedBox(
                 height: 4.h,
               ),
@@ -69,16 +78,20 @@ class HomePage extends ConsumerWidget {
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisSpacing: 3,
                                   mainAxisSpacing: 5,
-                                  childAspectRatio: (3/2),
+                                  childAspectRatio: (3 / 2),
                                   crossAxisCount: 2),
                           itemCount: data.length + 1,
                           itemBuilder: (context, index) {
                             if (index == data.length) {
                               return GroupButtonWidget(
-                                group: const Group(
+                                
+                                group: Group(
+                                    type: GroupType.customer,
+                                    parentGroupId: "",
+                                    subType: SubType.groups,
+                                    createdAt: DateTime.now(),
                                     isMainGroup: true,
                                     name: "التواصي للقطع الغير موجودة",
-                                    name2: "",
                                     isHiden: false),
                                 onTap: () {
                                   context.push(ServicePartPage.routePath,
@@ -88,6 +101,11 @@ class HomePage extends ConsumerWidget {
                             }
                             return GroupButtonWidget(
                               group: data[index],
+                              onLongPress: () async {
+                                //TODO just admin
+                                  await DilogsHelper.showGroupForm(context,
+                                      group: data[index], isMain: true);
+                                },
                               onTap: () {
                                 context.push(SubGroupPage.routePath,
                                     extra: fakeGroups.first);

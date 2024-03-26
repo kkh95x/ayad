@@ -4,6 +4,7 @@ import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/pages/users_page.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/theme.dart';
+import 'package:ayad/users/auth/auth_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -94,7 +95,9 @@ class ProfilePage extends ConsumerWidget {
           ),
           DynamicButton(
             title: "تسجيل الخروج",
-            onPressed: () {},
+            onPressed: () async{
+              await ref.read(authNotifierProvider.notifier).logout();
+            },
           ),
         ],
       ),

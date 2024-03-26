@@ -6,22 +6,25 @@ part 'group.freezed.dart';
 // But if Person was not serializable, we could skip it.
 part 'group.g.dart';
 
+enum GroupType { customer, vistor }
+
+enum SubType { groups, products }
+
 @freezed
 class Group with _$Group {
   const factory Group({
     String? id,
     required String name,
-    required String name2,
-    @Default(false)bool isMainGroup,
+    required GroupType type,
+    required SubType subType,
+    required String parentGroupId,
+    required DateTime createdAt,
+    @Default(false) bool isMainGroup,
     String? hexColor,
     String? imageUrl,
+    String? name2,
     required bool isHiden,
-    String? groupCode,
-    String? groupNumber,
-    
-
   }) = _Group;
 
-  factory Group.fromJson(Map<String, Object?> json)
-      => _$GroupFromJson(json);
+  factory Group.fromJson(Map<String, Object?> json) => _$GroupFromJson(json);
 }

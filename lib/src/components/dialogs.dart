@@ -8,15 +8,21 @@ import 'package:ayad/src/models/product.dart';
 import 'package:ayad/src/models/settings.dart';
 import 'package:ayad/users/domain/user.dart';
 import 'package:flutter/material.dart';
-
+  bool isUrl(String string) {
+    // Regular expression to check if the string starts with http://, https://, or www.
+    RegExp urlRegExp = RegExp(
+        r'^(?:http|https)?(?::\/\/)?(?:www\.)?[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+[\S]*$');
+    return urlRegExp.hasMatch(string);
+  }
 class DilogsHelper {
   static Future<void> showGroupForm(BuildContext context,
-      {Group? group}) async {
+      {Group? group,bool isMain=false}) async {
     await showDialog(
       context: context,
       builder: (context) {
         return GroupFormComponent(
           group: group,
+          isMain: isMain,
         );
       },
     );
