@@ -21,11 +21,15 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Product {
   String? get id => throw _privateConstructorUsedError;
-  String get groupName => throw _privateConstructorUsedError;
-  String get nameArabic => throw _privateConstructorUsedError;
-  String get nameEnglis => throw _privateConstructorUsedError;
+  String get productName => throw _privateConstructorUsedError;
+  String get productFullName => throw _privateConstructorUsedError;
+  String get parentGroupId => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  String? get productsSearching1 => throw _privateConstructorUsedError;
+  String? get productsSearching2 => throw _privateConstructorUsedError;
+  String? get productsSearching3 => throw _privateConstructorUsedError;
+  String? get productsSearching4 => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
-  String? get productCode => throw _privateConstructorUsedError;
   bool get isHiden => throw _privateConstructorUsedError;
   double? get count => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
@@ -45,11 +49,15 @@ abstract class $ProductCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
-      String groupName,
-      String nameArabic,
-      String nameEnglis,
+      String productName,
+      String productFullName,
+      String parentGroupId,
+      DateTime createdAt,
+      String? productsSearching1,
+      String? productsSearching2,
+      String? productsSearching3,
+      String? productsSearching4,
       double price,
-      String? productCode,
       bool isHiden,
       double? count,
       String? imageUrl,
@@ -72,11 +80,15 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   @override
   $Res call({
     Object? id = freezed,
-    Object? groupName = null,
-    Object? nameArabic = null,
-    Object? nameEnglis = null,
+    Object? productName = null,
+    Object? productFullName = null,
+    Object? parentGroupId = null,
+    Object? createdAt = null,
+    Object? productsSearching1 = freezed,
+    Object? productsSearching2 = freezed,
+    Object? productsSearching3 = freezed,
+    Object? productsSearching4 = freezed,
     Object? price = null,
-    Object? productCode = freezed,
     Object? isHiden = null,
     Object? count = freezed,
     Object? imageUrl = freezed,
@@ -89,26 +101,42 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      groupName: null == groupName
-          ? _value.groupName
-          : groupName // ignore: cast_nullable_to_non_nullable
+      productName: null == productName
+          ? _value.productName
+          : productName // ignore: cast_nullable_to_non_nullable
               as String,
-      nameArabic: null == nameArabic
-          ? _value.nameArabic
-          : nameArabic // ignore: cast_nullable_to_non_nullable
+      productFullName: null == productFullName
+          ? _value.productFullName
+          : productFullName // ignore: cast_nullable_to_non_nullable
               as String,
-      nameEnglis: null == nameEnglis
-          ? _value.nameEnglis
-          : nameEnglis // ignore: cast_nullable_to_non_nullable
+      parentGroupId: null == parentGroupId
+          ? _value.parentGroupId
+          : parentGroupId // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      productsSearching1: freezed == productsSearching1
+          ? _value.productsSearching1
+          : productsSearching1 // ignore: cast_nullable_to_non_nullable
+              as String?,
+      productsSearching2: freezed == productsSearching2
+          ? _value.productsSearching2
+          : productsSearching2 // ignore: cast_nullable_to_non_nullable
+              as String?,
+      productsSearching3: freezed == productsSearching3
+          ? _value.productsSearching3
+          : productsSearching3 // ignore: cast_nullable_to_non_nullable
+              as String?,
+      productsSearching4: freezed == productsSearching4
+          ? _value.productsSearching4
+          : productsSearching4 // ignore: cast_nullable_to_non_nullable
+              as String?,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
-      productCode: freezed == productCode
-          ? _value.productCode
-          : productCode // ignore: cast_nullable_to_non_nullable
-              as String?,
       isHiden: null == isHiden
           ? _value.isHiden
           : isHiden // ignore: cast_nullable_to_non_nullable
@@ -146,11 +174,15 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
-      String groupName,
-      String nameArabic,
-      String nameEnglis,
+      String productName,
+      String productFullName,
+      String parentGroupId,
+      DateTime createdAt,
+      String? productsSearching1,
+      String? productsSearching2,
+      String? productsSearching3,
+      String? productsSearching4,
       double price,
-      String? productCode,
       bool isHiden,
       double? count,
       String? imageUrl,
@@ -171,11 +203,15 @@ class __$$ProductImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? groupName = null,
-    Object? nameArabic = null,
-    Object? nameEnglis = null,
+    Object? productName = null,
+    Object? productFullName = null,
+    Object? parentGroupId = null,
+    Object? createdAt = null,
+    Object? productsSearching1 = freezed,
+    Object? productsSearching2 = freezed,
+    Object? productsSearching3 = freezed,
+    Object? productsSearching4 = freezed,
     Object? price = null,
-    Object? productCode = freezed,
     Object? isHiden = null,
     Object? count = freezed,
     Object? imageUrl = freezed,
@@ -188,26 +224,42 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      groupName: null == groupName
-          ? _value.groupName
-          : groupName // ignore: cast_nullable_to_non_nullable
+      productName: null == productName
+          ? _value.productName
+          : productName // ignore: cast_nullable_to_non_nullable
               as String,
-      nameArabic: null == nameArabic
-          ? _value.nameArabic
-          : nameArabic // ignore: cast_nullable_to_non_nullable
+      productFullName: null == productFullName
+          ? _value.productFullName
+          : productFullName // ignore: cast_nullable_to_non_nullable
               as String,
-      nameEnglis: null == nameEnglis
-          ? _value.nameEnglis
-          : nameEnglis // ignore: cast_nullable_to_non_nullable
+      parentGroupId: null == parentGroupId
+          ? _value.parentGroupId
+          : parentGroupId // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      productsSearching1: freezed == productsSearching1
+          ? _value.productsSearching1
+          : productsSearching1 // ignore: cast_nullable_to_non_nullable
+              as String?,
+      productsSearching2: freezed == productsSearching2
+          ? _value.productsSearching2
+          : productsSearching2 // ignore: cast_nullable_to_non_nullable
+              as String?,
+      productsSearching3: freezed == productsSearching3
+          ? _value.productsSearching3
+          : productsSearching3 // ignore: cast_nullable_to_non_nullable
+              as String?,
+      productsSearching4: freezed == productsSearching4
+          ? _value.productsSearching4
+          : productsSearching4 // ignore: cast_nullable_to_non_nullable
+              as String?,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
-      productCode: freezed == productCode
-          ? _value.productCode
-          : productCode // ignore: cast_nullable_to_non_nullable
-              as String?,
       isHiden: null == isHiden
           ? _value.isHiden
           : isHiden // ignore: cast_nullable_to_non_nullable
@@ -241,11 +293,15 @@ class __$$ProductImplCopyWithImpl<$Res>
 class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
   const _$ProductImpl(
       {this.id,
-      required this.groupName,
-      required this.nameArabic,
-      required this.nameEnglis,
+      required this.productName,
+      required this.productFullName,
+      required this.parentGroupId,
+      required this.createdAt,
+      this.productsSearching1,
+      this.productsSearching2,
+      this.productsSearching3,
+      this.productsSearching4,
       required this.price,
-      this.productCode,
       this.isHiden = false,
       this.count,
       this.imageUrl,
@@ -259,15 +315,23 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
   @override
   final String? id;
   @override
-  final String groupName;
+  final String productName;
   @override
-  final String nameArabic;
+  final String productFullName;
   @override
-  final String nameEnglis;
+  final String parentGroupId;
+  @override
+  final DateTime createdAt;
+  @override
+  final String? productsSearching1;
+  @override
+  final String? productsSearching2;
+  @override
+  final String? productsSearching3;
+  @override
+  final String? productsSearching4;
   @override
   final double price;
-  @override
-  final String? productCode;
   @override
   @JsonKey()
   final bool isHiden;
@@ -284,7 +348,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Product(id: $id, groupName: $groupName, nameArabic: $nameArabic, nameEnglis: $nameEnglis, price: $price, productCode: $productCode, isHiden: $isHiden, count: $count, imageUrl: $imageUrl, type: $type, makfol: $makfol, description: $description)';
+    return 'Product(id: $id, productName: $productName, productFullName: $productFullName, parentGroupId: $parentGroupId, createdAt: $createdAt, productsSearching1: $productsSearching1, productsSearching2: $productsSearching2, productsSearching3: $productsSearching3, productsSearching4: $productsSearching4, price: $price, isHiden: $isHiden, count: $count, imageUrl: $imageUrl, type: $type, makfol: $makfol, description: $description)';
   }
 
   @override
@@ -293,11 +357,15 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
     properties
       ..add(DiagnosticsProperty('type', 'Product'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('groupName', groupName))
-      ..add(DiagnosticsProperty('nameArabic', nameArabic))
-      ..add(DiagnosticsProperty('nameEnglis', nameEnglis))
+      ..add(DiagnosticsProperty('productName', productName))
+      ..add(DiagnosticsProperty('productFullName', productFullName))
+      ..add(DiagnosticsProperty('parentGroupId', parentGroupId))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('productsSearching1', productsSearching1))
+      ..add(DiagnosticsProperty('productsSearching2', productsSearching2))
+      ..add(DiagnosticsProperty('productsSearching3', productsSearching3))
+      ..add(DiagnosticsProperty('productsSearching4', productsSearching4))
       ..add(DiagnosticsProperty('price', price))
-      ..add(DiagnosticsProperty('productCode', productCode))
       ..add(DiagnosticsProperty('isHiden', isHiden))
       ..add(DiagnosticsProperty('count', count))
       ..add(DiagnosticsProperty('imageUrl', imageUrl))
@@ -312,15 +380,23 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
         (other.runtimeType == runtimeType &&
             other is _$ProductImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.groupName, groupName) ||
-                other.groupName == groupName) &&
-            (identical(other.nameArabic, nameArabic) ||
-                other.nameArabic == nameArabic) &&
-            (identical(other.nameEnglis, nameEnglis) ||
-                other.nameEnglis == nameEnglis) &&
+            (identical(other.productName, productName) ||
+                other.productName == productName) &&
+            (identical(other.productFullName, productFullName) ||
+                other.productFullName == productFullName) &&
+            (identical(other.parentGroupId, parentGroupId) ||
+                other.parentGroupId == parentGroupId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.productsSearching1, productsSearching1) ||
+                other.productsSearching1 == productsSearching1) &&
+            (identical(other.productsSearching2, productsSearching2) ||
+                other.productsSearching2 == productsSearching2) &&
+            (identical(other.productsSearching3, productsSearching3) ||
+                other.productsSearching3 == productsSearching3) &&
+            (identical(other.productsSearching4, productsSearching4) ||
+                other.productsSearching4 == productsSearching4) &&
             (identical(other.price, price) || other.price == price) &&
-            (identical(other.productCode, productCode) ||
-                other.productCode == productCode) &&
             (identical(other.isHiden, isHiden) || other.isHiden == isHiden) &&
             (identical(other.count, count) || other.count == count) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -336,11 +412,15 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      groupName,
-      nameArabic,
-      nameEnglis,
+      productName,
+      productFullName,
+      parentGroupId,
+      createdAt,
+      productsSearching1,
+      productsSearching2,
+      productsSearching3,
+      productsSearching4,
       price,
-      productCode,
       isHiden,
       count,
       imageUrl,
@@ -365,11 +445,15 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
 abstract class _Product implements Product {
   const factory _Product(
       {final String? id,
-      required final String groupName,
-      required final String nameArabic,
-      required final String nameEnglis,
+      required final String productName,
+      required final String productFullName,
+      required final String parentGroupId,
+      required final DateTime createdAt,
+      final String? productsSearching1,
+      final String? productsSearching2,
+      final String? productsSearching3,
+      final String? productsSearching4,
       required final double price,
-      final String? productCode,
       final bool isHiden,
       final double? count,
       final String? imageUrl,
@@ -382,15 +466,23 @@ abstract class _Product implements Product {
   @override
   String? get id;
   @override
-  String get groupName;
+  String get productName;
   @override
-  String get nameArabic;
+  String get productFullName;
   @override
-  String get nameEnglis;
+  String get parentGroupId;
+  @override
+  DateTime get createdAt;
+  @override
+  String? get productsSearching1;
+  @override
+  String? get productsSearching2;
+  @override
+  String? get productsSearching3;
+  @override
+  String? get productsSearching4;
   @override
   double get price;
-  @override
-  String? get productCode;
   @override
   bool get isHiden;
   @override

@@ -9,12 +9,17 @@ part 'settings.g.dart';
 @freezed
 class Settings with _$Settings {
   const factory Settings({
-    String? id,
+
     @Default("fixedId")  String fixedId,
-    required String marketInfo,
+    required String apkUrl,
     required String whatsAppPhone,
+     double? landtute,
+     double? longtute,
+     required String messageForCoustomer,
+     required String messageForVisotr,
+    String? noteForParts,
     @Default("1.0.1") String minVersion,
-    String? appUrl,
+   
     
 
   }) = _Settings;

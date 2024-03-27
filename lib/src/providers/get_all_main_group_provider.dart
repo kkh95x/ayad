@@ -4,7 +4,9 @@ import 'package:ayad/src/components/dialogs.dart';
 import 'package:ayad/src/data/supabase_group_repository.dart';
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/providers/supabase_storge_service.dart';
+import 'package:ayad/users/auth/shared_prefrance_service.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -39,23 +41,32 @@ const fakeGroups = <Group>[
 final getAllGroupProvider =
     StateNotifierProvider<MainGroupNotifer, AsyncValue<List<Group>>>((ref) {
   return MainGroupNotifer(ref.read(supabaseGroupRepositoryProvider),
-      ref.read(supbaseStorgeServicesProvider))
+      ref.read(supbaseStorgeServicesProvider),ref.read(sharedPrefranceServiceProvider))
     ..init();
 });
 
 class MainGroupNotifer extends StateNotifier<AsyncValue<List<Group>>> {
   final SupabaseGroupRepository _supabaseGroupRepository;
   final SupaStorgeService _storgeService;
-  MainGroupNotifer(this._supabaseGroupRepository, this._storgeService)
+  final SharedPrefranceServce sharedPrefranceServce;
+  MainGroupNotifer(this._supabaseGroupRepository, this._storgeService,this.sharedPrefranceServce)
       : super(const AsyncLoading());
   Future<void> init() async {
     state = const AsyncLoading();
     try {
       final groups = await _supabaseGroupRepository.getMainGroup(
           groupType: GroupType.customer);
+      sharedPrefranceServce.saveGroups(groups);
       state = AsyncData(groups);
-    } catch (e, stack) {
-      state = AsyncError(e, stack);
+    } catch (e,s) {
+      BotToast.showText(text: "حدث خطأ أثناء الإتصال بالسيرفر",textStyle: const TextStyle(fontSize: 14,color: Colors.white));
+      print("-----> ${e.toString()}");
+      final data=await sharedPrefranceServce.getGroups();
+      if(data==null){
+        state=AsyncError(e, s);
+      }else{
+        state = AsyncData(data);
+      }
     }
   }
 
@@ -79,7 +90,7 @@ class MainGroupNotifer extends StateNotifier<AsyncValue<List<Group>>> {
         isMainGroup: true,
         createdAt: DateTime.now(),
         imageUrl: imageUrlFromSupa,
-         isHiden: formGroup.control("isHidn").value);
+        isHiden: formGroup.control("isHidn").value ?? false);
 
     await _supabaseGroupRepository.create(group);
     BotToast.closeAllLoading();
@@ -108,7 +119,7 @@ class MainGroupNotifer extends StateNotifier<AsyncValue<List<Group>>> {
         isMainGroup: true,
         createdAt: DateTime.now(),
         imageUrl: imageUrlFromSupa,
-        isHiden: formGroup.control("isHidn").value);
+        isHiden: formGroup.control("isHidn").value ?? false);
 
     await _supabaseGroupRepository.update(newGroup);
     BotToast.closeAllLoading();

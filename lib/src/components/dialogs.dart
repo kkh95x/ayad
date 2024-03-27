@@ -16,12 +16,13 @@ import 'package:flutter/material.dart';
   }
 class DilogsHelper {
   static Future<void> showGroupForm(BuildContext context,
-      {Group? group,bool isMain=false}) async {
+      {Group? group,bool isMain=false,Group? parentGroup}) async {
     await showDialog(
       context: context,
       builder: (context) {
         return GroupFormComponent(
           group: group,
+          parentGroup: parentGroup,
           isMain: isMain,
         );
       },
@@ -29,12 +30,13 @@ class DilogsHelper {
   }
 
   static Future<void> showProductForm(BuildContext context,
-      {Product? product}) async {
+      {Product? product ,required Group parentGroup}) async {
     await showDialog(
       context: context,
       builder: (context) {
         return ProductFormComponent(
           product: product,
+          parentGroup: parentGroup,
         );
       },
     );

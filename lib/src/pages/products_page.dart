@@ -1,3 +1,4 @@
+import 'package:ayad/src/components/products_component.dart';
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/pages/product_page.dart';
@@ -25,55 +26,10 @@ class ProductsPage extends ConsumerWidget {
             children: [
               const TextSearchWidget(),
               SizedBox(height: 50.h,),
-              Expanded(
-                child: Consumer(
-                  builder: (context, ref, child) {
-                    return ref.watch(getSupProductProvider).when(
-                      data: (data) {
-                        // return Center(
-                        //     child: GridView.builder(
-                        //       itemCount: data.length,
-                        //         gridDelegate:
-                        //             const SliverGridDelegateWithFixedCrossAxisCount(
-                        //               crossAxisSpacing: 10,
-                        //               mainAxisSpacing: 10,
-                        //                 crossAxisCount: 2),
-
-                        //         itemBuilder: (context, index) {
-                        //           return ProductCardWidget(product: data[index]);
-                        //         },));
-                        if(data.isEmpty){
-                          return const Center(
-                            child: Text("هذ القسم فارغ حالياَ"),
-                          );
-                        }
-                        return ListView.builder(
-                          itemCount: data.length,
-                          itemBuilder: (context, index) {
-                            return ProductsListTileWidget(
-                              onTap: () {
-                                context.push(ProductPage.routePath,extra: data[index]);
-                              },
-                                product: data[index]);
-                          },
-                        );
-                      },
-                      error: (error, stackTrace) {
-                        return const Center(
-                          child: Text("Error"),
-                        );
-                      },
-                      loading: () {
-                        return const Center(
-                          child: LoadingWidget(),
-                        );
-                      },
-                    );
-                  },
-                ),
-              )
+              ProductsComponent(parentGroup: group,)
             ],
           ),
         ));
   }
 }
+

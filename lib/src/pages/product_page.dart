@@ -20,7 +20,7 @@ class ProductPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
     return PageTemplate(
-        title: product.nameEnglis,
+        title: product.productFullName,
         child: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.symmetric(vertical: 20.h),
@@ -66,11 +66,11 @@ class ProductPage extends ConsumerWidget {
                                 borderRadius: BorderRadius.circular(4.r),
                                 child: CachedNetworkImage(
                                     fit: BoxFit.cover,
-                                    progressIndicatorBuilder: (context, url,
-                                            progress) =>
-                                        const Center(
-                                          child: LoadingWidget(),
-                                        ),
+                                    progressIndicatorBuilder:
+                                        (context, url, progress) =>
+                                            const Center(
+                                              child: LoadingWidget(),
+                                            ),
                                     width: MediaQuery.of(context).size.width,
                                     imageUrl: product.imageUrl!),
                               ),
@@ -83,30 +83,35 @@ class ProductPage extends ConsumerWidget {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              product.nameEnglis,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(
-                                      color: appColor.redish, fontSize: 26),
+                            Expanded(
+                              child: Text(
+                                product.productFullName,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                        color: appColor.redish, fontSize: 26),
+                              ),
                             ),
                           ],
                         ),
                         SizedBox(
                           height: 10.h,
                         ),
-                        _buildTitlteInfoWidget(
-                            context, appColor, "المحموعة:", product.groupName),
-                        _buildTitlteInfoWidget(context, appColor,
-                            "اسم المنتج بالعربي", product.nameArabic),
-                        _buildTitlteInfoWidget(context, appColor,
-                            "اسم المنتج بالأنجليزية", product.nameEnglis),
-                        if (product.productCode != null)
-                          _buildTitlteInfoWidget(context, appColor,
-                              "كود المنتج", product.productCode ?? "-"),
+                        _buildTitlteInfoWidget(context, appColor, "اسم المنتج",
+                            product.productFullName),
+                        // _buildTitlteInfoWidget(context, appColor,
+                        //     "اسم المنتج بالعربي", product.nameArabic),
+                        // _buildTitlteInfoWidget(context, appColor,
+                        //     "اسم المنتج بالأنجليزية", product.nameEnglis),
+                        // if (product.productCode != null)
+                        //   _buildTitlteInfoWidget(context, appColor,
+                        //       "كود المنتج", product.productCode ?? "-"),
                         _buildTitlteInfoWidget(context, appColor, "سعر المنتج",
-                            "${product.price}\$"),
+                            "${fixPrice(product.price)}\$"),
                         if (product.type != null)
                           _buildTitlteInfoWidget(
                               context, appColor, "النوع", product.type ?? "-"),
@@ -133,11 +138,8 @@ class ProductPage extends ConsumerWidget {
                           height: 10.h,
                         ),
                         DynamicButton(
-                          title: "تحديث",
-                          onPressed: () async {
-                            await DilogsHelper.showProductForm(context,
-                                product: product);
-                          },
+                          title: "حذف",
+                          onPressed: () async {},
                         ),
                         SizedBox(
                           height: 30.h,

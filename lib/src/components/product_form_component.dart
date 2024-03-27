@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/models/product.dart';
+import 'package:ayad/src/providers/get_sub_products_provider.dart';
 import 'package:ayad/src/providers/products_form_component.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/main_text_input_widget.dart';
@@ -14,8 +16,10 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProductFormComponent extends ConsumerWidget {
-  const ProductFormComponent({super.key, this.product});
+  const ProductFormComponent(
+      {super.key, this.product, required this.parentGroup});
   final Product? product;
+  final Group parentGroup;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isEdit = product != null;
@@ -23,7 +27,7 @@ class ProductFormComponent extends ConsumerWidget {
 
     final appColor = ref.read(appColorLightProvider);
     return AlertDialog(
-      title: Text(isEdit ? product!.nameArabic : "إضافة منتج جديد"),
+      title: Text(isEdit ? product!.productFullName : "إضافة منتج جديد"),
       content: ReactiveForm(
           formGroup: formGroup,
           child: SingleChildScrollView(
@@ -35,28 +39,35 @@ class ProductFormComponent extends ConsumerWidget {
                   height: 10.h,
                 ),
                 const Row(
-                  children: [Text("*اسم المنتح")],
+                  children: [Text("اسم المنتح*")],
                 ),
                 MainTextFieldWidget(
-                  control: "groupName",
-                  placeholder: "*اسم المنتح",
+                  control: "productName",
+                  placeholder: "الاسم الفرعي للمنتح*",
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
                 const Row(
-                  children: [Text("*الاسم الثاني للمنتج")],
+                  children: [Text("الاسم الكامل للمنتج*")],
                 ),
                 MainTextFieldWidget(
-                    control: "nameArabic", placeholder: "*الاسم الثاني للمنتج"),
+                    control: "productFullName",
+                    placeholder: "الاسم الكامل للمنتج"),
                 SizedBox(
                   height: 10.h,
                 ),
                 const Row(
-                  children: [Text("كود المنتج")],
+                  children: [Text("اسماء مساعدة لعملية البحث")],
                 ),
                 MainTextFieldWidget(
-                    control: "productCode", placeholder: "كود المنتج"),
+                    control: "productsSearching1", placeholder: ""),
+                MainTextFieldWidget(
+                    control: "productsSearching2", placeholder: ""),
+                MainTextFieldWidget(
+                    control: "productsSearching3", placeholder: ""),
+                MainTextFieldWidget(
+                    control: "productsSearching4", placeholder: ""),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -83,7 +94,7 @@ class ProductFormComponent extends ConsumerWidget {
                 MainTextFieldWidget(
                     type: Type.double,
                     control: "count",
-                    placeholder: "الكمية المتوفرة من المنتج المنتج"),
+                    placeholder: "الكمية المتوفرة من المنتج "),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -135,12 +146,31 @@ class ProductFormComponent extends ConsumerWidget {
                 SizedBox(
                   height: 20.h,
                 ),
-                DynamicButton(
-                  type: ButtonTypes.Alternative,
-                  title: isEdit ? "تحديث" : "حفظ",
-                  radius: 8,
-                  onPressed: () {},
-                ),
+                ReactiveFormConsumer(builder: (context, formGroup, child) {
+                  return DynamicButton(
+                    type: ButtonTypes.Alternative,
+                    title: isEdit ? "تحديث" : "حفظ",
+                    radius: 8,
+                    onPressed: () async {
+                      if (isEdit) {
+                        await ref
+                            .read(getSupProductProvider(parentGroup).notifier)
+                            .update(formGroup, product!)
+                            .then((value) {
+                          context.pop();
+                          formGroup.reset();
+                        });
+                      } else {
+                        await ref
+                            .read(getSupProductProvider(parentGroup).notifier)
+                            .addGroup(formGroup)
+                            .then((value) {
+                          formGroup.reset();
+                        });
+                      }
+                    },
+                  );
+                }),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -158,72 +188,84 @@ class ProductFormComponent extends ConsumerWidget {
 
   ReactiveFormConsumer _imageWidget(AppColor appColor) {
     return ReactiveFormConsumer(
-                builder: (context, formGroup, child) {
-                  final imageUrl = formGroup.control("imageUrl").value;
-                  if (imageUrl == null) {
-                    return _buildPickImageWidget(appColor, formGroup);
-                  }
-                  if (isUrl(imageUrl)) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(10.r),
-                          height: 200.r,
-                          width:double.infinity,
-                          decoration: BoxDecoration(
-                              color: appColor.greyish.shade200,
-                              borderRadius: BorderRadius.circular(4.r)),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(4.r),
-                            child: CachedNetworkImage(
-                              imageUrl: imageUrl,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        _buildReplaceImage(formGroup),
-                      ],
-                    );
-                  } else {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(10.r),
-                          height: 200.r,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              color: appColor.greyish.shade200,
-                              borderRadius: BorderRadius.circular(4.r)),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(4.r),
-                            child: Image.file(
-                              File(imageUrl),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        _buildReplaceImage(formGroup),
-                      ],
-                    );
-                  }
-                },
-              );
+      builder: (context, formGroup, child) {
+        final imageUrl = formGroup.control("imageUrl").value;
+        if (imageUrl == null) {
+          return _buildPickImageWidget(appColor, formGroup);
+        }
+        if (isUrl(imageUrl)) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(10.r),
+                height: 200.r,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: appColor.greyish.shade200,
+                    borderRadius: BorderRadius.circular(4.r)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4.r),
+                  child: CachedNetworkImage(
+                    imageUrl: imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              _buildReplaceImage(formGroup),
+            ],
+          );
+        } else {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(10.r),
+                height: 200.r,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: appColor.greyish.shade200,
+                    borderRadius: BorderRadius.circular(4.r)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4.r),
+                  child: Image.file(
+                    File(imageUrl),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              _buildReplaceImage(formGroup),
+            ],
+          );
+        }
+      },
+    );
   }
 
-  TextButton _buildReplaceImage(FormGroup formGroup) {
-    return TextButton(
-        onPressed: () async {
-          final ImagePicker picker = ImagePicker();
-          // Pick an image.
-          final XFile? image =
-              await picker.pickImage(source: ImageSource.gallery);
-          if (image != null) {
-            formGroup.control("imageUrl").value = image.path;
-          }
-        },
-        child: const Text("استبدال صورة"));
+  Widget _buildReplaceImage(FormGroup formGroup) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        TextButton(
+            onPressed: () async {
+              final ImagePicker picker = ImagePicker();
+              // Pick an image.
+              final XFile? image =
+                  await picker.pickImage(source: ImageSource.gallery);
+              if (image != null) {
+                formGroup.control("imageUrl").value = image.path;
+              }
+            },
+            child: const Text("استبدال صورة")),
+        TextButton(
+            onPressed: () async {
+             
+                formGroup.control("imageUrl").value =  null;
+              
+            },
+            child: const Text("إزالة صورة")),
+      ],
+    );
   }
 
   bool isUrl(String string) {

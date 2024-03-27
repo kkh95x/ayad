@@ -8,7 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:auto_size_text_plus/auto_size_text.dart';
 
 class GroupButtonWidget extends ConsumerWidget {
-  const GroupButtonWidget({super.key, required this.group, this.onTap,this.onLongPress});
+  const GroupButtonWidget(
+      {super.key, required this.group, this.onTap, this.onLongPress});
   final Group group;
   final void Function()? onTap;
   final void Function()? onLongPress;
@@ -31,9 +32,14 @@ class GroupButtonWidget extends ConsumerWidget {
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                    blurRadius: 3,
-                    color: appColor.blackish.withOpacity(.4),
-                    offset: const Offset(1, 1))
+                    blurRadius: 4,
+                    // spreadRadius: 2,
+                    color: (group.isMainGroup || group.hexColor == null)
+                        ? appColor.blackish.withOpacity(.4)
+                        : getColorFromHex(group.hexColor ?? "#fffff")
+                                ?.withAlpha(200) ??
+                            Colors.black,
+                    offset: const Offset(1.5, 2))
               ],
               color: group.isMainGroup
                   ? appColor.blackish
@@ -107,49 +113,85 @@ class GroupButtonWidget extends ConsumerWidget {
                     //         ?.copyWith(color: appColor.whiteish, fontSize: 12),
                     //   ),
                     // ]
-                    if(group.isHiden)
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child:  Container(
-                        padding: const EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: appColor.blackish.withOpacity(.3)
-                        ),
-                        child: Icon(Icons.visibility_off,color: appColor.redish,)),
-                    )
+                    if (group.isHiden)
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: appColor.blackish.withOpacity(.3)),
+                            child: Icon(
+                              Icons.visibility_off,
+                              color: appColor.redish,
+                            )),
+                      )
                   ],
                 )
               : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Text(
-                          group.name,
-                          maxLines: 1,
-                          // maxFontSize: 16,
-                          // minFontSize: 7,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(color: appColor.whiteish),
-                        ),
-                      if (group.name2?.isNotEmpty==true) ...[
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        Text(
-                          group.name2??"",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                                  color: appColor.whiteish, fontSize: 12),
-                        ),
-                       
-                      ],
-                    ])),
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                group.name,
+                                maxLines: 1,
+                                // maxFontSize: 16,
+                                // minFontSize: 7,
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                        color: appColor.whiteish,
+                                        shadows: [
+                                      BoxShadow(
+                                          color:
+                                              appColor.blackish.withOpacity(.6),
+                                          spreadRadius: 1.5,
+                                          blurRadius: 2)
+                                    ]),
+                              ),
+                              if (group.isHiden)
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Container(
+                                      padding: const EdgeInsets.all(2),
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: appColor.blackish
+                                              .withOpacity(.3)),
+                                      child: Icon(
+                                        Icons.visibility_off,
+                                        color: appColor.whiteish,
+                                      )),
+                                )
+                            ],
+                          ),
+                          if (group.name2?.isNotEmpty == true) ...[
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Text(
+                              group.name2 ?? "",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(shadows: [
+                                BoxShadow(
+                                    color: appColor.blackish.withOpacity(.6),
+                                    spreadRadius: 1.5,
+                                    blurRadius: 2)
+                              ], color: appColor.whiteish, fontSize: 12),
+                            ),
+                          ],
+                        ]),
+                  ],
+                )),
     );
   }
 

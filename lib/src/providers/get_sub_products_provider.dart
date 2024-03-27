@@ -1,54 +1,178 @@
+import 'dart:io';
+
+import 'package:ayad/src/components/dialogs.dart';
+import 'package:ayad/src/data/supabase_product_repository.dart';
+import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/models/product.dart';
+import 'package:ayad/src/providers/supabase_storge_service.dart';
+import 'package:ayad/users/auth/shared_prefrance_service.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 const fakeSubProducts = <Product>[
-  Product(
-      nameEnglis: "WF",
-      groupName: "شاشات سامسونغ A01",
-      nameArabic: "دبليو أف",
-      price: 40,
-      description:
-          "شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي",
-      count: 12,
-      makfol: true,
-      productCode: "LC232334",
-      type: "أصلي"),
-  Product(
-      nameEnglis: "Omlide",
-      groupName: "شاشات سامسونغ A01",
+  // Product(
+  //     nameEnglis: "WF",
+  //     groupName: "شاشات سامسونغ A01",
+  //     nameArabic: "دبليو أف",
+  //     price: 40,
+  //     description:
+  //         "شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي",
+  //     count: 12,
+  //     makfol: true,
+  //     productCode: "LC232334",
+  //     type: "أصلي"),
+  // Product(
+  //     nameEnglis: "Omlide",
+  //     groupName: "شاشات سامسونغ A01",
 
-      imageUrl:
-          "https://atlas-content-cdn.pixelsquid.com/assets_v2/244/2448810350577980946/jpeg-600/G11.jpg?modifiedAt=1",
-      nameArabic: "أومليد",
-      price: 70,
-      count: 120,
-      type: "تقليد",
-      productCode: "LC232334",
-      makfol: false,
-      description:
-          "شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي"),
-  Product(
-      nameEnglis: "China Service",
-      nameArabic: "سيرفس صيني",
-      makfol: true,      groupName: "شاشات سامسونغ A01",
+  //     imageUrl:
+  //         "https://atlas-content-cdn.pixelsquid.com/assets_v2/244/2448810350577980946/jpeg-600/G11.jpg?modifiedAt=1",
+  //     nameArabic: "أومليد",
+  //     price: 70,
+  //     count: 120,
+  //     type: "تقليد",
+  //     productCode: "LC232334",
+  //     makfol: false,
+  //     description:
+  //         "شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي"),
+  // Product(
+  //     nameEnglis: "China Service",
+  //     nameArabic: "سيرفس صيني",
+  //     makfol: true,      groupName: "شاشات سامسونغ A01",
 
-      imageUrl:
-          "https://ae01.alicdn.com/kf/S214c97682eec48e3820898c6b4b81f29u/LCD-For-BLUBOO-S8-Plus-Touch-Screen-Display-Original-MTK6750T-Octa-src-6-0Inch-Mobile-Phone.jpg",
-      price: 60,
-      productCode: "LC232334",
-      type: "أصلي",
-      description:
-          "شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي"),
-  Product(
-      nameEnglis: "TFT",
-      nameArabic: "تي أف تي",      groupName: "شاشات سامسونغ A01",
+  //     imageUrl:
+  //         "https://ae01.alicdn.com/kf/S214c97682eec48e3820898c6b4b81f29u/LCD-For-BLUBOO-S8-Plus-Touch-Screen-Display-Original-MTK6750T-Octa-src-6-0Inch-Mobile-Phone.jpg",
+  //     price: 60,
+  //     productCode: "LC232334",
+  //     type: "أصلي",
+  //     description:
+  //         "شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي"),
+  // Product(
+  //     nameEnglis: "TFT",
+  //     nameArabic: "تي أف تي",      groupName: "شاشات سامسونغ A01",
 
-      price: 65.5,
-      productCode: "LC232334",
-      description:
-          "شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي"),
+  //     price: 65.5,
+  //     productCode: "LC232334",
+  //     description:
+  //         "شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي شرح تفاصيل عن المنتج الحالي"),
 ];
-final getSupProductProvider = FutureProvider<List<Product>>((ref) async {
-  await Future.delayed(const Duration(seconds: 1));
-  return fakeSubProducts;
+final getSupProductProvider = StateNotifierProvider.family<ProductsNotifer,
+    AsyncValue<List<Product>>, Group>((ref, g) {
+  return ProductsNotifer(
+      ref.read(supabaseProductRepositoryProvider),
+      ref.read(supbaseStorgeServicesProvider),
+      ref.read(sharedPrefranceServiceProvider),
+      g)
+    ..init();
 });
+
+class ProductsNotifer extends StateNotifier<AsyncValue<List<Product>>> {
+  final SupabaseProductRepository _supabaseProductRepository;
+  final SupaStorgeService _storgeService;
+  final SharedPrefranceServce sharedPrefranceServce;
+  final Group parentGroup;
+  ProductsNotifer(this._supabaseProductRepository, this._storgeService,
+      this.sharedPrefranceServce, this.parentGroup)
+      : super(const AsyncLoading());
+  Future<void> init() async {
+    state = const AsyncLoading();
+    try {
+      final products =
+          await _supabaseProductRepository.getSubProduct(parentGroup.id ?? "");
+      state = AsyncData(products);
+      sharedPrefranceServce.saveProduct(products, parentGroup.id ?? "3323232");
+    } catch (e, s) {
+      BotToast.showText(
+          text: "حدث خطأ أثناء الإتصال بالسيرفر",
+          textStyle: const TextStyle(fontSize: 14, color: Colors.white));
+      print("-----> ${e.toString()}");
+      final data =
+          await sharedPrefranceServce.getProduct(parentGroup.id ?? "343243242");
+      if (data == null) {
+        state = AsyncError(e, s);
+      } else {
+        state = AsyncData(data);
+      }
+    }
+  }
+
+  Future<void> addGroup(FormGroup formGroup) async {
+    if (formGroup.invalid) {
+      BotToast.showText(text: "يرجى التأكد من البيانات المدخلة");
+      return;
+    }
+    String? imageUrl = formGroup.control("imageUrl").value;
+    String? imageUrlFromSupa;
+    BotToast.showLoading();
+    if (imageUrl != null) {
+      imageUrlFromSupa = await _storgeService.saveGroupsFile(File(imageUrl),
+          "main/${DateTime.now().toIso8601String().replaceAll(" ", "")}.png");
+    }
+
+    final product = Product(
+      productName: formGroup.control("productName").value,
+      productFullName: formGroup.control("productFullName").value,
+      parentGroupId: parentGroup.id ?? 'r3424234',
+      createdAt: DateTime.now(),
+      imageUrl: imageUrlFromSupa,
+      count: formGroup.control("count").value,
+      description: formGroup.control("description").value,
+      isHiden: formGroup.control("isHiden").value ?? false,
+      makfol: formGroup.control("makfol").value,
+      productsSearching1: formGroup.control("productsSearching1").value,
+      productsSearching2: formGroup.control("productsSearching2").value,
+      productsSearching3: formGroup.control("productsSearching3").value,
+      productsSearching4: formGroup.control("productsSearching4").value,
+      type: formGroup.control("type").value,
+      price: formGroup.control("price").value,
+    );
+
+    await _supabaseProductRepository.create(product);
+    BotToast.closeAllLoading();
+    init();
+  }
+
+  Future<void> update(FormGroup formGroup, Product product) async {
+    if (formGroup.invalid) {
+      BotToast.showText(text: "يرجى التأكد من البيانات المدخلة");
+      return;
+    }
+    String? imageUrl = formGroup.control("imageUrl").value;
+    String? imageUrlFromSupa;
+    BotToast.showLoading();
+    if (imageUrl != null && isUrl(imageUrl)) {
+      imageUrlFromSupa = imageUrl;
+    } else if (imageUrl != null) {
+      imageUrlFromSupa = await _storgeService.saveGroupsFile(File(imageUrl),
+          "main/${DateTime.now().toIso8601String().replaceAll(" ", "")}.png");
+    }
+    final newProduct = product.copyWith(
+      productName: formGroup.control("productName").value,
+      productFullName: formGroup.control("productFullName").value,
+      imageUrl: imageUrlFromSupa,
+      count: formGroup.control("count").value,
+      description: formGroup.control("description").value,
+      isHiden: formGroup.control("isHiden").value ?? false,
+      makfol: formGroup.control("makfol").value,
+      productsSearching1: formGroup.control("productsSearching1").value,
+      productsSearching2: formGroup.control("productsSearching2").value,
+      productsSearching3: formGroup.control("productsSearching3").value,
+      productsSearching4: formGroup.control("productsSearching4").value,
+      type: formGroup.control("type").value,
+      price: formGroup.control("price").value,
+    );
+
+    await _supabaseProductRepository.update(newProduct);
+    BotToast.closeAllLoading();
+    init();
+  }
+
+  Future<void> delete(Product product) async {
+    BotToast.showLoading();
+    await _supabaseProductRepository.delete(product.id ?? "");
+    BotToast.closeAllLoading();
+    init();
+  }
+}

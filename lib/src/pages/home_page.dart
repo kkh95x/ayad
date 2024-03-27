@@ -73,45 +73,51 @@ class HomePage extends ConsumerWidget {
                   builder: (context, ref, child) {
                     return ref.watch(getAllGroupProvider).when(
                       data: (data) {
-                        return GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisSpacing: 3,
-                                  mainAxisSpacing: 5,
-                                  childAspectRatio: (3 / 2),
-                                  crossAxisCount: 2),
-                          itemCount: data.length + 1,
-                          itemBuilder: (context, index) {
-                            if (index == data.length) {
+                        return RefreshIndicator(
+                          backgroundColor: ref.read(appColorLightProvider).whiteish,
+                          onRefresh: () async{
+                            ref.read(getAllGroupProvider.notifier).init();
+                          },
+                          child: GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisSpacing: 3,
+                                    mainAxisSpacing: 5,
+                                    childAspectRatio: (3 / 2),
+                                    crossAxisCount: 2),
+                            itemCount: data.length + 1,
+                            itemBuilder: (context, index) {
+                              if (index == data.length) {
+                                return GroupButtonWidget(
+                                  
+                                  group: Group(
+                                      type: GroupType.customer,
+                                      parentGroupId: "",
+                                      subType: SubType.groups,
+                                      createdAt: DateTime.now(),
+                                      isMainGroup: true,
+                                      name: "التوصية على قطع غير موجودة",
+                                      isHiden: false),
+                                  onTap: () {
+                                    // context.push(ServicePartPage.routePath,
+                                    //     extra: fakeGroups.first);
+                                  },
+                                );
+                              }
                               return GroupButtonWidget(
-                                
-                                group: Group(
-                                    type: GroupType.customer,
-                                    parentGroupId: "",
-                                    subType: SubType.groups,
-                                    createdAt: DateTime.now(),
-                                    isMainGroup: true,
-                                    name: "التواصي للقطع الغير موجودة",
-                                    isHiden: false),
+                                group: data[index],
+                                onLongPress: () async {
+                                  //TODO just admin
+                                    await DilogsHelper.showGroupForm(context,
+                                        group: data[index], isMain: true);
+                                  },
                                 onTap: () {
-                                  context.push(ServicePartPage.routePath,
-                                      extra: fakeGroups.first);
+                                  context.push(SubGroupPage.routePath,
+                                      extra: data[index]);
                                 },
                               );
-                            }
-                            return GroupButtonWidget(
-                              group: data[index],
-                              onLongPress: () async {
-                                //TODO just admin
-                                  await DilogsHelper.showGroupForm(context,
-                                      group: data[index], isMain: true);
-                                },
-                              onTap: () {
-                                context.push(SubGroupPage.routePath,
-                                    extra: fakeGroups.first);
-                              },
-                            );
-                          },
+                            },
+                          ),
                         );
 
                         // SingleChildScrollView(

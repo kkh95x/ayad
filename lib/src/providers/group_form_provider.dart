@@ -4,13 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 final groupformProvider = Provider.family<FormGroup, Group?>((ref, group) {
-//    type
-// subType
-// parentGroupId
-// createdAt
+
   return FormGroup({
     "type": FormControl<GroupType>(value: group?.type),
-    "subType": FormControl<SubType>(value: group?.subType),
+    "subType": FormControl<SubType>(value: group?.subType,validators: [Validators.required]),
     "imageUrl": FormControl<String>(value: group?.imageUrl),
     'color': FormControl<Color>(
         value: ref.read(colorConverterProvider(group?.hexColor))),

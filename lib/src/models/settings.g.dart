@@ -8,20 +8,26 @@ part of 'settings.dart';
 
 _$SettingsImpl _$$SettingsImplFromJson(Map<String, dynamic> json) =>
     _$SettingsImpl(
-      id: json['id'] as String?,
       fixedId: json['fixedId'] as String? ?? "fixedId",
-      marketInfo: json['marketInfo'] as String,
+      apkUrl: json['apkUrl'] as String,
       whatsAppPhone: json['whatsAppPhone'] as String,
+      landtute: (json['landtute'] as num?)?.toDouble(),
+      longtute: (json['longtute'] as num?)?.toDouble(),
+      messageForCoustomer: json['messageForCoustomer'] as String,
+      messageForVisotr: json['messageForVisotr'] as String,
+      noteForParts: json['noteForParts'] as String?,
       minVersion: json['minVersion'] as String? ?? "1.0.1",
-      appUrl: json['appUrl'] as String?,
     );
 
 Map<String, dynamic> _$$SettingsImplToJson(_$SettingsImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'fixedId': instance.fixedId,
-      'marketInfo': instance.marketInfo,
+      'apkUrl': instance.apkUrl,
       'whatsAppPhone': instance.whatsAppPhone,
+      'landtute': instance.landtute,
+      'longtute': instance.longtute,
+      'messageForCoustomer': instance.messageForCoustomer,
+      'messageForVisotr': instance.messageForVisotr,
+      'noteForParts': instance.noteForParts,
       'minVersion': instance.minVersion,
-      'appUrl': instance.appUrl,
     };

@@ -80,7 +80,7 @@ class ProductCardWidget extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product.nameEnglis,
+                      product.productName,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: appColor.whiteish,
                             fontWeight: FontWeight.bold,
@@ -88,7 +88,7 @@ class ProductCardWidget extends ConsumerWidget {
                           ),
                     ),
                     Text(
-                      product.nameArabic,
+                      product.productFullName,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: appColor.greyish.shade200,
                             fontSize: 12,

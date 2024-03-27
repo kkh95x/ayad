@@ -10,16 +10,21 @@ part 'product.g.dart';
 class Product with _$Product {
   const factory Product(
       {String? id,
-      required String groupName,
-      required String nameArabic,
-      required String nameEnglis,
+      required String productName,
+      required String productFullName,
+      required String parentGroupId,
+      required DateTime createdAt,
+       String? productsSearching1,
+       String? productsSearching2,
+       String? productsSearching3,
+       String? productsSearching4,
       required double price,
-      String? productCode,
       @Default(false) bool isHiden,
       double? count,
       String? imageUrl,
       String? type,
       bool? makfol,
+      
     
       String? description}) = _Product;
 

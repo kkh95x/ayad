@@ -20,12 +20,15 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Settings {
-  String? get id => throw _privateConstructorUsedError;
   String get fixedId => throw _privateConstructorUsedError;
-  String get marketInfo => throw _privateConstructorUsedError;
+  String get apkUrl => throw _privateConstructorUsedError;
   String get whatsAppPhone => throw _privateConstructorUsedError;
+  double? get landtute => throw _privateConstructorUsedError;
+  double? get longtute => throw _privateConstructorUsedError;
+  String get messageForCoustomer => throw _privateConstructorUsedError;
+  String get messageForVisotr => throw _privateConstructorUsedError;
+  String? get noteForParts => throw _privateConstructorUsedError;
   String get minVersion => throw _privateConstructorUsedError;
-  String? get appUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,12 +42,15 @@ abstract class $SettingsCopyWith<$Res> {
       _$SettingsCopyWithImpl<$Res, Settings>;
   @useResult
   $Res call(
-      {String? id,
-      String fixedId,
-      String marketInfo,
+      {String fixedId,
+      String apkUrl,
       String whatsAppPhone,
-      String minVersion,
-      String? appUrl});
+      double? landtute,
+      double? longtute,
+      String messageForCoustomer,
+      String messageForVisotr,
+      String? noteForParts,
+      String minVersion});
 }
 
 /// @nodoc
@@ -60,38 +66,53 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? fixedId = null,
-    Object? marketInfo = null,
+    Object? apkUrl = null,
     Object? whatsAppPhone = null,
+    Object? landtute = freezed,
+    Object? longtute = freezed,
+    Object? messageForCoustomer = null,
+    Object? messageForVisotr = null,
+    Object? noteForParts = freezed,
     Object? minVersion = null,
-    Object? appUrl = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
       fixedId: null == fixedId
           ? _value.fixedId
           : fixedId // ignore: cast_nullable_to_non_nullable
               as String,
-      marketInfo: null == marketInfo
-          ? _value.marketInfo
-          : marketInfo // ignore: cast_nullable_to_non_nullable
+      apkUrl: null == apkUrl
+          ? _value.apkUrl
+          : apkUrl // ignore: cast_nullable_to_non_nullable
               as String,
       whatsAppPhone: null == whatsAppPhone
           ? _value.whatsAppPhone
           : whatsAppPhone // ignore: cast_nullable_to_non_nullable
               as String,
+      landtute: freezed == landtute
+          ? _value.landtute
+          : landtute // ignore: cast_nullable_to_non_nullable
+              as double?,
+      longtute: freezed == longtute
+          ? _value.longtute
+          : longtute // ignore: cast_nullable_to_non_nullable
+              as double?,
+      messageForCoustomer: null == messageForCoustomer
+          ? _value.messageForCoustomer
+          : messageForCoustomer // ignore: cast_nullable_to_non_nullable
+              as String,
+      messageForVisotr: null == messageForVisotr
+          ? _value.messageForVisotr
+          : messageForVisotr // ignore: cast_nullable_to_non_nullable
+              as String,
+      noteForParts: freezed == noteForParts
+          ? _value.noteForParts
+          : noteForParts // ignore: cast_nullable_to_non_nullable
+              as String?,
       minVersion: null == minVersion
           ? _value.minVersion
           : minVersion // ignore: cast_nullable_to_non_nullable
               as String,
-      appUrl: freezed == appUrl
-          ? _value.appUrl
-          : appUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -105,12 +126,15 @@ abstract class _$$SettingsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? id,
-      String fixedId,
-      String marketInfo,
+      {String fixedId,
+      String apkUrl,
       String whatsAppPhone,
-      String minVersion,
-      String? appUrl});
+      double? landtute,
+      double? longtute,
+      String messageForCoustomer,
+      String messageForVisotr,
+      String? noteForParts,
+      String minVersion});
 }
 
 /// @nodoc
@@ -124,38 +148,53 @@ class __$$SettingsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? fixedId = null,
-    Object? marketInfo = null,
+    Object? apkUrl = null,
     Object? whatsAppPhone = null,
+    Object? landtute = freezed,
+    Object? longtute = freezed,
+    Object? messageForCoustomer = null,
+    Object? messageForVisotr = null,
+    Object? noteForParts = freezed,
     Object? minVersion = null,
-    Object? appUrl = freezed,
   }) {
     return _then(_$SettingsImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
       fixedId: null == fixedId
           ? _value.fixedId
           : fixedId // ignore: cast_nullable_to_non_nullable
               as String,
-      marketInfo: null == marketInfo
-          ? _value.marketInfo
-          : marketInfo // ignore: cast_nullable_to_non_nullable
+      apkUrl: null == apkUrl
+          ? _value.apkUrl
+          : apkUrl // ignore: cast_nullable_to_non_nullable
               as String,
       whatsAppPhone: null == whatsAppPhone
           ? _value.whatsAppPhone
           : whatsAppPhone // ignore: cast_nullable_to_non_nullable
               as String,
+      landtute: freezed == landtute
+          ? _value.landtute
+          : landtute // ignore: cast_nullable_to_non_nullable
+              as double?,
+      longtute: freezed == longtute
+          ? _value.longtute
+          : longtute // ignore: cast_nullable_to_non_nullable
+              as double?,
+      messageForCoustomer: null == messageForCoustomer
+          ? _value.messageForCoustomer
+          : messageForCoustomer // ignore: cast_nullable_to_non_nullable
+              as String,
+      messageForVisotr: null == messageForVisotr
+          ? _value.messageForVisotr
+          : messageForVisotr // ignore: cast_nullable_to_non_nullable
+              as String,
+      noteForParts: freezed == noteForParts
+          ? _value.noteForParts
+          : noteForParts // ignore: cast_nullable_to_non_nullable
+              as String?,
       minVersion: null == minVersion
           ? _value.minVersion
           : minVersion // ignore: cast_nullable_to_non_nullable
               as String,
-      appUrl: freezed == appUrl
-          ? _value.appUrl
-          : appUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -164,34 +203,43 @@ class __$$SettingsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
   const _$SettingsImpl(
-      {this.id,
-      this.fixedId = "fixedId",
-      required this.marketInfo,
+      {this.fixedId = "fixedId",
+      required this.apkUrl,
       required this.whatsAppPhone,
-      this.minVersion = "1.0.1",
-      this.appUrl});
+      this.landtute,
+      this.longtute,
+      required this.messageForCoustomer,
+      required this.messageForVisotr,
+      this.noteForParts,
+      this.minVersion = "1.0.1"});
 
   factory _$SettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$SettingsImplFromJson(json);
 
   @override
-  final String? id;
-  @override
   @JsonKey()
   final String fixedId;
   @override
-  final String marketInfo;
+  final String apkUrl;
   @override
   final String whatsAppPhone;
   @override
+  final double? landtute;
+  @override
+  final double? longtute;
+  @override
+  final String messageForCoustomer;
+  @override
+  final String messageForVisotr;
+  @override
+  final String? noteForParts;
+  @override
   @JsonKey()
   final String minVersion;
-  @override
-  final String? appUrl;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Settings(id: $id, fixedId: $fixedId, marketInfo: $marketInfo, whatsAppPhone: $whatsAppPhone, minVersion: $minVersion, appUrl: $appUrl)';
+    return 'Settings(fixedId: $fixedId, apkUrl: $apkUrl, whatsAppPhone: $whatsAppPhone, landtute: $landtute, longtute: $longtute, messageForCoustomer: $messageForCoustomer, messageForVisotr: $messageForVisotr, noteForParts: $noteForParts, minVersion: $minVersion)';
   }
 
   @override
@@ -199,12 +247,15 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Settings'))
-      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('fixedId', fixedId))
-      ..add(DiagnosticsProperty('marketInfo', marketInfo))
+      ..add(DiagnosticsProperty('apkUrl', apkUrl))
       ..add(DiagnosticsProperty('whatsAppPhone', whatsAppPhone))
-      ..add(DiagnosticsProperty('minVersion', minVersion))
-      ..add(DiagnosticsProperty('appUrl', appUrl));
+      ..add(DiagnosticsProperty('landtute', landtute))
+      ..add(DiagnosticsProperty('longtute', longtute))
+      ..add(DiagnosticsProperty('messageForCoustomer', messageForCoustomer))
+      ..add(DiagnosticsProperty('messageForVisotr', messageForVisotr))
+      ..add(DiagnosticsProperty('noteForParts', noteForParts))
+      ..add(DiagnosticsProperty('minVersion', minVersion));
   }
 
   @override
@@ -212,21 +263,37 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SettingsImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.fixedId, fixedId) || other.fixedId == fixedId) &&
-            (identical(other.marketInfo, marketInfo) ||
-                other.marketInfo == marketInfo) &&
+            (identical(other.apkUrl, apkUrl) || other.apkUrl == apkUrl) &&
             (identical(other.whatsAppPhone, whatsAppPhone) ||
                 other.whatsAppPhone == whatsAppPhone) &&
+            (identical(other.landtute, landtute) ||
+                other.landtute == landtute) &&
+            (identical(other.longtute, longtute) ||
+                other.longtute == longtute) &&
+            (identical(other.messageForCoustomer, messageForCoustomer) ||
+                other.messageForCoustomer == messageForCoustomer) &&
+            (identical(other.messageForVisotr, messageForVisotr) ||
+                other.messageForVisotr == messageForVisotr) &&
+            (identical(other.noteForParts, noteForParts) ||
+                other.noteForParts == noteForParts) &&
             (identical(other.minVersion, minVersion) ||
-                other.minVersion == minVersion) &&
-            (identical(other.appUrl, appUrl) || other.appUrl == appUrl));
+                other.minVersion == minVersion));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, fixedId, marketInfo, whatsAppPhone, minVersion, appUrl);
+      runtimeType,
+      fixedId,
+      apkUrl,
+      whatsAppPhone,
+      landtute,
+      longtute,
+      messageForCoustomer,
+      messageForVisotr,
+      noteForParts,
+      minVersion);
 
   @JsonKey(ignore: true)
   @override
@@ -244,28 +311,37 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
 
 abstract class _Settings implements Settings {
   const factory _Settings(
-      {final String? id,
-      final String fixedId,
-      required final String marketInfo,
+      {final String fixedId,
+      required final String apkUrl,
       required final String whatsAppPhone,
-      final String minVersion,
-      final String? appUrl}) = _$SettingsImpl;
+      final double? landtute,
+      final double? longtute,
+      required final String messageForCoustomer,
+      required final String messageForVisotr,
+      final String? noteForParts,
+      final String minVersion}) = _$SettingsImpl;
 
   factory _Settings.fromJson(Map<String, dynamic> json) =
       _$SettingsImpl.fromJson;
 
   @override
-  String? get id;
-  @override
   String get fixedId;
   @override
-  String get marketInfo;
+  String get apkUrl;
   @override
   String get whatsAppPhone;
   @override
-  String get minVersion;
+  double? get landtute;
   @override
-  String? get appUrl;
+  double? get longtute;
+  @override
+  String get messageForCoustomer;
+  @override
+  String get messageForVisotr;
+  @override
+  String? get noteForParts;
+  @override
+  String get minVersion;
   @override
   @JsonKey(ignore: true)
   _$$SettingsImplCopyWith<_$SettingsImpl> get copyWith =>

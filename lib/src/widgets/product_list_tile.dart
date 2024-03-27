@@ -7,19 +7,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductsListTileWidget extends ConsumerWidget {
-  const ProductsListTileWidget({
-    super.key,
-    required this.product,
-    this.onTap,
-  });
+  const ProductsListTileWidget(
+      {super.key, required this.product, this.onTap, this.onLongPress});
   final void Function()? onTap;
   final Product product;
-
+  final void Function()? onLongPress;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
-    return InkWell(
-      borderRadius: BorderRadius.circular(4.r),
+    return GestureDetector(
+      onLongPress: () {
+        onLongPress?.call();
+      },
       onTap: () {
         onTap?.call();
       },
@@ -27,8 +26,7 @@ class ProductsListTileWidget extends ConsumerWidget {
         width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 12.h),
         decoration: BoxDecoration(
-            color: appColor.whiteish,
-            borderRadius: BorderRadius.circular(4.r)),
+            color: appColor.whiteish, borderRadius: BorderRadius.circular(4.r)),
         height: 77.h,
         child: Stack(
           children: [
@@ -68,70 +66,91 @@ class ProductsListTileWidget extends ConsumerWidget {
         padding: EdgeInsets.only(
           left: 20.w,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.max,
+        child: Stack(
           children: [
-            _buildImageWidget(appColor),
-            SizedBox(width: 12.w),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(),
-                  Text(
-                    product.nameEnglis,
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: appColor.blackish),
-                  ),
-                  Row(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                _buildImageWidget(appColor),
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(),
                       Text(
-                        product.nameArabic,
+                        product.productName,
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: appColor.greyish),
+                            color: appColor.blackish),
                       ),
-                      InkWell(
-                        onTap: () => onTap?.call(),
-                        borderRadius: BorderRadius.circular(4.r),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 5.h, horizontal: 10.w),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: appColor.redish),
-                          child: Text(
-                            "عرض التفاصيل",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
-                                    color: appColor.whiteish,
-                                    fontSize: 9,
-                                    fontWeight: FontWeight.w400),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              product.productFullName,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: appColor.greyish),
+                            ),
                           ),
-                        ),
+                          InkWell(
+                            onTap: () => onTap?.call(),
+                            borderRadius: BorderRadius.circular(4.r),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 5.h, horizontal: 10.w),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: appColor.redish),
+                              child: Text(
+                                "عرض التفاصيل",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                        color: appColor.whiteish,
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
+                      // if(showReportButton && isScrollshep||eductionPlan !=null)
+                      Text(
+                        "السعر:   ${fixPrice(product.price)}\$",
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: appColor.redish),
+                      ),
+                      const SizedBox(),
                     ],
                   ),
-                  // if(showReportButton && isScrollshep||eductionPlan !=null)
-                  Text(
-                    "السعر:   ${fixPrice(product.price)}\$",
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: appColor.redish),
-                  ),
-                  const SizedBox(),
-                ],
-              ),
-            )
+                )
+              ],
+            ),
+            if (product.isHiden)
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: appColor.blackish.withOpacity(.3)),
+                    child: Icon(
+                      Icons.visibility_off,
+                      color: appColor.redish,
+                    )),
+              )
           ],
         ));
   }
@@ -165,18 +184,18 @@ class ProductsListTileWidget extends ConsumerWidget {
                     width: 67.h,
                     height: 69.h,
                     fit: BoxFit.cover,
-                    progressIndicatorBuilder: (context, url, progress) {
-                      if (progress.totalSize == null) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      final pr =
-                          (progress.downloaded) / (progress.totalSize ?? 1);
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: pr,
-                        ),
-                      );
-                    },
+                    // progressIndicatorBuilder: (context, url, progress) {
+                    //   if (progress.totalSize == null) {
+                    //     return const Center(child: CircularProgressIndicator());
+                    //   }
+                    //   final pr =
+                    //       (progress.downloaded) / (progress.totalSize ?? 1);
+                    //   return Center(
+                    //     child: CircularProgressIndicator(
+                    //       value: pr,
+                    //     ),
+                    //   );
+                    // },
                     errorWidget: (context, error, stackTrace) {
                       return Image.asset(
                         Assets.png.logoWhite.path,
@@ -188,13 +207,13 @@ class ProductsListTileWidget extends ConsumerWidget {
                 ),
               )
             : ClipRRect(
-                  borderRadius: BorderRadius.circular(4.r),
-              child: Assets.png.logoWhite.image(
+                borderRadius: BorderRadius.circular(4.r),
+                child: Assets.png.logoWhite.image(
                   width: 67.h,
                   height: 69.h,
                   fit: BoxFit.cover,
                 ),
-            ),
+              ),
       ),
     );
   }

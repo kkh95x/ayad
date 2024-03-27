@@ -18,15 +18,15 @@ class SupabaseGroupRepository implements GroupRepository {
       await _supabaseClient.from(_tableName).insert(data);
     } catch (e) {
       if (e is PostgrestException) {
-        print("--->${e.message}");
+        // print("--->${e.message}");
       }
-      print("--->${e.toString()}");
+      // print("--->${e.toString()}");
     }
   }
 
   @override
-  Future<void> delete(String groupId)async {
-  await  _supabaseClient.from(_tableName).delete().eq("id", groupId);
+  Future<void> delete(String groupId) async {
+    await _supabaseClient.from(_tableName).delete().eq("id", groupId);
   }
 
   @override
@@ -36,12 +36,14 @@ class SupabaseGroupRepository implements GroupRepository {
       final response = await _supabaseClient
           .from(_tableName)
           .select()
+          .eq("isMainGroup", true)
           .eq("type", groupType.name);
       return response.map((e) => Group.fromJson(e)).toList();
     } else {
       final response = await _supabaseClient
           .from(_tableName)
           .select()
+          .eq("isMainGroup", true)
           .eq("type", groupType.name)
           .eq("isHiden", isHiden);
       return response.map((e) => Group.fromJson(e)).toList();
@@ -54,5 +56,16 @@ class SupabaseGroupRepository implements GroupRepository {
         .from(_tableName)
         .update(group.toJson())
         .eq("id", group.id ?? "");
+  }
+
+  @override
+  Future<List<Group>> getSubGruops(String parentGroupId) async {
+    final query = _supabaseClient
+        .from(_tableName)
+        .select()
+        .eq("isMainGroup", false)
+        .eq("parentGroupId", parentGroupId);
+    final res = await query.whenComplete(() => null);
+    return res.map((e) => Group.fromJson(e)).toList();
   }
 }

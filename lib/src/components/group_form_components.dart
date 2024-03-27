@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/providers/get_all_main_group_provider.dart';
+import 'package:ayad/src/providers/get_sub_groub_provider.dart';
 import 'package:ayad/src/providers/group_form_provider.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/main_text_input_widget.dart';
@@ -16,8 +17,10 @@ import 'package:reactive_color_picker/reactive_color_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class GroupFormComponent extends ConsumerWidget {
-  const GroupFormComponent({super.key, this.group, this.isMain = false});
+  const GroupFormComponent(
+      {super.key, this.group, this.isMain = false, this.parentGroup});
   final Group? group;
+  final Group? parentGroup;
   final bool isMain;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,7 +38,7 @@ class GroupFormComponent extends ConsumerWidget {
                 if (isMain) _imageWidget(appColor),
                 const Row(
                   children: [
-                    Text("أسم المجموعة"),
+                    Text("اسم المجموعة*"),
                   ],
                 ),
                 MainTextFieldWidget(
@@ -48,7 +51,7 @@ class GroupFormComponent extends ConsumerWidget {
                 if (!isMain) ...[
                   const Row(
                     children: [
-                      Text("الاسم الثاني للمجموعة "),
+                      Text("الاسم الثاني للمجموعة"),
                     ],
                   ),
                   MainTextFieldWidget(control: "name2", placeholder: ""),
@@ -66,43 +69,52 @@ class GroupFormComponent extends ConsumerWidget {
                 // // SizedBox(
                 // //   height: 10.h,
                 // // ),
-                if (!isMain)
+
+                SizedBox(
+                  height: 10.h,
+                ),
+
+                ReactiveFormConsumer(
+                  builder: (context, formGroup, child) {
+                    const values = [SubType.groups, SubType.products];
+                    final titles = ["مجموعة أقسام", "مجموعة منتجات"];
+                    return Wrap(
+                      children: values
+                          .map((e) => Row(
+                                children: [
+                                  Radio<SubType>(
+                                    value: e,
+                                    groupValue:
+                                        formGroup.control("subType").value,
+                                    onChanged: (value) {
+                                      if (value != null) {
+                                        formGroup.control("subType").value =
+                                            value;
+                                      }
+                                    },
+                                  ),
+                                  Text(titles[values.indexOf(e)])
+                                ],
+                              ))
+                          .toList(),
+                    );
+                  },
+                ),
+
+                SizedBox(
+                  height: 10.h,
+                ),
+                if (!isMain) ...[
                   const Row(
                     children: [
                       Text("اللون"),
                     ],
                   ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                if (isMain)
-                  ReactiveFormConsumer(
-                    builder: (context, formGroup, child) {
-                      const values = [SubType.groups, SubType.products];
-                      final titles = ["مجموعة أقسام", "مجموعة منتجات"];
-                      return Wrap(
-                        children: values
-                            .map((e) => Row(
-                                  children: [
-                                    Radio<SubType>(
-                                      value: e,
-                                      groupValue:
-                                          formGroup.control("subType").value,
-                                      onChanged: (value) {
-                                        if (value != null) {
-                                          formGroup.control("subType").value =
-                                              value;
-                                        }
-                                      },
-                                    ),
-                                    Text(titles[values.indexOf(e)])
-                                  ],
-                                ))
-                            .toList(),
-                      );
-                    },
-                  )
-                else
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                ],
+                if (!isMain)
                   SizedBox(
                     width: double.infinity,
                     child: SizedBox(
@@ -150,6 +162,24 @@ class GroupFormComponent extends ConsumerWidget {
                               .addGroup(formGroup);
                           formGroup.reset();
                         }
+                      } else {
+                        if (parentGroup != null) {
+                          if (isEdit) {
+                            await ref
+                                .read(
+                                    getSubGroupProvider(parentGroup!).notifier)
+                                .update(formGroup, group!);
+                            if (context.mounted) {
+                              context.pop();
+                            }
+                          } else {
+                            await ref
+                                .read(
+                                    getSubGroupProvider(parentGroup!).notifier)
+                                .addGroup(formGroup);
+                            formGroup.reset();
+                          }
+                        }
                       }
                     },
                   );
@@ -161,11 +191,21 @@ class GroupFormComponent extends ConsumerWidget {
                   DynamicButton(
                     title: "حذف",
                     onPressed: () async {
+                      if(isMain){
+
                       await ref
                           .read(getAllGroupProvider.notifier)
                           .delete(group!);
                       if (context.mounted) {
                         context.pop();
+                      }
+                      }else{
+                        await ref
+                          .read(getSubGroupProvider(parentGroup!).notifier)
+                          .delete(group!);
+                      if (context.mounted) {
+                        context.pop();
+                      }
                       }
                     },
                   ),

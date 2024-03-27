@@ -11,26 +11,25 @@ import 'package:url_launcher/url_launcher.dart';
 class WhatsAppProductButton extends ConsumerWidget {
   const WhatsAppProductButton({super.key, required this.product});
   final Product product;
-  
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
     return Container(
       height: 35.h,
-      decoration: BoxDecoration(
-        boxShadow: [
-                BoxShadow(
-                    blurRadius: 3,
-                    color: appColor.blackish.withOpacity(.4),
-                    offset: const Offset(1, 1))
-              ],
-          color: appColor.greenish, borderRadius: BorderRadius.circular(4)),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+            blurRadius: 3,
+            color: appColor.blackish.withOpacity(.4),
+            offset: const Offset(1, 1))
+      ], color: appColor.greenish, borderRadius: BorderRadius.circular(4)),
       padding: EdgeInsets.symmetric(horizontal: 20.h),
       child: InkWell(
         onTap: () async {
           final link = WhatsAppUnilink(
             phoneNumber: '+31637031781',
-            text: "مرحبا\nأرغب بشراء المنتج *${product.nameEnglis}*\n من المجموعة *${product.groupName}* \nذو المعرف *${product.productCode}* \n${product.description??""}",
+            text:
+                "مرحبا\nأرغب بشراء المنتج *${product.productFullName}*\n * \n ${product.description ?? ""}",
           );
           if (await canLaunchUrl(link.asUri())) {
             launchUrl(link.asUri());
