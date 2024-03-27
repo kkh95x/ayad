@@ -15,7 +15,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:ayad/src/pages/slides_page.dart';
 import 'package:go_router/go_router.dart';
 
 final _key = GlobalKey<NavigatorState>();
@@ -39,6 +39,13 @@ final routeProvider = Provider<GoRouter>((ref) {
         path: LoginPage.routePath,
         name: LoginPage.routeName,
         builder: (context, state) => LoginPage(
+          key: state.pageKey,
+        ),
+      ),
+       GoRoute(
+        path: SlidesPage.routePath,
+        name: SlidesPage.routeName,
+        builder: (context, state) => SlidesPage(
           key: state.pageKey,
         ),
       ),

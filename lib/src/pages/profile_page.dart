@@ -1,6 +1,7 @@
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/src/components/dialogs.dart';
 import 'package:ayad/src/pages/page_template.dart';
+import 'package:ayad/src/pages/slides_page.dart';
 import 'package:ayad/src/pages/users_page.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/theme.dart';
@@ -60,6 +61,15 @@ class ProfilePage extends ConsumerWidget {
             title: "عرض قائمة الزبائن",
             onPressed: () {
               context.push(UsersPage.routePath);
+            },
+          ),
+           SizedBox(
+            height: 10.h,
+          ),
+          DynamicButton(
+            title: "عرض قائمة الإعلانات",
+            onPressed: () {
+              context.push(SlidesPage.routePath);
             },
           ),
           SizedBox(

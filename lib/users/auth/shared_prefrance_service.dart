@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/models/product.dart';
 import 'package:ayad/src/models/settings.dart';
+import 'package:ayad/src/models/slides.dart';
 import 'package:ayad/users/domain/user.dart';
 import 'package:encrypt_shared_preferences/provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -109,5 +110,23 @@ class SharedPrefranceServce {
     }
     final mapsData = jsonDecode(data) as Map<String, dynamic>;
     return Settings.fromJson(mapsData);
+  }
+
+
+  Future<void> saveSlides(List<Slide> slide) async {
+    await _sharedPreferences.remove("slide");
+    final data = jsonEncode(slide.map((e) => e.toJson()).toList());
+    await _sharedPreferences.setString("slide", data);
+  }
+
+  Future<List<Slide>?> getSlides() async {
+    final data = _sharedPreferences.get("slide");
+    if (data == null) {
+      return null;
+    }
+     final mapsData = jsonDecode(data) as List<dynamic>;
+    return mapsData
+        .map((e) => Slide.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 }
