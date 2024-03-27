@@ -81,60 +81,63 @@ class MainTextFieldWidget extends ConsumerWidget {
           bool enable = ref.watch(toggleProvider);
 
           return type == Type.phoneNumber
-              ? ReactivePhoneFormField<PhoneNumber>(
-                  readOnly: readOnly,
-                  enabled: !isDisabled,
-                  formControlName: control,
-                  focusNode: FocusNode(),
-                  style: style ??
-                      Theme.of(context)
-                          .textTheme
-                          .labelSmall!
+              ? Directionality(
+                textDirection: TextDirection.ltr,
+                child: ReactivePhoneFormField<PhoneNumber>(
+                    readOnly: readOnly,
+                    enabled: !isDisabled,
+                    formControlName: control,
+                    focusNode: FocusNode(),
+                    style: style ??
+                        Theme.of(context)
+                            .textTheme
+                            .labelSmall!
+                            .copyWith(color: colorProvider.greyish.shade400),
+                    decoration: InputDecoration(
+                      errorStyle: const TextStyle(
+                          color: Colors.red,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 12),
+                      prefixIcon: placeholderIcon,
+                      prefixStyle: textThemeLight.labelSmall!
                           .copyWith(color: colorProvider.greyish.shade400),
-                  decoration: InputDecoration(
-                    errorStyle: const TextStyle(
-                        color: Colors.red,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 12),
-                    prefixIcon: placeholderIcon,
-                    prefixStyle: textThemeLight.labelSmall!
-                        .copyWith(color: colorProvider.greyish.shade400),
-                    suffixStyle:
-                        Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: colorProvider.greyish.shade400,
-                            ),
-                    errorMaxLines: 1,
-                    fillColor: colorProvider.whiteish,
-                    contentPadding: EdgeInsets.only(right: 50.w),
-                    errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: colorProvider.greyish),
-                        borderRadius: BorderRadius.circular(
-                          radius,
-                        )),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: colorProvider.greyish),
-                        borderRadius: BorderRadius.circular(
-                          radius,
-                        )),
-                    focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: colorProvider.greyish),
-                        borderRadius: BorderRadius.circular(
-                          radius,
-                        )),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide( color: colorProvider.redish.shade200),
-                        borderRadius: BorderRadius.circular(
-                          radius,
-                        )),
-                    filled: true,
-                    hintText: placeholder,
-                    hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-                          color: colorProvider.greyish.shade400,
-                        ),
+                      suffixStyle:
+                          Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: colorProvider.greyish.shade400,
+                              ),
+                      errorMaxLines: 1,
+                      fillColor: colorProvider.whiteish,
+                      contentPadding: EdgeInsets.only(right: 50.w),
+                      errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: colorProvider.greyish),
+                          borderRadius: BorderRadius.circular(
+                            radius,
+                          )),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: colorProvider.greyish),
+                          borderRadius: BorderRadius.circular(
+                            radius,
+                          )),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: colorProvider.greyish),
+                          borderRadius: BorderRadius.circular(
+                            radius,
+                          )),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide( color: colorProvider.redish.shade200),
+                          borderRadius: BorderRadius.circular(
+                            radius,
+                          )),
+                      filled: true,
+                      hintText: placeholder,
+                      hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: colorProvider.greyish.shade400,
+                          ),
+                    ),
+                    textInputAction: textInputAction,
                   ),
-                  textInputAction: textInputAction,
-                )
+              )
               : type == Type.date
                   ? Theme(
                       data: ThemeData.light(),

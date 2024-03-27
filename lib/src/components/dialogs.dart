@@ -52,12 +52,13 @@ class DilogsHelper {
       },
     );
   }
-  static Future<void> showSettingsForm(BuildContext context, {Settings? settings}) async {
+  static Future<void> showSettingsForm(BuildContext context, ) async {
+
     await showDialog(
       context: context,
       builder: (context) {
-        return SettingsFormComponent(
-          settings: settings,
+        return const SettingsFormComponent(
+       
         );
       },
     );

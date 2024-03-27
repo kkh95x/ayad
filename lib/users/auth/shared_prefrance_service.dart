@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/models/product.dart';
+import 'package:ayad/src/models/settings.dart';
 import 'package:ayad/users/domain/user.dart';
 import 'package:encrypt_shared_preferences/provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -94,5 +95,19 @@ class SharedPrefranceServce {
     return mapsData
         .map((e) => Product.fromJson(e as Map<String, dynamic>))
         .toList();
+  }
+    Future<void> saveSetting(Settings settings) async {
+    await _sharedPreferences.remove("settings");
+    final data = jsonEncode(settings.toJson());
+    await _sharedPreferences.setString("settings", data);
+  }
+
+  Future<Settings?> getSetting() async {
+    final data = _sharedPreferences.get("settings");
+    if (data == null) {
+      return null;
+    }
+    final mapsData = jsonDecode(data) as Map<String, dynamic>;
+    return Settings.fromJson(mapsData);
   }
 }

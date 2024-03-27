@@ -2,7 +2,6 @@ import 'package:ayad/src/data/group_repository.dart';
 import 'package:ayad/src/models/group.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
 final supabaseGroupRepositoryProvider =
     Provider((ref) => SupabaseGroupRepository(Supabase.instance.client));
 
