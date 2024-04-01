@@ -28,7 +28,6 @@ class PageTemplate extends ConsumerWidget {
     final list =
         goRoute.routeInformationProvider.value.uri.toString().split("/");
     return Scaffold(
-        resizeToAvoidBottomInset: false,
         backgroundColor: colorProvider.whiteish,
         floatingActionButtonLocation: floatingActionButton != null
             ? FloatingActionButtonLocation.centerDocked
@@ -76,7 +75,8 @@ class PageTemplate extends ConsumerWidget {
                   children: [
                     Image.asset(
                       Assets.png.background.path,
-                      fit: BoxFit.fill,
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.fitWidth,
                     ),
                     Column(
                       children: [

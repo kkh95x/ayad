@@ -11,10 +11,16 @@ final getSettingFuture = FutureProvider.autoDispose<Settings?>((ref) async {
     }
     return setting;
   } catch (e) {
-  return await  ref.read(sharedPrefranceServiceProvider).getSetting();
+    final setting = await ref.read(sharedPrefranceServiceProvider).getSetting();
+    if (setting != null) {
+      return setting;
+    } else {
+      throw Exception(e);
+    }
   }
 });
-final getSettingAdminFuture = FutureProvider.autoDispose<Settings?>((ref) async {
+final getSettingAdminFuture =
+    FutureProvider.autoDispose<Settings?>((ref) async {
   try {
     final setting = await ref.read(supabaseSettingsRepositoryProvider).get();
     if (setting != null) {
@@ -22,6 +28,6 @@ final getSettingAdminFuture = FutureProvider.autoDispose<Settings?>((ref) async 
     }
     return setting;
   } catch (e) {
-  throw Exception("لم نتمكن من الوصول للسيرفر");
+    throw Exception("لم نتمكن من الوصول للسيرفر");
   }
 });

@@ -36,7 +36,7 @@ class LoginPage extends ConsumerWidget {
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 150.h,
+              height: 50.h,
             ),
             LottieBuilder.asset(
               Assets.json.login,
@@ -77,8 +77,20 @@ class LoginPage extends ConsumerWidget {
               );
             }),
             SizedBox(
-              height: 40.h,
+              height: 10.h,
             ),
+            Text(
+              "يمكنكم معرفة أسعار الأجهزة من خلال تسجيل الدخول بحساب زائر",
+              style: TextStyle(
+                height: 1.3,
+                fontSize: 12,
+                color: ref.read(appColorLightProvider).greyish.shade400,
+              ),
+            ),
+            TextButton(
+                onPressed: ()async {
+                  await ref.read(authNotifierProvider.notifier).loginAsVistor();
+                }, child: const Text("تسجيل الدخول كزائر")),
             SizedBox(
               width: 335,
               child: Column(
@@ -88,7 +100,8 @@ class LoginPage extends ConsumerWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       height: 1.3,
-                      color: ref.read(appColorLightProvider).greenish.shade100,
+                      fontSize: 12,
+                      color: ref.read(appColorLightProvider).greyish.shade400,
                     ),
                   ),
                   SizedBox(

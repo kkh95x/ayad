@@ -2,13 +2,14 @@ import 'package:ayad/src/components/slides_component.dart';
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/pages/group_page.dart';
 import 'package:ayad/src/pages/page_template.dart';
-import 'package:ayad/src/pages/service_part_page.dart';
 import 'package:ayad/src/providers/get_all_main_group_provider.dart';
-import 'package:ayad/src/widgets/dynamic_button.dart';
+import 'package:ayad/src/providers/get_settings_provider.dart';
 import 'package:ayad/src/widgets/group_button_widget.dart';
 import 'package:ayad/src/widgets/loading_widget.dart';
 import 'package:ayad/src/widgets/type_ahead_widget.dart';
 import 'package:ayad/theme.dart';
+import 'package:ayad/users/auth/auth_notifier.dart';
+import 'package:ayad/users/domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,19 +30,33 @@ class HomePage extends ConsumerWidget {
           padding: EdgeInsets.all(10.0.r),
           child: Column(
             children: [
-              Container(
-                height: 30,
-                decoration: BoxDecoration(
-                    color: ref.read(appColorLightProvider).redish,
-                    borderRadius: BorderRadius.circular(4)),
-                child: Marquee(
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: ref.read(appColorLightProvider).whiteish),
-                    blankSpace: MediaQuery.of(context).size.width,
-                    text:
-                        "بسم الله الرحمن الرحيم , الحمد لله رب العالمين , الرحمن الرحيم , مالك يوم الدين , إياك نعبد وإياك نستعين "),
-              ),
+              Consumer(builder: (context, ref, child) {
+                final setting = ref.watch(getSettingFuture).value;
+                final user = ref.watch(authNotifierProvider).value?.currentUser;
+                String text = " ";
+                if (user?.type == UserType.anon) {
+                  text = setting?.messageForVisotr ?? " ";
+                } else if (user?.type == UserType.customer) {
+                  text = setting?.messageForCoustomer ?? " ";
+                } else if (user?.type == UserType.admin) {
+                  text="الزوار: ";
+                  text += setting?.messageForVisotr ?? " ";
+                  text += ", الزبائن:";
+                  text += setting?.messageForCoustomer ?? " ";
+                }
+                return Container(
+                  height: 30,
+                  decoration: BoxDecoration(
+                      color: ref.read(appColorLightProvider).redish,
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Marquee(
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: ref.read(appColorLightProvider).whiteish),
+                      blankSpace: MediaQuery.of(context).size.width,
+                      text:text,
+                ));
+              }),
               SizedBox(
                 height: 2.h,
               ),
@@ -74,8 +89,9 @@ class HomePage extends ConsumerWidget {
                     return ref.watch(getAllGroupProvider).when(
                       data: (data) {
                         return RefreshIndicator(
-                          backgroundColor: ref.read(appColorLightProvider).whiteish,
-                          onRefresh: () async{
+                          backgroundColor:
+                              ref.read(appColorLightProvider).whiteish,
+                          onRefresh: () async {
                             ref.read(getAllGroupProvider.notifier).init();
                           },
                           child: GridView.builder(
@@ -89,7 +105,6 @@ class HomePage extends ConsumerWidget {
                             itemBuilder: (context, index) {
                               if (index == data.length) {
                                 return GroupButtonWidget(
-                                  
                                   group: Group(
                                       type: GroupType.customer,
                                       parentGroupId: "",
@@ -108,9 +123,9 @@ class HomePage extends ConsumerWidget {
                                 group: data[index],
                                 onLongPress: () async {
                                   //TODO just admin
-                                    await DilogsHelper.showGroupForm(context,
-                                        group: data[index], isMain: true);
-                                  },
+                                  await DilogsHelper.showGroupForm(context,
+                                      group: data[index], isMain: true);
+                                },
                                 onTap: () {
                                   context.push(SubGroupPage.routePath,
                                       extra: data[index]);

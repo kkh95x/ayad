@@ -141,7 +141,7 @@ class SlidesFormComponent extends ConsumerWidget {
                     height: 10.h,
                   ),
                   DynamicButton(
-                    title: "العودة",
+                    title: "حذف",
                     onPressed: () async {
                       await ref
                           .read(slideNotiferProvider.notifier)
