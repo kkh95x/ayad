@@ -13,6 +13,7 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       productFullName: json['productFullName'] as String,
       parentGroupId: json['parentGroupId'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
+      groupType: $enumDecode(_$GroupTypeEnumMap, json['groupType']),
       productsSearching1: json['productsSearching1'] as String?,
       productsSearching2: json['productsSearching2'] as String?,
       productsSearching3: json['productsSearching3'] as String?,
@@ -33,6 +34,7 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'productFullName': instance.productFullName,
       'parentGroupId': instance.parentGroupId,
       'createdAt': instance.createdAt.toIso8601String(),
+      'groupType': _$GroupTypeEnumMap[instance.groupType]!,
       'productsSearching1': instance.productsSearching1,
       'productsSearching2': instance.productsSearching2,
       'productsSearching3': instance.productsSearching3,
@@ -45,3 +47,8 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'makfol': instance.makfol,
       'description': instance.description,
     };
+
+const _$GroupTypeEnumMap = {
+  GroupType.customer: 'customer',
+  GroupType.vistor: 'vistor',
+};

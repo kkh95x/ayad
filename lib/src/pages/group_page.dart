@@ -8,6 +8,8 @@ import 'package:ayad/src/widgets/group_button_widget.dart';
 import 'package:ayad/src/widgets/loading_widget.dart';
 import 'package:ayad/src/widgets/type_ahead_widget.dart';
 import 'package:ayad/theme.dart';
+import 'package:ayad/users/auth/auth_notifier.dart';
+import 'package:ayad/users/domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,6 +22,9 @@ class SubGroupPage extends ConsumerWidget {
   final Group group;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isAdmin = ref.watch(authNotifierProvider).value?.currentUser?.type ==
+        UserType.admin;
+
     return PageTemplate(
         title: group.name,
         child: Padding(
@@ -30,35 +35,45 @@ class SubGroupPage extends ConsumerWidget {
               SizedBox(
                 height: 10.h,
               ),
-              Row(
-                children: [
-                  if (group.subType == SubType.groups)
-                    Expanded(
-                      child: DynamicButton(
-                        type: ButtonTypes.Secondary,
-                        title: "إضافة مجموعة جديدة",
-                        onPressed: () async {
-                          await DilogsHelper.showGroupForm(context,
-                              parentGroup: group, isMain: false);
-                        },
+              if (isAdmin)
+                Row(
+                  children: [
+                    if (group.subType == SubType.groups)
+                      Expanded(
+                        child: DynamicButton(
+                          type: ButtonTypes.Secondary,
+                          title: "إضافة مجموعة جديدة",
+                          onPressed: () async {
+                            if(isAdmin){
+                              
+                            await DilogsHelper.showGroupForm(context,
+                                groupType: group.type,
+                                parentGroup: group,
+                                isMain: false);
+                            }
+                          },
+                        ),
                       ),
-                    ),
-                  if (group.subType == SubType.products) ...[
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Expanded(
-                      child: DynamicButton(
-                        type: ButtonTypes.Secondary,
-                        title: "إضافة منتج جديد",
-                        onPressed: () async {
-                          await DilogsHelper.showProductForm(context,parentGroup: group);
-                        },
+                    if (group.subType == SubType.products) ...[
+                      SizedBox(
+                        width: 10.w,
                       ),
-                    )
-                  ]
-                ],
-              ),
+                      Expanded(
+                        child: DynamicButton(
+                          type: ButtonTypes.Secondary,
+                          title: "إضافة منتج جديد",
+                          onPressed: () async {
+                            if(isAdmin){
+
+                            await DilogsHelper.showProductForm(context,
+                                parentGroup: group);
+                            }
+                          },
+                        ),
+                      )
+                    ]
+                  ],
+                ),
               SizedBox(
                 height: 10.h,
               ),
@@ -113,6 +128,7 @@ class GroupsComponent extends StatelessWidget {
                                 group: e,
                                 onLongPress: () async {
                                   await DilogsHelper.showGroupForm(context,
+                                      groupType: parentGroup.type,
                                       group: e,
                                       parentGroup: parentGroup,
                                       isMain: false);
@@ -124,7 +140,7 @@ class GroupsComponent extends StatelessWidget {
                                   //       extra: data.first);
                                   // } else {
                                   // if (e.subType == SubType.groups) {
-                                    context.push(routePath, extra: e);
+                                  context.push(routePath, extra: e);
                                   // } else {
                                   //   //TODO push products
                                   // }

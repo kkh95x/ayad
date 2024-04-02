@@ -35,6 +35,7 @@ class UserService {
 
   Future<void> logout() async {
     await _prefranceServce.deleteUserLocaly();
+    await _prefranceServce.clearAll();
   }
 
   Future<AppUser?> getUserByUsenamAndPassword(

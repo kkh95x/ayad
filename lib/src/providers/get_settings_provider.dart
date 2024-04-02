@@ -1,6 +1,7 @@
 import 'package:ayad/src/data/supbase_settings_repository.dart';
 import 'package:ayad/src/models/settings.dart';
 import 'package:ayad/users/auth/shared_prefrance_service.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final getSettingFuture = FutureProvider.autoDispose<Settings?>((ref) async {
@@ -15,6 +16,7 @@ final getSettingFuture = FutureProvider.autoDispose<Settings?>((ref) async {
     if (setting != null) {
       return setting;
     } else {
+      BotToast.showText(text: "لم نتمكن من الوصول إلى السيرفر");
       throw Exception(e);
     }
   }

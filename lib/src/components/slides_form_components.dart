@@ -6,6 +6,8 @@ import 'package:ayad/src/providers/slides_form_provider.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/main_text_input_widget.dart';
 import 'package:ayad/theme.dart';
+import 'package:ayad/users/auth/auth_notifier.dart';
+import 'package:ayad/users/domain/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,6 +25,10 @@ class SlidesFormComponent extends ConsumerWidget {
     final formGroup = ref.read(slidesFormProvider(slide));
 
     final appColor = ref.read(appColorLightProvider);
+     final isAdmin=ref.watch(authNotifierProvider).value?.currentUser?.type==UserType.admin;
+    if(!isAdmin){
+      return const SizedBox();
+    }
     return AlertDialog(
       title: Text(isEdit ? slide!.title : "إضافة إعلان جديد"),
       content: ReactiveForm(

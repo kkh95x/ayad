@@ -1,3 +1,4 @@
+import 'package:ayad/src/models/group.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -14,6 +15,7 @@ class Product with _$Product {
       required String productFullName,
       required String parentGroupId,
       required DateTime createdAt,
+      required GroupType groupType,
        String? productsSearching1,
        String? productsSearching2,
        String? productsSearching3,

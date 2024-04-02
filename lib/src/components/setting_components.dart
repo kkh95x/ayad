@@ -2,8 +2,10 @@ import 'package:ayad/src/data/supbase_settings_repository.dart';
 import 'package:ayad/src/models/settings.dart';
 import 'package:ayad/src/providers/get_settings_provider.dart';
 import 'package:ayad/src/providers/setting_form_provider.dart';
+import 'package:ayad/src/providers/version_helper.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/main_text_input_widget.dart';
+import 'package:ayad/theme.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,10 +45,24 @@ class SettingsFormComponent extends ConsumerWidget {
                         height: 10.h,
                       ),
                       const Row(
-                        children: [Text("الحد الأدنى لأصدار التطبيق")],
+                        children: [Text("الحد الأدنى لإصدار التطبيق")],
                       ),
-                      MainTextFieldWidget(
-                          control: "minVersin", placeholder: "1.0.1"),
+                      Consumer(
+                        builder: (context, ref, child) {
+                          final version=ref.watch(getCurrentVersion).value;
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              MainTextFieldWidget(
+                                
+                                  control: "minVersin", placeholder: "1.0.1"),
+                            if(version!=null)
+                            Text("الإصدار الحالي $version",style: TextStyle(fontSize: 10,color: ref.read(appColorLightProvider).greenish),)
+                              
+                            ],
+                          );
+                        }
+                      ),
                       SizedBox(
                         height: 10.h,
                       ),

@@ -1,6 +1,9 @@
 import 'package:ayad/src/data/supabase_group_repository.dart';
 import 'package:ayad/src/models/group.dart';
+import 'package:ayad/users/auth/auth_notifier.dart';
+import 'package:ayad/users/auth/auth_state.dart';
 import 'package:ayad/users/auth/shared_prefrance_service.dart';
+import 'package:ayad/users/domain/user.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -65,8 +68,11 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 final getSubGroupProvider = StateNotifierProvider.family<SubGroupNotifer,
     AsyncValue<List<Group>>, Group>((ref, arge) {
-  return SubGroupNotifer(ref.read(supabaseGroupRepositoryProvider), arge,
-      ref.read(sharedPrefranceServiceProvider))
+  return SubGroupNotifer(
+      ref.read(supabaseGroupRepositoryProvider),
+      arge,
+      ref.read(sharedPrefranceServiceProvider),
+      ref.watch(authNotifierProvider).value)
     ..init();
 });
 
@@ -74,19 +80,30 @@ class SubGroupNotifer extends StateNotifier<AsyncValue<List<Group>>> {
   final SupabaseGroupRepository _supabaseGroupRepository;
   final SharedPrefranceServce _prefranceServce;
   final Group parentGroup;
-  SubGroupNotifer(
-      this._supabaseGroupRepository, this.parentGroup, this._prefranceServce)
+  final AuthState? authState;
+    bool? get isHidden{
+    if(authState?.currentUser?.type==UserType.admin){
+return null;
+
+    }else{
+      return false;
+    }
+  }
+  SubGroupNotifer(this._supabaseGroupRepository, this.parentGroup,
+      this._prefranceServce, this.authState)
       : super(const AsyncLoading());
   Future<void> init() async {
     state = const AsyncLoading();
     try {
       final groups =
-          await _supabaseGroupRepository.getSubGruops(parentGroup.id ?? "3434");
+          await _supabaseGroupRepository.getSubGruops(parentGroup.id ?? "3434",isHidden: isHidden);
       state = AsyncData(groups);
       _prefranceServce.saveSubGroups(groups, parentGroup.id ?? "6767");
     } catch (e, stack) {
-      BotToast.showText(text: "حدث خطأ أثناء الإتصال بالسيرفر",textStyle: const TextStyle(fontSize: 14,color: Colors.white));
-      print("-----> ${e.toString()}");
+      BotToast.showText(
+          text: "حدث خطأ أثناء الإتصال بالسيرفر",
+          textStyle: const TextStyle(fontSize: 14, color: Colors.white));
+      // print("-----> ${e.toString()}");
       final data =
           await _prefranceServce.getSupGroups(parentGroup.id ?? "6767767");
       if (data != null) {
@@ -115,7 +132,7 @@ class SubGroupNotifer extends StateNotifier<AsyncValue<List<Group>>> {
     final newGroup = Group(
         name: formGroup.control("name").value,
         name2: formGroup.control("name2").value,
-        type: GroupType.customer,
+        type: parentGroup.type,
         subType: formGroup.control("subType").value,
         parentGroupId: parentGroup.id ?? "",
         isMainGroup: false,
@@ -144,7 +161,7 @@ class SubGroupNotifer extends StateNotifier<AsyncValue<List<Group>>> {
         // parentGroupId: parentGroup.id ?? "",
         // isMainGroup: false,
         // createdAt: DateTime.now(),
-        hexColor:colorToHex( formGroup.control("color").value),
+        hexColor: colorToHex(formGroup.control("color").value),
         isHiden: formGroup.control("isHidn").value ?? false);
 
     await _supabaseGroupRepository.update(newGroup);

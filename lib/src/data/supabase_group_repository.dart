@@ -2,6 +2,7 @@ import 'package:ayad/src/data/group_repository.dart';
 import 'package:ayad/src/models/group.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 final supabaseGroupRepositoryProvider =
     Provider((ref) => SupabaseGroupRepository(Supabase.instance.client));
 
@@ -30,23 +31,28 @@ class SupabaseGroupRepository implements GroupRepository {
 
   @override
   Future<List<Group>> getMainGroup(
-      {required GroupType groupType, bool? isHiden}) async {
-    if (isHiden == null) {
-      final response = await _supabaseClient
-          .from(_tableName)
-          .select()
-          .eq("isMainGroup", true)
-          .eq("type", groupType.name);
-      return response.map((e) => Group.fromJson(e)).toList();
-    } else {
-      final response = await _supabaseClient
-          .from(_tableName)
-          .select()
-          .eq("isMainGroup", true)
-          .eq("type", groupType.name)
-          .eq("isHiden", isHiden);
-      return response.map((e) => Group.fromJson(e)).toList();
+      {required GroupType? groupType, bool? isHiden}) async {
+    // if (isHiden == null) {
+    PostgrestFilterBuilder<List<Map<String, dynamic>>> query =
+        _supabaseClient.from(_tableName).select().eq("isMainGroup", true);
+    if (groupType != null) {
+     query= query.eq("type", groupType.name);
     }
+    if (isHiden != null) {
+     query= query.eq("isHiden", isHiden);
+    }
+    // .eq("type", groupType.name);
+    final response = await query;
+    return response.map((e) => Group.fromJson(e)).toList();
+    // } else {
+    //   final response = await _supabaseClient
+    //       .from(_tableName)
+    //       .select()
+    //       .eq("isMainGroup", true)
+    //       .eq("type", groupType.name)
+    //       .eq("isHiden", isHiden);
+    //   return response.map((e) => Group.fromJson(e)).toList();
+    // }
   }
 
   @override
@@ -58,13 +64,16 @@ class SupabaseGroupRepository implements GroupRepository {
   }
 
   @override
-  Future<List<Group>> getSubGruops(String parentGroupId) async {
-    final query = _supabaseClient
+  Future<List<Group>> getSubGruops(String parentGroupId,{bool? isHidden}) async {
+    PostgrestFilterBuilder<List<Map<String, dynamic>>> query = _supabaseClient
         .from(_tableName)
         .select()
         .eq("isMainGroup", false)
         .eq("parentGroupId", parentGroupId);
-    final res = await query.whenComplete(() => null);
+    if(isHidden!=null){
+      query=query.eq("isHiden", isHidden);
+    }
+    final res = await query;
     return res.map((e) => Group.fromJson(e)).toList();
   }
 }

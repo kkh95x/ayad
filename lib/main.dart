@@ -1,4 +1,3 @@
-
 import 'package:ayad/router.dart';
 import 'package:ayad/theme.dart';
 import 'package:ayad/users/auth/shared_prefrance_service.dart';
@@ -7,13 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  await PackageInfo.fromPlatform();
   await SharedPrefranceServce.initial();
   await Supabase.initialize(
-    
       url: "https://vrclircgjpkyvnvsonwn.supabase.co",
       anonKey:
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyY2xpcmNnanBreXZudnNvbnduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTEyNzY0MzEsImV4cCI6MjAyNjg1MjQzMX0.QH1TTUIVnOOF56Z708MCRXXKKeJLW9BvjVrv3Pv5P_Q");

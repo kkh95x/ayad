@@ -1,3 +1,4 @@
+import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/models/product.dart';
 
 abstract class ProductRepository {
@@ -5,5 +6,6 @@ abstract class ProductRepository {
   Future<void> create(Product product);
   Future<void> update(Product product);
   Future<void> delete(String productId);
+  Future<List<Product>> search(String? text,GroupType? type);
   
 }

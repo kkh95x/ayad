@@ -1,5 +1,6 @@
 import 'package:ayad/src/models/product.dart';
 import 'package:ayad/gen/assets.gen.dart';
+import 'package:ayad/src/providers/get_settings_provider.dart';
 import 'package:ayad/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,13 +27,16 @@ class WhatsAppProductButton extends ConsumerWidget {
       padding: EdgeInsets.symmetric(horizontal: 20.h),
       child: InkWell(
         onTap: () async {
-          final link = WhatsAppUnilink(
-            phoneNumber: '+31637031781',
-            text:
-                "مرحبا\nأرغب بشراء المنتج *${product.productFullName}*\n * \n ${product.description ?? ""}",
-          );
-          if (await canLaunchUrl(link.asUri())) {
-            launchUrl(link.asUri());
+          final setting = await ref.watch(getSettingFuture.future);
+          if (setting != null) {
+            final link = WhatsAppUnilink(
+              phoneNumber: setting.whatsAppPhone,
+              text:
+                  "مرحبا\nأرغب بشراء المنتج *${product.productFullName}*\n * \n ${product.description ?? ""}",
+            );
+            if (await canLaunchUrl(link.asUri())) {
+              launchUrl(link.asUri());
+            }
           }
         },
         child: Row(

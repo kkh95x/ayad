@@ -21,9 +21,9 @@ class SupabaseSlidesRepository implements SlidesRepository {
 
   @override
   Future<List<Slide>> get({SlidesType? slidesType}) async {
-    final query = _supabaseClient.from(tableName).select();
+    PostgrestFilterBuilder<List<Map<String, dynamic>>> query = _supabaseClient.from(tableName).select();
     if (slidesType != null) {
-      query.eq("slidesType", slidesType.name);
+    query=  query.eq("slidesType", slidesType.name);
     }
     final res = await query.select();
     return res.map((e) => Slide.fromJson(e)).toList();

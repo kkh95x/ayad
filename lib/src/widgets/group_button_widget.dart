@@ -1,6 +1,8 @@
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/theme.dart';
+import 'package:ayad/users/auth/auth_notifier.dart';
+import 'package:ayad/users/domain/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,12 +18,17 @@ class GroupButtonWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
+     final isAdmin=ref.watch(authNotifierProvider).value?.currentUser?.type==UserType.admin;
+    
     return GestureDetector(
       onTap: () {
         onTap?.call();
       },
       onLongPress: () {
+        if(isAdmin){
+
         onLongPress?.call();
+        }
       },
       child: Container(
           height: group.isMainGroup ? 100 : null,

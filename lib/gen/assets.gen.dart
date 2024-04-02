@@ -73,11 +73,17 @@ class $AssetsSvgGen {
   /// File path: assets/svg/loading.json
   String get loading => 'assets/svg/loading.json';
 
+  /// File path: assets/svg/map.svg
+  String get map => 'assets/svg/map.svg';
+
+  /// File path: assets/svg/need_update.json
+  String get needUpdate => 'assets/svg/need_update.json';
+
   /// File path: assets/svg/whatsapp-white-icon.svg
   String get whatsappWhiteIcon => 'assets/svg/whatsapp-white-icon.svg';
 
   /// List of all assets
-  List<String> get values => [loading, whatsappWhiteIcon];
+  List<String> get values => [loading, map, needUpdate, whatsappWhiteIcon];
 }
 
 class Assets {

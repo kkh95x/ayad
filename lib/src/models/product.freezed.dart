@@ -25,6 +25,7 @@ mixin _$Product {
   String get productFullName => throw _privateConstructorUsedError;
   String get parentGroupId => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
+  GroupType get groupType => throw _privateConstructorUsedError;
   String? get productsSearching1 => throw _privateConstructorUsedError;
   String? get productsSearching2 => throw _privateConstructorUsedError;
   String? get productsSearching3 => throw _privateConstructorUsedError;
@@ -53,6 +54,7 @@ abstract class $ProductCopyWith<$Res> {
       String productFullName,
       String parentGroupId,
       DateTime createdAt,
+      GroupType groupType,
       String? productsSearching1,
       String? productsSearching2,
       String? productsSearching3,
@@ -84,6 +86,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? productFullName = null,
     Object? parentGroupId = null,
     Object? createdAt = null,
+    Object? groupType = null,
     Object? productsSearching1 = freezed,
     Object? productsSearching2 = freezed,
     Object? productsSearching3 = freezed,
@@ -117,6 +120,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      groupType: null == groupType
+          ? _value.groupType
+          : groupType // ignore: cast_nullable_to_non_nullable
+              as GroupType,
       productsSearching1: freezed == productsSearching1
           ? _value.productsSearching1
           : productsSearching1 // ignore: cast_nullable_to_non_nullable
@@ -178,6 +185,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       String productFullName,
       String parentGroupId,
       DateTime createdAt,
+      GroupType groupType,
       String? productsSearching1,
       String? productsSearching2,
       String? productsSearching3,
@@ -207,6 +215,7 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? productFullName = null,
     Object? parentGroupId = null,
     Object? createdAt = null,
+    Object? groupType = null,
     Object? productsSearching1 = freezed,
     Object? productsSearching2 = freezed,
     Object? productsSearching3 = freezed,
@@ -240,6 +249,10 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      groupType: null == groupType
+          ? _value.groupType
+          : groupType // ignore: cast_nullable_to_non_nullable
+              as GroupType,
       productsSearching1: freezed == productsSearching1
           ? _value.productsSearching1
           : productsSearching1 // ignore: cast_nullable_to_non_nullable
@@ -297,6 +310,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       required this.productFullName,
       required this.parentGroupId,
       required this.createdAt,
+      required this.groupType,
       this.productsSearching1,
       this.productsSearching2,
       this.productsSearching3,
@@ -323,6 +337,8 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
   @override
   final DateTime createdAt;
   @override
+  final GroupType groupType;
+  @override
   final String? productsSearching1;
   @override
   final String? productsSearching2;
@@ -348,7 +364,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Product(id: $id, productName: $productName, productFullName: $productFullName, parentGroupId: $parentGroupId, createdAt: $createdAt, productsSearching1: $productsSearching1, productsSearching2: $productsSearching2, productsSearching3: $productsSearching3, productsSearching4: $productsSearching4, price: $price, isHiden: $isHiden, count: $count, imageUrl: $imageUrl, type: $type, makfol: $makfol, description: $description)';
+    return 'Product(id: $id, productName: $productName, productFullName: $productFullName, parentGroupId: $parentGroupId, createdAt: $createdAt, groupType: $groupType, productsSearching1: $productsSearching1, productsSearching2: $productsSearching2, productsSearching3: $productsSearching3, productsSearching4: $productsSearching4, price: $price, isHiden: $isHiden, count: $count, imageUrl: $imageUrl, type: $type, makfol: $makfol, description: $description)';
   }
 
   @override
@@ -361,6 +377,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       ..add(DiagnosticsProperty('productFullName', productFullName))
       ..add(DiagnosticsProperty('parentGroupId', parentGroupId))
       ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('groupType', groupType))
       ..add(DiagnosticsProperty('productsSearching1', productsSearching1))
       ..add(DiagnosticsProperty('productsSearching2', productsSearching2))
       ..add(DiagnosticsProperty('productsSearching3', productsSearching3))
@@ -388,6 +405,8 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
                 other.parentGroupId == parentGroupId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
+            (identical(other.groupType, groupType) ||
+                other.groupType == groupType) &&
             (identical(other.productsSearching1, productsSearching1) ||
                 other.productsSearching1 == productsSearching1) &&
             (identical(other.productsSearching2, productsSearching2) ||
@@ -416,6 +435,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       productFullName,
       parentGroupId,
       createdAt,
+      groupType,
       productsSearching1,
       productsSearching2,
       productsSearching3,
@@ -449,6 +469,7 @@ abstract class _Product implements Product {
       required final String productFullName,
       required final String parentGroupId,
       required final DateTime createdAt,
+      required final GroupType groupType,
       final String? productsSearching1,
       final String? productsSearching2,
       final String? productsSearching3,
@@ -473,6 +494,8 @@ abstract class _Product implements Product {
   String get parentGroupId;
   @override
   DateTime get createdAt;
+  @override
+  GroupType get groupType;
   @override
   String? get productsSearching1;
   @override

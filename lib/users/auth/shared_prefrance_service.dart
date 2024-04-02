@@ -20,7 +20,9 @@ class SharedPrefranceServce {
     await EncryptedSharedPreferences.initialize(myKey);
     _sharedPreferences = EncryptedSharedPreferences.getInstance();
   }
-
+  Future<void> clearAll() async {
+   await _sharedPreferences.clear();
+  }
   Future<void> saveUser(AppUser user) async {
     final data = jsonEncode(user.toJson());
     await _sharedPreferences.setString(_userKey, data);

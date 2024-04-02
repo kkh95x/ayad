@@ -1,4 +1,5 @@
 import 'package:ayad/src/pages/page_template.dart';
+import 'package:ayad/src/providers/get_settings_provider.dart';
 import 'package:ayad/src/widgets/whats_app_button.dart';
 import 'package:ayad/theme.dart';
 import 'package:flutter/widgets.dart';
@@ -43,11 +44,18 @@ class ServicePartPage extends ConsumerWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        "ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ملاحظات حول التواصي على القطع ",
-                       
-                        
-                        style: TextStyle(color: appColor.greyish.shade400,height: 1.5),
+                      Consumer(
+                        builder: (context, ref, child)  {
+                           final setting=ref.watch(getSettingFuture);
+                          return 
+                          
+                           Text(
+                           setting.value?.noteForParts?? "-",
+                           
+                            
+                            style: TextStyle(color: appColor.greyish.shade400,height: 1.5),
+                          );
+                        }
                       ),
                       const SizedBox(
                         height: 40,

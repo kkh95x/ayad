@@ -1,3 +1,4 @@
+import 'package:ayad/src/components/home_list_component.dart';
 import 'package:ayad/src/components/slides_component.dart';
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/pages/group_page.dart';
@@ -66,106 +67,12 @@ class HomePage extends ConsumerWidget {
               ),
               const TextSearchWidget(),
 
-              // SizedBox(
-              //   height: 20.h,
-              // ),
-              // Row(
-              //   children: [
-              //     Text("الأقسام الرئيسية",style: Theme.of(context).textTheme.titleMedium?.copyWith(color: ref.read(appColorLightProvider).redish),)
-              //   ],
-              // ),
-              TextButton(
-                child: const Text("إضافة قسم جديد"),
-                onPressed: () async {
-                  await DilogsHelper.showGroupForm(context, isMain: true);
-                },
-              ),
+             
               SizedBox(
                 height: 4.h,
               ),
-              Expanded(
-                child: Consumer(
-                  builder: (context, ref, child) {
-                    return ref.watch(getAllGroupProvider).when(
-                      data: (data) {
-                        return RefreshIndicator(
-                          backgroundColor:
-                              ref.read(appColorLightProvider).whiteish,
-                          onRefresh: () async {
-                            ref.read(getAllGroupProvider.notifier).init();
-                          },
-                          child: GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisSpacing: 3,
-                                    mainAxisSpacing: 5,
-                                    childAspectRatio: (3 / 2),
-                                    crossAxisCount: 2),
-                            itemCount: data.length + 1,
-                            itemBuilder: (context, index) {
-                              if (index == data.length) {
-                                return GroupButtonWidget(
-                                  group: Group(
-                                      type: GroupType.customer,
-                                      parentGroupId: "",
-                                      subType: SubType.groups,
-                                      createdAt: DateTime.now(),
-                                      isMainGroup: true,
-                                      name: "التوصية على قطع غير موجودة",
-                                      isHiden: false),
-                                  onTap: () {
-                                    // context.push(ServicePartPage.routePath,
-                                    //     extra: fakeGroups.first);
-                                  },
-                                );
-                              }
-                              return GroupButtonWidget(
-                                group: data[index],
-                                onLongPress: () async {
-                                  //TODO just admin
-                                  await DilogsHelper.showGroupForm(context,
-                                      group: data[index], isMain: true);
-                                },
-                                onTap: () {
-                                  context.push(SubGroupPage.routePath,
-                                      extra: data[index]);
-                                },
-                              );
-                            },
-                          ),
-                        );
-
-                        // SingleChildScrollView(
-                        //   child: Wrap(
-                        //     crossAxisAlignment: WrapCrossAlignment.center,
-                        //     alignment: WrapAlignment.center,
-                        //     children: data
-                        //         .map((e) => GroupButtonWidget(
-                        //               group: e,
-                        //               onTap: () {
-                        //                 context.push(SubGroupPage.routePath,
-                        //                     extra: fakeGroups.first);
-                        //               },
-                        //             ))
-                        //         .toList(),
-                        //   ),
-                        // );
-                      },
-                      error: (error, stackTrace) {
-                        return const Center(
-                          child: Text("Error"),
-                        );
-                      },
-                      loading: () {
-                        return const Center(
-                          child: LoadingWidget(),
-                        );
-                      },
-                    );
-                  },
-                ),
-              )
-            ],
+             const Expanded(child:  HomeListComponent()),
+               ],
           ),
         ));
   }

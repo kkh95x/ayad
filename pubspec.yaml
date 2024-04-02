@@ -51,6 +51,7 @@ dependencies:
   json_annotation: ^4.8.1
   lottie: ^3.1.0
   marquee: ^2.2.3
+  package_info_plus: ^5.0.1
   reactive_color_picker: ^2.0.0
   reactive_date_time_picker: ^3.0.0
   reactive_forms: ^16.1.1

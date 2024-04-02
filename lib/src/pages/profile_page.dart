@@ -3,9 +3,11 @@ import 'package:ayad/src/components/dialogs.dart';
 import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/pages/slides_page.dart';
 import 'package:ayad/src/pages/users_page.dart';
+import 'package:ayad/src/providers/get_settings_provider.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/theme.dart';
 import 'package:ayad/users/auth/auth_notifier.dart';
+import 'package:ayad/users/domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,6 +22,9 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
+    final user = ref.watch(authNotifierProvider).value?.currentUser;
+    final isAdmin = user?.type == UserType.admin;
+
     return PageTemplate(
         child: SingleChildScrollView(
       child: Column(
@@ -31,7 +36,7 @@ class ProfilePage extends ConsumerWidget {
             height: 20.h,
           ),
           Text(
-            "Username",
+            user?.username ?? "Username",
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -40,47 +45,62 @@ class ProfilePage extends ConsumerWidget {
           SizedBox(
             height: 5.h,
           ),
-          Text(
-            "+31637031781",
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w400, color: appColor.greyish.shade400),
-          ),
+          if (user?.type != UserType.anon)
+            Text(
+              user?.phone ?? " ",
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: appColor.greyish.shade400),
+            ),
           SizedBox(
             height: 10.h,
           ),
-          DynamicButton(
-            title: "تغيير كلمة المرور",
-            onPressed: () async {
-              await DilogsHelper.showForgetPasswordForm(context);
-            },
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          DynamicButton(
-            title: "عرض قائمة الزبائن",
-            onPressed: () {
-              context.push(UsersPage.routePath);
-            },
-          ),
-           SizedBox(
-            height: 10.h,
-          ),
-          DynamicButton(
-            title: "عرض قائمة الإعلانات",
-            onPressed: () {
-              context.push(SlidesPage.routePath);
-            },
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          DynamicButton(
-            title: "عرض الأعدادات ",
-            onPressed: () async {
-              await DilogsHelper.showSettingsForm(context);
-            },
-          ),
+          if (user?.type != UserType.anon)
+            DynamicButton(
+              title: "تغيير كلمة المرور",
+              onPressed: () async {
+                await DilogsHelper.showForgetPasswordForm(context);
+              },
+            ),
+          if (isAdmin) ...[
+            SizedBox(
+              height: 10.h,
+            ),
+            DynamicButton(
+              title: "عرض قائمة الزبائن",
+              onPressed: () {
+                if (isAdmin) {
+                  context.push(UsersPage.routePath);
+                }
+              },
+            ),
+          ],
+          if (isAdmin) ...[
+            SizedBox(
+              height: 10.h,
+            ),
+            DynamicButton(
+              title: "عرض قائمة الإعلانات",
+              onPressed: () {
+                if (isAdmin) {
+                  context.push(SlidesPage.routePath);
+                }
+              },
+            ),
+          ],
+          if (isAdmin) ...[
+            SizedBox(
+              height: 10.h,
+            ),
+            DynamicButton(
+              title: "عرض الإعدادات ",
+              onPressed: () async {
+                if (isAdmin) {
+                  await DilogsHelper.showSettingsForm(context);
+                }
+              },
+            ),
+          ],
           SizedBox(
             height: 10.h,
           ),
@@ -91,13 +111,16 @@ class ProfilePage extends ConsumerWidget {
             // ),
             title: "عرض موقع المتجر على الخريطة",
             onPressed: () async {
-              double latitude=36.58741348746436;
-              double longitude= 37.04609160000916;
-              String googleUrl =
-                  'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
-              if (await canLaunchUrl(Uri.parse(googleUrl))) {
-                await launchUrl(Uri.parse(googleUrl));
-              } else {}
+              final setting = await ref.read(getSettingFuture.future);
+              if (setting != null) {
+                double latitude = setting.landtute ?? 36.58365142557628;
+                double longitude = setting.longtute ?? 37.04943860000036;
+                String googleUrl =
+                    'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+                if (await canLaunchUrl(Uri.parse(googleUrl))) {
+                  await launchUrl(Uri.parse(googleUrl));
+                } else {}
+              }
             },
           ),
           SizedBox(
@@ -105,7 +128,7 @@ class ProfilePage extends ConsumerWidget {
           ),
           DynamicButton(
             title: "تسجيل الخروج",
-            onPressed: () async{
+            onPressed: () async {
               await ref.read(authNotifierProvider.notifier).logout();
             },
           ),

@@ -1,14 +1,19 @@
-import 'package:ayad/src/components/dialogs.dart';
+import 'package:ayad/src/data/supabase_product_repository.dart';
 import 'package:ayad/src/models/product.dart';
 import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/loading_widget.dart';
+import 'package:ayad/src/widgets/maps_button_widget.dart';
 import 'package:ayad/src/widgets/whats_app_product_button.dart';
 import 'package:ayad/theme.dart';
+import 'package:ayad/users/auth/auth_notifier.dart';
+import 'package:ayad/users/domain/user.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductPage extends ConsumerWidget {
   const ProductPage({super.key, required this.product});
@@ -16,9 +21,13 @@ class ProductPage extends ConsumerWidget {
 
   static String get routeName => "product-page";
   static String get routePath => "/$routeName";
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
+    final isAdmin = ref.watch(authNotifierProvider).value?.currentUser?.type ==
+        UserType.admin;
+
     return PageTemplate(
         title: product.productFullName,
         child: SingleChildScrollView(
@@ -137,10 +146,27 @@ class ProductPage extends ConsumerWidget {
                         SizedBox(
                           height: 10.h,
                         ),
-                        DynamicButton(
-                          title: "حذف",
-                          onPressed: () async {},
+                        const MapButton(),
+                        SizedBox(
+                          height: 10.h,
                         ),
+                        if (isAdmin)
+                          DynamicButton(
+                            title: "حذف",
+                            onPressed: () async {
+                              if(isAdmin){
+
+                              BotToast.showLoading();
+                              await ref
+                                  .read(supabaseProductRepositoryProvider)
+                                  .delete(product.id ?? "");
+                              BotToast.closeAllLoading();
+                              if (context.mounted) {
+                                context.pop(true);
+                              }
+                              }
+                            },
+                          ),
                         SizedBox(
                           height: 30.h,
                         )

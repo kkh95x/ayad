@@ -46,8 +46,11 @@ class ProductsComponent extends StatelessWidget {
                     onLongPress: () async{
                     await  DilogsHelper.showProductForm(context, parentGroup: parentGroup,product: data[index]);
                     },
-                    onTap: () {
-                      context.push(ProductPage.routePath,extra: data[index]);
+                    onTap: () async{
+                     final refresh=await context.push(ProductPage.routePath,extra: data[index]);
+                     if(refresh is bool && refresh){
+                      ref.read(getSupProductProvider(parentGroup).notifier).init();
+                     }
                     },
                       product: data[index]);
                 },

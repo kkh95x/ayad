@@ -6,9 +6,11 @@ import 'package:ayad/src/pages/login_page.dart';
 import 'package:ayad/src/pages/product_page.dart';
 import 'package:ayad/src/pages/products_page.dart';
 import 'package:ayad/src/pages/profile_page.dart';
+import 'package:ayad/src/pages/rejected_version_page.dart';
 import 'package:ayad/src/pages/service_part_page.dart';
 import 'package:ayad/src/pages/splash_page.dart';
 import 'package:ayad/src/pages/users_page.dart';
+import 'package:ayad/src/providers/version_helper.dart';
 import 'package:ayad/users/auth/auth_notifier.dart';
 import 'package:ayad/users/auth/auth_state.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -22,6 +24,7 @@ final _key = GlobalKey<NavigatorState>();
 
 final routeProvider = Provider<GoRouter>((ref) {
   final authNotifer = ref.watch(authNotifierProvider).value;
+  final versionChecker=ref.watch(versionCheckerProvider);
   return GoRouter(
     observers: [BotToastNavigatorObserver()],
     navigatorKey: _key,
@@ -118,12 +121,26 @@ final routeProvider = Provider<GoRouter>((ref) {
         //   child:
         //       ProductPage(key: state.pageKey, product: state.extra as Product),
         // ),
-      )
+    
+      ),
+         GoRoute(
+        path: RejectedVersionPage.routePath,
+        name: RejectedVersionPage.routeName,
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+            context: context,
+            state: state,
+            child: RejectedVersionPage(
+              key: state.pageKey,
+            )),
+      ),
     ],
     redirect: (context, state) {
       final isSplash = state.fullPath == SplashPage.routePath;
       final isAuth = authNotifer?.authStatus == AuthStatus.authorized;
       final isInit = authNotifer?.authStatus == AuthStatus.initial;
+      if(versionChecker==VersionStutes.rejected){
+        return RejectedVersionPage.routePath;
+      }
       if (isSplash) {
         if (isInit) {
           return null;

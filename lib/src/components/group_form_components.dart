@@ -7,6 +7,8 @@ import 'package:ayad/src/providers/group_form_provider.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/main_text_input_widget.dart';
 import 'package:ayad/theme.dart';
+import 'package:ayad/users/auth/auth_notifier.dart';
+import 'package:ayad/users/domain/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,12 +20,23 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 class GroupFormComponent extends ConsumerWidget {
   const GroupFormComponent(
-      {super.key, this.group, this.isMain = false, this.parentGroup});
+      {super.key,
+      this.group,
+      this.isMain = false,
+      this.parentGroup,
+      required this.groupType});
   final Group? group;
   final Group? parentGroup;
   final bool isMain;
+  final GroupType groupType;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isAdmin = ref.watch(authNotifierProvider).value?.currentUser?.type ==
+        UserType.admin;
+    if (!isAdmin) {
+      return const SizedBox();
+    }
+
     final isEdit = group != null;
     final formGroup = ref.read(groupformProvider(group));
     final appColor = ref.read(appColorLightProvider);
@@ -151,14 +164,14 @@ class GroupFormComponent extends ConsumerWidget {
                       if (isMain) {
                         if (isEdit) {
                           await ref
-                              .read(getAllGroupProvider.notifier)
+                              .read(getAllGroupProvider(groupType).notifier)
                               .update(formGroup, group!);
                           if (context.mounted) {
                             context.pop();
                           }
                         } else {
                           await ref
-                              .read(getAllGroupProvider.notifier)
+                              .read(getAllGroupProvider(groupType).notifier)
                               .addGroup(formGroup);
                           formGroup.reset();
                         }
@@ -191,21 +204,20 @@ class GroupFormComponent extends ConsumerWidget {
                   DynamicButton(
                     title: "حذف",
                     onPressed: () async {
-                      if(isMain){
-
-                      await ref
-                          .read(getAllGroupProvider.notifier)
-                          .delete(group!);
-                      if (context.mounted) {
-                        context.pop();
-                      }
-                      }else{
+                      if (isMain) {
                         await ref
-                          .read(getSubGroupProvider(parentGroup!).notifier)
-                          .delete(group!);
-                      if (context.mounted) {
-                        context.pop();
-                      }
+                            .read(getAllGroupProvider(groupType).notifier)
+                            .delete(group!);
+                        if (context.mounted) {
+                          context.pop();
+                        }
+                      } else {
+                        await ref
+                            .read(getSubGroupProvider(parentGroup!).notifier)
+                            .delete(group!);
+                        if (context.mounted) {
+                          context.pop();
+                        }
                       }
                     },
                   ),
