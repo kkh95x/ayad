@@ -18,6 +18,7 @@ class AppUser with _$AppUser {
     required String password,
     required DateTime createdAt,
     required UserType type,
+    String? token,
 
   }) = _User;
 

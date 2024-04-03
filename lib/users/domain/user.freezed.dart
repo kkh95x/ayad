@@ -27,6 +27,7 @@ mixin _$AppUser {
   String get password => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   UserType get type => throw _privateConstructorUsedError;
+  String? get token => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,8 @@ abstract class $AppUserCopyWith<$Res> {
       String username,
       String password,
       DateTime createdAt,
-      UserType type});
+      UserType type,
+      String? token});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
     Object? password = null,
     Object? createdAt = null,
     Object? type = null,
+    Object? token = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -98,6 +101,10 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as UserType,
+      token: freezed == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -116,7 +123,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $AppUserCopyWith<$Res> {
       String username,
       String password,
       DateTime createdAt,
-      UserType type});
+      UserType type,
+      String? token});
 }
 
 /// @nodoc
@@ -136,6 +144,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? password = null,
     Object? createdAt = null,
     Object? type = null,
+    Object? token = freezed,
   }) {
     return _then(_$UserImpl(
       id: freezed == id
@@ -166,6 +175,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as UserType,
+      token: freezed == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -180,7 +193,8 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
       required this.username,
       required this.password,
       required this.createdAt,
-      required this.type});
+      required this.type,
+      this.token});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -199,10 +213,12 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   final DateTime createdAt;
   @override
   final UserType type;
+  @override
+  final String? token;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AppUser(id: $id, fullName: $fullName, phone: $phone, username: $username, password: $password, createdAt: $createdAt, type: $type)';
+    return 'AppUser(id: $id, fullName: $fullName, phone: $phone, username: $username, password: $password, createdAt: $createdAt, type: $type, token: $token)';
   }
 
   @override
@@ -216,7 +232,8 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
       ..add(DiagnosticsProperty('username', username))
       ..add(DiagnosticsProperty('password', password))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('type', type));
+      ..add(DiagnosticsProperty('type', type))
+      ..add(DiagnosticsProperty('token', token));
   }
 
   @override
@@ -234,13 +251,14 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
                 other.password == password) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.token, token) || other.token == token));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, fullName, phone, username, password, createdAt, type);
+  int get hashCode => Object.hash(runtimeType, id, fullName, phone, username,
+      password, createdAt, type, token);
 
   @JsonKey(ignore: true)
   @override
@@ -264,7 +282,8 @@ abstract class _User implements AppUser {
       required final String username,
       required final String password,
       required final DateTime createdAt,
-      required final UserType type}) = _$UserImpl;
+      required final UserType type,
+      final String? token}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -282,6 +301,8 @@ abstract class _User implements AppUser {
   DateTime get createdAt;
   @override
   UserType get type;
+  @override
+  String? get token;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

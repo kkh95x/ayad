@@ -14,6 +14,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       password: json['password'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       type: $enumDecode(_$UserTypeEnumMap, json['type']),
+      token: json['token'] as String?,
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -25,6 +26,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'password': instance.password,
       'createdAt': instance.createdAt.toIso8601String(),
       'type': _$UserTypeEnumMap[instance.type]!,
+      'token': instance.token,
     };
 
 const _$UserTypeEnumMap = {

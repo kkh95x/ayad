@@ -8,6 +8,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+// Import the generated file
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,15 +22,50 @@ Future<void> main() async {
       url: "https://vrclircgjpkyvnvsonwn.supabase.co",
       anonKey:
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyY2xpcmNnanBreXZudnNvbnduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTEyNzY0MzEsImV4cCI6MjAyNjg1MjQzMX0.QH1TTUIVnOOF56Z708MCRXXKKeJLW9BvjVrv3Pv5P_Q");
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    if (message.notification != null) {
+      BotToast.closeAllLoading();
+      BotToast.showSimpleNotification(
+        title: message.notification!.title!,
+        subTitle: message.notification!.body,
+        duration: const Duration(seconds: 10),
+        backgroundColor: Colors.grey.shade200,
+      );
+      print(
+          'Message also contained a notification: ${message.notification?.title} ${message.notification?.body}');
+    }
+  });
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
+  @override
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    // FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    //   final title = event.notification?.title;
+    //   final body = event.notification?.body;
+    //   print(event.toMap());
+    //   if (title != null && body != null) {
+    //     BotToast.showSimpleNotification(title: title, subTitle: body);
+    //   }
+    // });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final botToastBuilder = BotToastInit();
 
     final router = ref.watch(routeProvider);
