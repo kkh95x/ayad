@@ -1,15 +1,10 @@
 import 'package:ayad/src/components/products_component.dart';
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/pages/page_template.dart';
-import 'package:ayad/src/pages/product_page.dart';
-import 'package:ayad/src/providers/get_sub_products_provider.dart';
-import 'package:ayad/src/widgets/loading_widget.dart';
-import 'package:ayad/src/widgets/product_list_tile.dart';
 import 'package:ayad/src/widgets/type_ahead_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class ProductsPage extends ConsumerWidget {
   const ProductsPage({super.key, required this.group});
