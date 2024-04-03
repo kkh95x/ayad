@@ -2,7 +2,6 @@ import 'package:ayad/src/providers/app_notification_provider.dart';
 import 'package:ayad/src/providers/notification_provider.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/main_text_input_widget.dart';
-import 'package:ayad/theme.dart';
 import 'package:ayad/users/domain/user.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';

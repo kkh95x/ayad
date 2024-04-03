@@ -7,7 +7,6 @@ import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/loading_widget.dart';
 import 'package:ayad/theme.dart';
 import 'package:ayad/users/domain/user.dart';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
