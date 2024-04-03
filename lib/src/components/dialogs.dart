@@ -19,7 +19,10 @@ bool isUrl(String string) {
 
 class DilogsHelper {
   static Future<void> showGroupForm(BuildContext context,
-      {Group? group, bool isMain = false, Group? parentGroup,required GroupType groupType}) async {
+      {Group? group,
+      bool isMain = false,
+      Group? parentGroup,
+      required GroupType groupType}) async {
     await showDialog(
       context: context,
       builder: (context) {
