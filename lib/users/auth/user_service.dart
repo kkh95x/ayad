@@ -61,14 +61,12 @@ class UserService {
     return user;
   }
 
-  Future<(AppUser, bool)> updateUser(String password, AppUser appUser) async {
-    if (appUser.password != password) {
-      return (appUser, false);
-    }
+  Future<AppUser> updateUser(String password, AppUser appUser) async {
+   
     final updatesUser = appUser.copyWith(password: password);
     await _supabaseUserRepository.update(updatesUser);
     await _prefranceServce.deleteUserLocaly();
     await _prefranceServce.saveUser(updatesUser);
-    return (updatesUser, true);
+    return updatesUser;
   }
 }

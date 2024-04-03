@@ -20,9 +20,9 @@ class SupabaseUserRepository implements UserRepository {
   }
 
   @override
-  Future<bool> delete(String userId)async {
-  await  _supabaseClient.from(_tableName).delete().eq("id", userId);
-  return true;
+  Future<bool> delete(String userId) async {
+    await _supabaseClient.from(_tableName).delete().eq("id", userId);
+    return true;
   }
 
   @override
@@ -32,15 +32,17 @@ class SupabaseUserRepository implements UserRepository {
   }
 
   @override
-  Future<AppUser?> loginIn(String username, String password)async {
-   final response=await  _supabaseClient.from(_tableName).select().eq("username", username)
-   .eq("password", password);
-   if(response.isEmpty){
-    return null;
-   }else{
-    return AppUser.fromJson(response.first);
-   }
-
+  Future<AppUser?> loginIn(String username, String password) async {
+    final response = await _supabaseClient
+        .from(_tableName)
+        .select()
+        .eq("username", username)
+        .eq("password", password);
+    if (response.isEmpty) {
+      return null;
+    } else {
+      return AppUser.fromJson(response.first);
+    }
   }
 
   @override
@@ -71,5 +73,11 @@ class SupabaseUserRepository implements UserRepository {
         .eq("username", username)
         .count();
     return count.count > 0;
+  }
+
+  @override
+  Future<List<String>> getAllIds() async {
+    final usersIds = await _supabaseClient.from(_tableName).select("id");
+    return usersIds.map((e) => e['id']?.toString() ?? "").toList();
   }
 }

@@ -23,6 +23,7 @@ class SupabaseSlidesRepository implements SlidesRepository {
   Future<List<Slide>> get({SlidesType? slidesType}) async {
     PostgrestFilterBuilder<List<Map<String, dynamic>>> query = _supabaseClient.from(tableName).select();
     if (slidesType != null) {
+    query=query.eq("isHiden", false);
     query=  query.eq("slidesType", slidesType.name);
     }
     final res = await query.select();

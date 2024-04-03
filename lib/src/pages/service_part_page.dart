@@ -13,7 +13,7 @@ class ServicePartPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
     return PageTemplate(
-        title: "التواصي للقطع الغير موجودة",
+        title:"التوصية على قطع غير موجودة",
         child: Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),

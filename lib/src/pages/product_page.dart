@@ -1,4 +1,6 @@
+import 'package:ayad/src/components/user_notification_component.dart';
 import 'package:ayad/src/data/supabase_product_repository.dart';
+import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/models/product.dart';
 import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
@@ -154,21 +156,40 @@ class ProductPage extends ConsumerWidget {
                           DynamicButton(
                             title: "حذف",
                             onPressed: () async {
-                              if(isAdmin){
-
-                              BotToast.showLoading();
-                              await ref
-                                  .read(supabaseProductRepositoryProvider)
-                                  .delete(product.id ?? "");
-                              BotToast.closeAllLoading();
-                              if (context.mounted) {
-                                context.pop(true);
-                              }
+                              if (isAdmin) {
+                                BotToast.showLoading();
+                                await ref
+                                    .read(supabaseProductRepositoryProvider)
+                                    .delete(product.id ?? "");
+                                BotToast.closeAllLoading();
+                                if (context.mounted) {
+                                  context.pop(true);
+                                }
                               }
                             },
                           ),
                         SizedBox(
-                          height: 30.h,
+                          height: 10.h,
+                        ),
+                        if (isAdmin && product.groupType == GroupType.customer)
+                          DynamicButton(
+                            type: ButtonTypes.Alternative,
+                            title: "إرسال إشعار منتج لكافة الزبائن",
+                            onPressed: () async {
+                              if (isAdmin) {
+                                await showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return UserNotificationComponent(
+                                      productId: product.id,
+                                    );
+                                  },
+                                );
+                              }
+                            },
+                          ),
+                        SizedBox(
+                          height: 20.h,
                         )
                       ],
                     ),

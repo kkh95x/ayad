@@ -1,5 +1,6 @@
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/src/components/dialogs.dart';
+import 'package:ayad/src/pages/my_notification_page.dart';
 import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/pages/slides_page.dart';
 import 'package:ayad/src/pages/users_page.dart';
@@ -75,6 +76,19 @@ class ProfilePage extends ConsumerWidget {
               },
             ),
           ],
+          if (isAdmin||ref.watch(authNotifierProvider).value?.currentUser?.type==UserType.customer) ...[
+            SizedBox(
+              height: 10.h,
+            ),
+            DynamicButton(
+              title: "عرض قائمة الإشعارات",
+              onPressed: () {
+                
+                  context.push(MyNotificationPage.routePath);
+                
+              },
+            ),
+          ],
           if (isAdmin) ...[
             SizedBox(
               height: 10.h,
@@ -132,6 +146,7 @@ class ProfilePage extends ConsumerWidget {
               await ref.read(authNotifierProvider.notifier).logout();
             },
           ),
+          SizedBox(height: 30.h,)
         ],
       ),
     ));

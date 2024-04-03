@@ -3,6 +3,7 @@ import 'package:ayad/src/models/product.dart';
 import 'package:ayad/src/pages/group_page.dart';
 import 'package:ayad/src/pages/home_page.dart';
 import 'package:ayad/src/pages/login_page.dart';
+import 'package:ayad/src/pages/my_notification_page.dart';
 import 'package:ayad/src/pages/product_page.dart';
 import 'package:ayad/src/pages/products_page.dart';
 import 'package:ayad/src/pages/profile_page.dart';
@@ -24,7 +25,7 @@ final _key = GlobalKey<NavigatorState>();
 
 final routeProvider = Provider<GoRouter>((ref) {
   final authNotifer = ref.watch(authNotifierProvider).value;
-  final versionChecker=ref.watch(versionCheckerProvider);
+  final versionChecker = ref.watch(versionCheckerProvider);
   return GoRouter(
     observers: [BotToastNavigatorObserver()],
     navigatorKey: _key,
@@ -45,7 +46,7 @@ final routeProvider = Provider<GoRouter>((ref) {
           key: state.pageKey,
         ),
       ),
-       GoRoute(
+      GoRoute(
         path: SlidesPage.routePath,
         name: SlidesPage.routeName,
         builder: (context, state) => SlidesPage(
@@ -100,6 +101,16 @@ final routeProvider = Provider<GoRouter>((ref) {
             )),
       ),
       GoRoute(
+        path: MyNotificationPage.routePath,
+        name: MyNotificationPage.routeName,
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+            context: context,
+            state: state,
+            child: MyNotificationPage(
+              key: state.pageKey,
+            )),
+      ),
+      GoRoute(
         path: ServicePartPage.routePath,
         name: ServicePartPage.routeName,
         pageBuilder: (context, state) => buildPageWithDefaultTransition(
@@ -121,9 +132,8 @@ final routeProvider = Provider<GoRouter>((ref) {
         //   child:
         //       ProductPage(key: state.pageKey, product: state.extra as Product),
         // ),
-    
       ),
-         GoRoute(
+      GoRoute(
         path: RejectedVersionPage.routePath,
         name: RejectedVersionPage.routeName,
         pageBuilder: (context, state) => buildPageWithDefaultTransition(
@@ -138,7 +148,7 @@ final routeProvider = Provider<GoRouter>((ref) {
       final isSplash = state.fullPath == SplashPage.routePath;
       final isAuth = authNotifer?.authStatus == AuthStatus.authorized;
       final isInit = authNotifer?.authStatus == AuthStatus.initial;
-      if(versionChecker==VersionStutes.rejected){
+      if (versionChecker == VersionStutes.rejected) {
         return RejectedVersionPage.routePath;
       }
       if (isSplash) {

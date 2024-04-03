@@ -81,4 +81,24 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     state = AsyncData(
         AuthState(authStatus: AuthStatus.authorized, currentUser: user));
   }
+
+  changePassword(String oldPassword, String newPassword) async {
+    if (state.value?.currentUser != null) {
+      BotToast.showLoading();
+      await Future.delayed(const Duration(seconds: 1));
+      final currentPassword = state.value?.currentUser?.password;
+
+      if (currentPassword != oldPassword) {
+        BotToast.closeAllLoading();
+        BotToast.showText(text: "كلمة المرور غلط");
+        return;
+      } else {
+        await ref
+            .read(userServiceProvider)
+            .updateUser(newPassword, state.value!.currentUser!);
+        BotToast.showText(text: "تم تغيير كلمة المرور بنجاح");
+        BotToast.closeAllLoading();
+      }
+    }
+  }
 }

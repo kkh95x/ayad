@@ -208,6 +208,7 @@ class _SlidesComponentState extends State<SlidesComponent> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(4),
                     child: CustomCarouselSlider(
+                         
                         items: <CarouselItem>[
                           CarouselItem(
                             boxDecoration: BoxDecoration(

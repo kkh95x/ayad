@@ -163,6 +163,8 @@ class MainTextFieldWidget extends ConsumerWidget {
                                   "MinLength 8" ,
                               ValidationMessage.email: (error) =>
                                   "Email format error" ,
+                               ValidationMessage.compare: (error) =>
+                                  "كلمة المرور غير متطابقة" ,
                             },
                         decoration: InputDecoration(
                           errorStyle: const TextStyle(
@@ -304,6 +306,8 @@ class MainTextFieldWidget extends ConsumerWidget {
                                     "MinLength 8" ,
                                 ValidationMessage.email: (error) =>
                                     "Email format error" ,
+                                    ValidationMessage.compare: (error) =>
+                                  "كلمة المرور غير متطابقة" ,
                               },
                           textInputAction: textInputAction,
                           textAlign: TextAlign.start,
@@ -413,6 +417,8 @@ class MainTextFieldWidget extends ConsumerWidget {
                                     "اقل طول مسموح هو 6 خانات" ,
                                 ValidationMessage.email: (error) =>
                                     "البريد الإلكتروني مرفوض" ,
+                                ValidationMessage.compare: (error) =>
+                                  "كلمة المرور غير متطابقة" ,
                               },
                           textInputAction: textInputAction,
                           textAlign: TextAlign.start,

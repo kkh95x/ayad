@@ -8,5 +8,5 @@ abstract class UserRepository{
  Future<AppUser?> loginIn(String username,String password);
  Future<bool> checkUsername(String username);
   Future<bool> checkUsernameWithId(String username,String id);
-
+ Future<List<String>> getAllIds();
 }

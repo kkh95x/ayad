@@ -2,6 +2,7 @@
 import 'package:ayad/src/providers/user_form_provider.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/main_text_input_widget.dart';
+import 'package:ayad/users/auth/auth_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +30,7 @@ class ForgetPasswordFormComponent extends ConsumerWidget {
                   children: [Text("كلمة المرور الحالية")],
                 ),
                 MainTextFieldWidget(
-                    control: "password", placeholder: "كلمة المرور"),
+                    control: "password", placeholder: ""),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -49,11 +50,20 @@ class ForgetPasswordFormComponent extends ConsumerWidget {
                 SizedBox(
                   height: 20.h,
                 ),
-                DynamicButton(
-                  type: ButtonTypes.Alternative,
-                  title: "تغيير كلمة المرور",
-                  radius: 8,
-                  onPressed: () {},
+                ReactiveFormConsumer(
+                  builder: (context, formGroup, child)  {
+                    return DynamicButton(
+                      isDisabled: formGroup.invalid,
+                      type: ButtonTypes.Alternative,
+                      title: "تغيير كلمة المرور",
+                      radius: 8,
+                      onPressed: ()async {
+                         ref.read(authNotifierProvider.notifier).changePassword(formGroup.control("password").value, formGroup.control("password2").value);
+                         context.pop();
+                         formGroup.reset();
+                      },
+                    );
+                  }
                 ),
                 SizedBox(
                   height: 10.h,

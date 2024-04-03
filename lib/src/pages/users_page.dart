@@ -83,11 +83,11 @@ class UsersPage extends ConsumerWidget {
                                 },
                                 trailing: TextButton(
                                     onPressed: () async {
-                                      if (user.token == null) {
-                                        BotToast.showText(
-                                            text:
-                                                "مستخدم لم يقم بتسجيل الدخول بعد");
-                                      } else {
+                                      // if (user.token == null) {
+                                      //   BotToast.showText(
+                                      //       text:
+                                      //           "مستخدم لم يقم بتسجيل الدخول بعد");
+                                      // } else {
                                         await showDialog(
                                           context: context,
                                           builder: (context) {
@@ -95,7 +95,7 @@ class UsersPage extends ConsumerWidget {
                                                 appUsers: [user]);
                                           },
                                         );
-                                      }
+                                      // }
                                     },
                                     child: const Text("إرسال إشعار")),
                                 leading: CircleAvatar(

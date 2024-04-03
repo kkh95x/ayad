@@ -58,4 +58,18 @@ class SupabaseProductRepository implements ProductRepository {
     final res = await query;
     return res.map((e) => Product.fromJson(e)).toList();
   }
+  
+  @override
+  Future<Product?> get(String id)async {
+   final res= await _client
+        .from(tableName)
+        .select()
+        .eq("isHiden", false)
+        .eq("id", id).single();
+  if(res.isEmpty){
+    return null;
+  }else{
+    return Product.fromJson(res);
+  }
+  }
 }
