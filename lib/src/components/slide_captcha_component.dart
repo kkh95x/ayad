@@ -19,7 +19,7 @@ Future<bool> showSlideCaptchaSlider(BuildContext context) async {
       return AlertDialog(
         content: SliderCaptcha(
           controller: controller,
-          title: "اسحب للتحقق من أختبار الروبوت",
+          title: "اسحب للتحقق من إختبار الروبوت",
           image: Image.asset(
             _images[randomIndex],
             fit: BoxFit.fitWidth,

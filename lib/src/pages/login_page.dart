@@ -71,7 +71,7 @@ class LoginPage extends ConsumerWidget {
                     ref.read(authNotifierProvider.notifier).login(form);
                   } else {
                     BotToast.showText(
-                        text: "فشل أختبار الروبوت",
+                        text: "فشل إختبار الروبوت",
                         contentColor: ref.read(appColorLightProvider).redish);
                   }
                 },
