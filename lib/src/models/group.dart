@@ -23,6 +23,8 @@ class Group with _$Group {
     String? hexColor,
     String? imageUrl,
     String? name2,
+    double? priority,
+    bool? isSeivce,
     required bool isHiden,
   }) = _Group;
 

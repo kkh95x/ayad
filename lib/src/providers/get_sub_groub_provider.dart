@@ -81,22 +81,22 @@ class SubGroupNotifer extends StateNotifier<AsyncValue<List<Group>>> {
   final SharedPrefranceServce _prefranceServce;
   final Group parentGroup;
   final AuthState? authState;
-    bool? get isHidden{
-    if(authState?.currentUser?.type==UserType.admin){
-return null;
-
-    }else{
+  bool? get isHidden {
+    if (authState?.currentUser?.type == UserType.admin) {
+      return null;
+    } else {
       return false;
     }
   }
+
   SubGroupNotifer(this._supabaseGroupRepository, this.parentGroup,
       this._prefranceServce, this.authState)
       : super(const AsyncLoading());
   Future<void> init() async {
     state = const AsyncLoading();
     try {
-      final groups =
-          await _supabaseGroupRepository.getSubGruops(parentGroup.id ?? "3434",isHidden: isHidden);
+      final groups = await _supabaseGroupRepository
+          .getSubGruops(parentGroup.id ?? "3434", isHidden: isHidden);
       state = AsyncData(groups);
       _prefranceServce.saveSubGroups(groups, parentGroup.id ?? "6767");
     } catch (e, stack) {
@@ -136,6 +136,7 @@ return null;
         subType: formGroup.control("subType").value,
         parentGroupId: parentGroup.id ?? "",
         isMainGroup: false,
+        priority: formGroup.control("priority").value,
         createdAt: DateTime.now(),
         hexColor: colorToHex(formGroup.control("color").value as Color?),
         isHiden: formGroup.control("isHidn").value ?? false);
@@ -161,6 +162,7 @@ return null;
         // parentGroupId: parentGroup.id ?? "",
         // isMainGroup: false,
         // createdAt: DateTime.now(),
+        priority: formGroup.control("priority").value,
         hexColor: colorToHex(formGroup.control("color").value),
         isHiden: formGroup.control("isHidn").value ?? false);
 

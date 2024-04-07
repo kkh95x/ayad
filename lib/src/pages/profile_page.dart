@@ -76,7 +76,7 @@ class ProfilePage extends ConsumerWidget {
               },
             ),
           ],
-          if (isAdmin||ref.watch(authNotifierProvider).value?.currentUser?.type==UserType.customer) ...[
+          // if (isAdmin||ref.watch(authNotifierProvider).value?.currentUser?.type==UserType.customer) ...[
             SizedBox(
               height: 10.h,
             ),
@@ -88,7 +88,7 @@ class ProfilePage extends ConsumerWidget {
                 
               },
             ),
-          ],
+          // ],
           if (isAdmin) ...[
             SizedBox(
               height: 10.h,

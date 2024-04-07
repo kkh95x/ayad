@@ -9,4 +9,5 @@ abstract class UserRepository{
  Future<bool> checkUsername(String username);
   Future<bool> checkUsernameWithId(String username,String id);
  Future<List<String>> getAllIds();
+ Future<AppUser?> getId(String username, String password);
 }

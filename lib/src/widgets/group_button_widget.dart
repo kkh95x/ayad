@@ -37,15 +37,17 @@ class GroupButtonWidget extends ConsumerWidget {
               ? null
               : EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
           decoration: BoxDecoration(
+           
               boxShadow: [
                 BoxShadow(
                     blurRadius: 4,
                     // spreadRadius: 2,
-                    color: (group.isMainGroup || group.hexColor == null)
+                    color: 
+                    (group.isMainGroup || group.hexColor == null)
                         ? appColor.blackish.withOpacity(.4)
                         : getColorFromHex(group.hexColor ?? "#fffff")
                                 ?.withAlpha(200) ??
-                            Colors.black,
+                            Colors.grey,
                     offset: const Offset(1.5, 2))
               ],
               color: group.isMainGroup
@@ -158,9 +160,9 @@ class GroupButtonWidget extends ConsumerWidget {
                                         shadows: [
                                       BoxShadow(
                                           color:
-                                              appColor.blackish.withOpacity(.6),
-                                          spreadRadius: 1.5,
-                                          blurRadius: 2)
+                                              appColor.blackish.withOpacity(.9),
+                                          spreadRadius: 2,
+                                          blurRadius: 1)
                                     ]),
                               ),
                               if (group.isHiden)
@@ -190,9 +192,10 @@ class GroupButtonWidget extends ConsumerWidget {
                                   .bodyMedium
                                   ?.copyWith(shadows: [
                                 BoxShadow(
-                                    color: appColor.blackish.withOpacity(.6),
-                                    spreadRadius: 1.5,
-                                    blurRadius: 2)
+                                     color:
+                                              appColor.blackish,
+                                          spreadRadius: 2,
+                                          blurRadius: 1)
                               ], color: appColor.whiteish, fontSize: 12),
                             ),
                           ],

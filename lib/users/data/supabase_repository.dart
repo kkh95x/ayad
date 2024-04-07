@@ -26,8 +26,19 @@ class SupabaseUserRepository implements UserRepository {
   }
 
   @override
-  Future<List<AppUser>?> getAll() async {
-    final users = await _supabaseClient.from(_tableName).select();
+  Future<List<AppUser>?> getAll(
+      {UserType userType = UserType.customer, bool isAll = false}) async {
+    PostgrestFilterBuilder<List<Map<String, dynamic>>> query =
+        _supabaseClient.from(_tableName).select();
+    if (!isAll) {
+      if (userType == UserType.customer) {
+        query = query
+            .neq("type",UserType.anon.name);
+      } else {
+        query = query.eq("type", UserType.anon.name);
+      }
+    }
+    final users = await query;
     return users.map((e) => AppUser.fromJson(e)).toList();
   }
 
@@ -76,8 +87,34 @@ class SupabaseUserRepository implements UserRepository {
   }
 
   @override
-  Future<List<String>> getAllIds() async {
-    final usersIds = await _supabaseClient.from(_tableName).select("id");
+  Future<List<String>> getAllIds(
+      {UserType userType = UserType.customer, bool isAll = false}) async {
+    PostgrestFilterBuilder<List<Map<String, dynamic>>> query =
+        _supabaseClient.from(_tableName).select("id");
+    if (!isAll) {
+      if (userType == UserType.customer) {
+        query = query
+            .neq("type", UserType.anon.name);
+      } else {
+        query = query.eq("type", UserType.anon.name);
+      }
+    }
+    final usersIds = await query;
     return usersIds.map((e) => e['id']?.toString() ?? "").toList();
+  }
+  
+  @override
+  Future<AppUser?> getId(String username, String password) async{
+      final response = await _supabaseClient
+        .from(_tableName)
+        .select()
+        .eq("username", username)
+        .eq("type", UserType.anon.name)
+        .eq("password", password);
+    if (response.isEmpty) {
+      return null;
+    } else {
+      return AppUser.fromJson(response.first);
+    }
   }
 }

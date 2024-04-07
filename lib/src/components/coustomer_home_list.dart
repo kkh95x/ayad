@@ -3,6 +3,7 @@ import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/pages/group_page.dart';
 import 'package:ayad/src/pages/service_part_page.dart';
 import 'package:ayad/src/providers/get_all_main_group_provider.dart';
+import 'package:ayad/src/widgets/child_warpper_animation_widget.dart';
 import 'package:ayad/src/widgets/group_button_widget.dart';
 import 'package:ayad/src/widgets/loading_widget.dart';
 import 'package:ayad/theme.dart';
@@ -52,38 +53,50 @@ class CoustomerHomeListComponent extends ConsumerWidget {
                               mainAxisSpacing: 5,
                               childAspectRatio: (3 / 2),
                               crossAxisCount: 2),
-                      itemCount: data.length + 1,
+                      itemCount: data.length,
                       itemBuilder: (context, index) {
-                        if (index == data.length) {
-                          return GroupButtonWidget(
-                            group: Group(
-                                type: GroupType.customer,
-                                parentGroupId: "",
-                                subType: SubType.groups,
-                                createdAt: DateTime.now(),
-                                isMainGroup: true,
-                                name: "التوصية على قطع غير موجودة",
-                                isHiden: false),
-                            onTap: () {
-                              context.push(ServicePartPage.routePath,
-                                  );
+                        // if (index == data.length) {
+                        //   return GroupButtonWidget(
+                        //     group: Group(
+                        //         type: GroupType.customer,
+                        //         parentGroupId: "",
+                        //         subType: SubType.groups,
+                        //         createdAt: DateTime.now(),
+                        //         isMainGroup: true,
+                        //         name: "التوصية على قطع غير موجودة",
+                        //         isHiden: false),
+                        //     onTap: () {
+                        //       context.push(ServicePartPage.routePath,
+                        //           );
+                        //     },
+                        //   );
+                        // }
+                        return  ChildWrpperWithAnimation(
+                          animationTypes:const {
+                            AnimationType.slide,
+                            AnimationType.fade,
+                            AnimationType.scall
+                          },
+                          wantKeepAlive: true,
+                          child: GroupButtonWidget(
+                            group: data[index],
+                            onLongPress: () async {
+                              if (isAdmin) {
+                                await DilogsHelper.showGroupForm(context,
+                                    groupType: GroupType.customer,
+                                    group: data[index],
+                                    isMain: true);
+                              }
                             },
-                          );
-                        }
-                        return GroupButtonWidget(
-                          group: data[index],
-                          onLongPress: () async {
-                            if (isAdmin) {
-                              await DilogsHelper.showGroupForm(context,
-                                  groupType: GroupType.customer,
-                                  group: data[index],
-                                  isMain: true);
-                            }
-                          },
-                          onTap: () {
-                            context.push(SubGroupPage.routePath,
-                                extra: data[index]);
-                          },
+                            onTap: () {
+                              if (data[index].isSeivce == true) {
+                                context.push(ServicePartPage.routePath);
+                              } else {
+                                context.push(SubGroupPage.routePath,
+                                    extra: data[index]);
+                              }
+                            },
+                          ),
                         );
                       },
                     ),

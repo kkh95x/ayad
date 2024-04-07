@@ -26,6 +26,8 @@ final productformProvider = Provider.family<FormGroup, Product?>((ref, product) 
     "count": FormControl<double>(value: product?.count),
     "imageUrl": FormControl<String>(value: product?.imageUrl),
     "type": FormControl<String>(value: product?.type),
-    "makfol":FormControl<bool>(value: product?.makfol)
+    "makfol":FormControl<bool>(value: product?.makfol),
+    "priority":FormControl<double>(value: product?.priority)
+
   });
 });

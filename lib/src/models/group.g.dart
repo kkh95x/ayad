@@ -17,6 +17,8 @@ _$GroupImpl _$$GroupImplFromJson(Map<String, dynamic> json) => _$GroupImpl(
       hexColor: json['hexColor'] as String?,
       imageUrl: json['imageUrl'] as String?,
       name2: json['name2'] as String?,
+      priority: (json['priority'] as num?)?.toDouble(),
+      isSeivce: json['isSeivce'] as bool?,
       isHiden: json['isHiden'] as bool,
     );
 
@@ -32,6 +34,8 @@ Map<String, dynamic> _$$GroupImplToJson(_$GroupImpl instance) =>
       'hexColor': instance.hexColor,
       'imageUrl': instance.imageUrl,
       'name2': instance.name2,
+      'priority': instance.priority,
+      'isSeivce': instance.isSeivce,
       'isHiden': instance.isHiden,
     };
 

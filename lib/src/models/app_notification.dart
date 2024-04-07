@@ -6,7 +6,7 @@ part 'app_notification.freezed.dart';
 // But if Person was not serializable, we could skip it.
 part 'app_notification.g.dart';
 
-enum GroupType { customer, vistor }
+
 
 enum SubType { groups, products }
 

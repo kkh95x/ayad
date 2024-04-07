@@ -26,6 +26,16 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseMessaging.instance.setAutoInitEnabled(true);
+
+  await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     if (message.notification != null) {
       BotToast.closeAllLoading();

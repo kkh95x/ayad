@@ -59,8 +59,7 @@ class UsersPage extends ConsumerWidget {
                             await showDialog(
                               context: context,
                               builder: (context) {
-                                return UserNotificationComponent(
-                                    appUsers: data!);
+                                return const UserNotificationComponent();
                               },
                             );
                           }
@@ -91,7 +90,7 @@ class UsersPage extends ConsumerWidget {
                                           context: context,
                                           builder: (context) {
                                             return UserNotificationComponent(
-                                                appUsers: [user]);
+                                                user: user);
                                           },
                                         );
                                       // }

@@ -17,6 +17,10 @@ final groupformProvider = Provider.family<FormGroup, Group?>((ref, group) {
         value: group?.name2, ),
     "isHidn": FormControl<bool>(
         value: group?.isHiden??false,),
+    "priority":FormControl<double>(
+        value: group?.priority,),
+    "isSeivce":FormControl<bool>(
+        value: group?.isSeivce,)
   });
 });
 final colorConverterProvider =

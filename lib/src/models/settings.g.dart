@@ -15,7 +15,8 @@ _$SettingsImpl _$$SettingsImplFromJson(Map<String, dynamic> json) =>
       longtute: (json['longtute'] as num?)?.toDouble(),
       messageForCoustomer: json['messageForCoustomer'] as String,
       messageForVisotr: json['messageForVisotr'] as String,
-      noteForParts: json['noteForParts'] as String?,
+      noteForPartsCustomer: json['noteForPartsCustomer'] as String?,
+      noteFormPartsVistors: json['noteFormPartsVistors'] as String?,
       minVersion: json['minVersion'] as String? ?? "1.0.1",
     );
 
@@ -28,6 +29,7 @@ Map<String, dynamic> _$$SettingsImplToJson(_$SettingsImpl instance) =>
       'longtute': instance.longtute,
       'messageForCoustomer': instance.messageForCoustomer,
       'messageForVisotr': instance.messageForVisotr,
-      'noteForParts': instance.noteForParts,
+      'noteForPartsCustomer': instance.noteForPartsCustomer,
+      'noteFormPartsVistors': instance.noteFormPartsVistors,
       'minVersion': instance.minVersion,
     };

@@ -47,22 +47,25 @@ class SettingsFormComponent extends ConsumerWidget {
                       const Row(
                         children: [Text("الحد الأدنى لإصدار التطبيق")],
                       ),
-                      Consumer(
-                        builder: (context, ref, child) {
-                          final version=ref.watch(getCurrentVersion).value;
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              MainTextFieldWidget(
-                                
-                                  control: "minVersin", placeholder: "1.0.1"),
-                            if(version!=null)
-                            Text("الإصدار الحالي $version",style: TextStyle(fontSize: 10,color: ref.read(appColorLightProvider).greenish),)
-                              
-                            ],
-                          );
-                        }
-                      ),
+                      Consumer(builder: (context, ref, child) {
+                        final version = ref.watch(getCurrentVersion).value;
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            MainTextFieldWidget(
+                                control: "minVersin", placeholder: "1.0.1"),
+                            if (version != null)
+                              Text(
+                                "الإصدار الحالي $version",
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    color: ref
+                                        .read(appColorLightProvider)
+                                        .greenish),
+                              )
+                          ],
+                        );
+                      }),
                       SizedBox(
                         height: 10.h,
                       ),
@@ -104,12 +107,24 @@ class SettingsFormComponent extends ConsumerWidget {
                       const Row(
                         children: [
                           Text(
-                            "ملاحظات التوصية على القطع",
+                            " ملاحظات التوصية على القطع للزبائن",
                           )
                         ],
                       ),
                       MainTextFieldWidget(
-                        control: "noteForParts",
+                        control: "noteForPartsCustomer",
+                        multiLine: true,
+                        placeholder: "",
+                      ),
+                      const Row(
+                        children: [
+                          Text(
+                            " ملاحظات التوصية على القطع للزوار",
+                          )
+                        ],
+                      ),
+                      MainTextFieldWidget(
+                        control: "noteFormPartsVistors",
                         multiLine: true,
                         placeholder: "",
                       ),
@@ -125,14 +140,12 @@ class SettingsFormComponent extends ConsumerWidget {
                           Expanded(
                             child: MainTextFieldWidget(
                               control: "longtute",
-                               
                               placeholder: "طول",
                             ),
                           ),
                           Expanded(
                             child: MainTextFieldWidget(
                               control: "landtute",
-                            
                               placeholder: "عرض",
                             ),
                           ),
@@ -145,24 +158,36 @@ class SettingsFormComponent extends ConsumerWidget {
                         type: ButtonTypes.Alternative,
                         title: "تحديث",
                         radius: 8,
-                        onPressed: ()async {
-
+                        onPressed: () async {
                           BotToast.showLoading();
-                          final stting=Settings(
-                            apkUrl: formGroup.control("apkUrl").value,
-                             whatsAppPhone:( formGroup.control("whatsAppPhone").value as PhoneNumber?)?.international??"",
-                              messageForCoustomer: formGroup.control("messageForCoustomer").value,
-                               messageForVisotr: formGroup.control("messageForVisotr").value,
-                               landtute:formGroup.control("landtute").value ,
-                               longtute:formGroup.control("longtute").value ,
-                               minVersion:formGroup.control("minVersin").value ,
-                               noteForParts:formGroup.control("noteForParts").value 
-                               );
-                          await ref.read(supabaseSettingsRepositoryProvider).update(stting).then((value){
+                          final stting = Settings(
+                              apkUrl: formGroup.control("apkUrl").value,
+                              whatsAppPhone: (formGroup
+                                          .control("whatsAppPhone")
+                                          .value as PhoneNumber?)
+                                      ?.international ??
+                                  "",
+                              messageForCoustomer: formGroup
+                                  .control("messageForCoustomer")
+                                  .value,
+                              messageForVisotr:
+                                  formGroup.control("messageForVisotr").value,
+                              landtute: formGroup.control("landtute").value,
+                              longtute: formGroup.control("longtute").value,
+                              minVersion: formGroup.control("minVersin").value,
+                              noteForPartsCustomer: formGroup
+                                  .control("noteForPartsCustomer")
+                                  .value,
+                              noteFormPartsVistors: formGroup
+                                  .control("noteFormPartsVistors")
+                                  .value);
+                          await ref
+                              .read(supabaseSettingsRepositoryProvider)
+                              .update(stting)
+                              .then((value) {
                             BotToast.closeAllLoading();
                             context.pop();
                           });
-
                         },
                       ),
                       DynamicButton(

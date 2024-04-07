@@ -30,6 +30,8 @@ mixin _$Group {
   String? get hexColor => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
   String? get name2 => throw _privateConstructorUsedError;
+  double? get priority => throw _privateConstructorUsedError;
+  bool? get isSeivce => throw _privateConstructorUsedError;
   bool get isHiden => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,6 +55,8 @@ abstract class $GroupCopyWith<$Res> {
       String? hexColor,
       String? imageUrl,
       String? name2,
+      double? priority,
+      bool? isSeivce,
       bool isHiden});
 }
 
@@ -79,6 +83,8 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
     Object? hexColor = freezed,
     Object? imageUrl = freezed,
     Object? name2 = freezed,
+    Object? priority = freezed,
+    Object? isSeivce = freezed,
     Object? isHiden = null,
   }) {
     return _then(_value.copyWith(
@@ -122,6 +128,14 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String?,
+      priority: freezed == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as double?,
+      isSeivce: freezed == isSeivce
+          ? _value.isSeivce
+          : isSeivce // ignore: cast_nullable_to_non_nullable
+              as bool?,
       isHiden: null == isHiden
           ? _value.isHiden
           : isHiden // ignore: cast_nullable_to_non_nullable
@@ -148,6 +162,8 @@ abstract class _$$GroupImplCopyWith<$Res> implements $GroupCopyWith<$Res> {
       String? hexColor,
       String? imageUrl,
       String? name2,
+      double? priority,
+      bool? isSeivce,
       bool isHiden});
 }
 
@@ -172,6 +188,8 @@ class __$$GroupImplCopyWithImpl<$Res>
     Object? hexColor = freezed,
     Object? imageUrl = freezed,
     Object? name2 = freezed,
+    Object? priority = freezed,
+    Object? isSeivce = freezed,
     Object? isHiden = null,
   }) {
     return _then(_$GroupImpl(
@@ -215,6 +233,14 @@ class __$$GroupImplCopyWithImpl<$Res>
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String?,
+      priority: freezed == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as double?,
+      isSeivce: freezed == isSeivce
+          ? _value.isSeivce
+          : isSeivce // ignore: cast_nullable_to_non_nullable
+              as bool?,
       isHiden: null == isHiden
           ? _value.isHiden
           : isHiden // ignore: cast_nullable_to_non_nullable
@@ -237,6 +263,8 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
       this.hexColor,
       this.imageUrl,
       this.name2,
+      this.priority,
+      this.isSeivce,
       required this.isHiden});
 
   factory _$GroupImpl.fromJson(Map<String, dynamic> json) =>
@@ -264,11 +292,15 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
   @override
   final String? name2;
   @override
+  final double? priority;
+  @override
+  final bool? isSeivce;
+  @override
   final bool isHiden;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Group(id: $id, name: $name, type: $type, subType: $subType, parentGroupId: $parentGroupId, createdAt: $createdAt, isMainGroup: $isMainGroup, hexColor: $hexColor, imageUrl: $imageUrl, name2: $name2, isHiden: $isHiden)';
+    return 'Group(id: $id, name: $name, type: $type, subType: $subType, parentGroupId: $parentGroupId, createdAt: $createdAt, isMainGroup: $isMainGroup, hexColor: $hexColor, imageUrl: $imageUrl, name2: $name2, priority: $priority, isSeivce: $isSeivce, isHiden: $isHiden)';
   }
 
   @override
@@ -286,6 +318,8 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
       ..add(DiagnosticsProperty('hexColor', hexColor))
       ..add(DiagnosticsProperty('imageUrl', imageUrl))
       ..add(DiagnosticsProperty('name2', name2))
+      ..add(DiagnosticsProperty('priority', priority))
+      ..add(DiagnosticsProperty('isSeivce', isSeivce))
       ..add(DiagnosticsProperty('isHiden', isHiden));
   }
 
@@ -309,6 +343,10 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
             (identical(other.name2, name2) || other.name2 == name2) &&
+            (identical(other.priority, priority) ||
+                other.priority == priority) &&
+            (identical(other.isSeivce, isSeivce) ||
+                other.isSeivce == isSeivce) &&
             (identical(other.isHiden, isHiden) || other.isHiden == isHiden));
   }
 
@@ -326,6 +364,8 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
       hexColor,
       imageUrl,
       name2,
+      priority,
+      isSeivce,
       isHiden);
 
   @JsonKey(ignore: true)
@@ -354,6 +394,8 @@ abstract class _Group implements Group {
       final String? hexColor,
       final String? imageUrl,
       final String? name2,
+      final double? priority,
+      final bool? isSeivce,
       required final bool isHiden}) = _$GroupImpl;
 
   factory _Group.fromJson(Map<String, dynamic> json) = _$GroupImpl.fromJson;
@@ -378,6 +420,10 @@ abstract class _Group implements Group {
   String? get imageUrl;
   @override
   String? get name2;
+  @override
+  double? get priority;
+  @override
+  bool? get isSeivce;
   @override
   bool get isHiden;
   @override

@@ -17,15 +17,14 @@ class AppNotificationNotifer {
   AppNotificationNotifer(
       this._repository, this._senderId, this._appNotificationRepository);
 
-
   Future sendToAllUsersNotification(String title, String body,
-      {List<AppUser>? users,String?productId}) async {
+      {UserType userType = UserType.customer,
+      bool isAll = false,
+      String? productId}) async {
     List<String> ids;
-    if (users != null) {
-      ids = users.map((e) => e.id ?? "").toList();
-    } else {
-      ids = await _repository.getAllIds();
-    }
+
+    ids = await _repository.getAllIds(isAll: isAll, userType: userType);
+
     final notifications = ids
         .map((e) => AppNotification(
             title: title,
@@ -39,5 +38,14 @@ class AppNotificationNotifer {
     await _appNotificationRepository.createMultipleRows(notifications);
   }
 
-  
+  Future sendToUserNotification(String title, String body, AppUser user) async {
+    final notification = AppNotification(
+        title: title,
+        body: body,
+        userId: user.id ?? "",
+        createAt: DateTime.now(),
+        senderId: _senderId);
+
+    await _appNotificationRepository.createMultipleRows([notification]);
+  }
 }

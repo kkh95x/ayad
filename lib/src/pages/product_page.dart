@@ -157,31 +157,57 @@ class ProductPage extends ConsumerWidget {
                             title: "حذف",
                             onPressed: () async {
                               if (isAdmin) {
-                                BotToast.showLoading();
-                                await ref
-                                    .read(supabaseProductRepositoryProvider)
-                                    .delete(product.id ?? "");
-                                BotToast.closeAllLoading();
-                                if (context.mounted) {
-                                  context.pop(true);
-                                }
+                                return await showDialog(
+                                  context: context,
+                                  builder: (context2) {
+                                    return AlertDialog(
+                                      title: const Text("تحذير"),
+                                      content: const Text(
+                                          "أنت على وشك حذف المنتج نهائياََ , هل تريد المتابعة؟"),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () async {
+                                              BotToast.showLoading();
+                                              await ref
+                                                  .read(
+                                                      supabaseProductRepositoryProvider)
+                                                  .delete(product.id ?? "");
+                                              BotToast.closeAllLoading();
+                                              if(context2.mounted){
+                                                context2.pop();
+                                              }
+                                              if (context.mounted) {
+                                                context.pop(true);
+                                              }
+                                            },
+                                            child: const Text("نعم")),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop(false);
+                                            },
+                                            child: const Text("لا"))
+                                      ],
+                                    );
+                                  },
+                                );
                               }
                             },
                           ),
                         SizedBox(
                           height: 10.h,
                         ),
-                        if (isAdmin && product.groupType == GroupType.customer)
+                        if (isAdmin )
                           DynamicButton(
                             type: ButtonTypes.Alternative,
-                            title: "إرسال إشعار منتج لكافة الزبائن",
+                            title:
+                                "إرسال إشعار منتج لكافة ${product.groupType == GroupType.vistor ? "الزوار" : "الزبائن"}",
                             onPressed: () async {
                               if (isAdmin) {
                                 await showDialog(
                                   context: context,
                                   builder: (context) {
                                     return UserNotificationComponent(
-                                      productId: product.id,
+                                      productId: product,
                                     );
                                   },
                                 );

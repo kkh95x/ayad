@@ -17,7 +17,8 @@ class Settings with _$Settings {
      double? longtute,
      required String messageForCoustomer,
      required String messageForVisotr,
-    String? noteForParts,
+    String? noteForPartsCustomer,
+    String? noteFormPartsVistors,
     @Default("1.0.1") String minVersion,
    
     

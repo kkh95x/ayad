@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -25,8 +26,9 @@ class SlidesFormComponent extends ConsumerWidget {
     final formGroup = ref.read(slidesFormProvider(slide));
 
     final appColor = ref.read(appColorLightProvider);
-     final isAdmin=ref.watch(authNotifierProvider).value?.currentUser?.type==UserType.admin;
-    if(!isAdmin){
+    final isAdmin = ref.watch(authNotifierProvider).value?.currentUser?.type ==
+        UserType.admin;
+    if (!isAdmin) {
       return const SizedBox();
     }
     return AlertDialog(
@@ -187,16 +189,20 @@ class SlidesFormComponent extends ConsumerWidget {
             children: [
               Container(
                 padding: EdgeInsets.all(10.r),
-                height: 200.r,
-                width: double.infinity,
+                //  constraints: const BoxConstraints(maxHeight: 500),
+                height: 150,
+                width: MediaQuery.of(context).size.width * .9,
                 decoration: BoxDecoration(
                     color: appColor.greyish.shade200,
                     borderRadius: BorderRadius.circular(4.r)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4.r),
-                  child: CachedNetworkImage(
-                    imageUrl: imageUrl,
-                    fit: BoxFit.cover,
+                child: AspectRatio(
+                  aspectRatio: (3 / 2),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(4.r),
+                    child: CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                 ),
               ),
@@ -209,16 +215,19 @@ class SlidesFormComponent extends ConsumerWidget {
             children: [
               Container(
                 padding: EdgeInsets.all(10.r),
-                height: 200.r,
-                width: double.infinity,
+                height: 150,
+                width: MediaQuery.of(context).size.width * .9,
                 decoration: BoxDecoration(
                     color: appColor.greyish.shade200,
                     borderRadius: BorderRadius.circular(4.r)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4.r),
-                  child: Image.file(
-                    File(imageUrl),
-                    fit: BoxFit.cover,
+                child: AspectRatio(
+                  aspectRatio: (3 / 2),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(4.r),
+                    child: Image.file(
+                      File(imageUrl),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -232,8 +241,8 @@ class SlidesFormComponent extends ConsumerWidget {
 
   Widget _buildReplaceImage(FormGroup formGroup) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        // const ImageCropperButtonWidget(controle: "imageUrl"),
         TextButton(
             onPressed: () async {
               final ImagePicker picker = ImagePicker();
@@ -241,15 +250,34 @@ class SlidesFormComponent extends ConsumerWidget {
               final XFile? image =
                   await picker.pickImage(source: ImageSource.gallery);
               if (image != null) {
-                formGroup.control("imageUrl").value = image.path;
+                CroppedFile? croppedFile = await ImageCropper().cropImage(
+                  sourcePath: image.path,
+                  aspectRatioPresets: [
+                    CropAspectRatioPreset.square,
+                    CropAspectRatioPreset.ratio3x2,
+                    CropAspectRatioPreset.original,
+                    CropAspectRatioPreset.ratio4x3,
+                    CropAspectRatioPreset.ratio16x9
+                  ],
+                  uiSettings: [
+                    AndroidUiSettings(
+                        toolbarTitle: 'Cropper',
+                        toolbarColor: Colors.red,
+                        toolbarWidgetColor: Colors.white,
+                        initAspectRatio: CropAspectRatioPreset.original,
+                        lockAspectRatio: false),
+                    IOSUiSettings(
+                      title: 'Cropper',
+                    ),
+                  ],
+                );
+                if (croppedFile != null) {
+                  final imageUrlCropper = croppedFile.path;
+                  formGroup.control("imageUrl").value = imageUrlCropper;
+                }
               }
             },
             child: const Text("استبدال صورة")),
-        TextButton(
-            onPressed: () async {
-              formGroup.control("imageUrl").value = null;
-            },
-            child: const Text("إزالة صورة")),
       ],
     );
   }
@@ -261,25 +289,57 @@ class SlidesFormComponent extends ConsumerWidget {
     return urlRegExp.hasMatch(string);
   }
 
-  Container _buildPickImageWidget(AppColor appColor, FormGroup formGroup) {
-    return Container(
-      padding: EdgeInsets.all(10.r),
-      height: 200.r,
-      width: double.infinity,
-      decoration: BoxDecoration(
-          color: appColor.greyish.shade200,
-          borderRadius: BorderRadius.circular(4.r)),
-      child: TextButton(
-          onPressed: () async {
-            final ImagePicker picker = ImagePicker();
-            // Pick an image.
-            final XFile? image =
-                await picker.pickImage(source: ImageSource.gallery);
-            if (image != null) {
-              formGroup.control("imageUrl").value = image.path;
-            }
-          },
-          child: const Text("إختيار صورة")),
-    );
+  Widget _buildPickImageWidget(AppColor appColor, FormGroup formGroup) {
+    return Builder(builder: (context) {
+      return Container(
+        padding: EdgeInsets.all(10.r),
+        height: 150,
+        width: MediaQuery.of(context).size.width * .9,
+        decoration: BoxDecoration(
+            color: appColor.greyish.shade200,
+            borderRadius: BorderRadius.circular(4.r)),
+        child: TextButton(
+            onPressed: () async {
+              final ImagePicker picker = ImagePicker();
+              // Pick an image.
+              final XFile? image =
+                  await picker.pickImage(source: ImageSource.gallery);
+              if (image != null) {
+                final ImagePicker picker = ImagePicker();
+                // Pick an image.
+                final XFile? image =
+                    await picker.pickImage(source: ImageSource.gallery);
+                if (image != null) {
+                  CroppedFile? croppedFile = await ImageCropper().cropImage(
+                    sourcePath: image.path,
+                    aspectRatioPresets: [
+                      CropAspectRatioPreset.square,
+                      CropAspectRatioPreset.ratio3x2,
+                      CropAspectRatioPreset.original,
+                      CropAspectRatioPreset.ratio4x3,
+                      CropAspectRatioPreset.ratio16x9
+                    ],
+                    uiSettings: [
+                      AndroidUiSettings(
+                          toolbarTitle: 'Cropper',
+                          toolbarColor: Colors.red,
+                          toolbarWidgetColor: Colors.white,
+                          initAspectRatio: CropAspectRatioPreset.original,
+                          lockAspectRatio: false),
+                      IOSUiSettings(
+                        title: 'Cropper',
+                      ),
+                    ],
+                  );
+                  if (croppedFile != null) {
+                    final imageUrlCropper = croppedFile.path;
+                    formGroup.control("imageUrl").value = imageUrlCropper;
+                  }
+                }
+              }
+            },
+            child: const Text("إختيار صورة")),
+      );
+    });
   }
 }

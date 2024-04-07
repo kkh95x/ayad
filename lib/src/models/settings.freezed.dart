@@ -27,7 +27,8 @@ mixin _$Settings {
   double? get longtute => throw _privateConstructorUsedError;
   String get messageForCoustomer => throw _privateConstructorUsedError;
   String get messageForVisotr => throw _privateConstructorUsedError;
-  String? get noteForParts => throw _privateConstructorUsedError;
+  String? get noteForPartsCustomer => throw _privateConstructorUsedError;
+  String? get noteFormPartsVistors => throw _privateConstructorUsedError;
   String get minVersion => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,7 +50,8 @@ abstract class $SettingsCopyWith<$Res> {
       double? longtute,
       String messageForCoustomer,
       String messageForVisotr,
-      String? noteForParts,
+      String? noteForPartsCustomer,
+      String? noteFormPartsVistors,
       String minVersion});
 }
 
@@ -73,7 +75,8 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
     Object? longtute = freezed,
     Object? messageForCoustomer = null,
     Object? messageForVisotr = null,
-    Object? noteForParts = freezed,
+    Object? noteForPartsCustomer = freezed,
+    Object? noteFormPartsVistors = freezed,
     Object? minVersion = null,
   }) {
     return _then(_value.copyWith(
@@ -105,9 +108,13 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
           ? _value.messageForVisotr
           : messageForVisotr // ignore: cast_nullable_to_non_nullable
               as String,
-      noteForParts: freezed == noteForParts
-          ? _value.noteForParts
-          : noteForParts // ignore: cast_nullable_to_non_nullable
+      noteForPartsCustomer: freezed == noteForPartsCustomer
+          ? _value.noteForPartsCustomer
+          : noteForPartsCustomer // ignore: cast_nullable_to_non_nullable
+              as String?,
+      noteFormPartsVistors: freezed == noteFormPartsVistors
+          ? _value.noteFormPartsVistors
+          : noteFormPartsVistors // ignore: cast_nullable_to_non_nullable
               as String?,
       minVersion: null == minVersion
           ? _value.minVersion
@@ -133,7 +140,8 @@ abstract class _$$SettingsImplCopyWith<$Res>
       double? longtute,
       String messageForCoustomer,
       String messageForVisotr,
-      String? noteForParts,
+      String? noteForPartsCustomer,
+      String? noteFormPartsVistors,
       String minVersion});
 }
 
@@ -155,7 +163,8 @@ class __$$SettingsImplCopyWithImpl<$Res>
     Object? longtute = freezed,
     Object? messageForCoustomer = null,
     Object? messageForVisotr = null,
-    Object? noteForParts = freezed,
+    Object? noteForPartsCustomer = freezed,
+    Object? noteFormPartsVistors = freezed,
     Object? minVersion = null,
   }) {
     return _then(_$SettingsImpl(
@@ -187,9 +196,13 @@ class __$$SettingsImplCopyWithImpl<$Res>
           ? _value.messageForVisotr
           : messageForVisotr // ignore: cast_nullable_to_non_nullable
               as String,
-      noteForParts: freezed == noteForParts
-          ? _value.noteForParts
-          : noteForParts // ignore: cast_nullable_to_non_nullable
+      noteForPartsCustomer: freezed == noteForPartsCustomer
+          ? _value.noteForPartsCustomer
+          : noteForPartsCustomer // ignore: cast_nullable_to_non_nullable
+              as String?,
+      noteFormPartsVistors: freezed == noteFormPartsVistors
+          ? _value.noteFormPartsVistors
+          : noteFormPartsVistors // ignore: cast_nullable_to_non_nullable
               as String?,
       minVersion: null == minVersion
           ? _value.minVersion
@@ -210,7 +223,8 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
       this.longtute,
       required this.messageForCoustomer,
       required this.messageForVisotr,
-      this.noteForParts,
+      this.noteForPartsCustomer,
+      this.noteFormPartsVistors,
       this.minVersion = "1.0.1"});
 
   factory _$SettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -232,14 +246,16 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
   @override
   final String messageForVisotr;
   @override
-  final String? noteForParts;
+  final String? noteForPartsCustomer;
+  @override
+  final String? noteFormPartsVistors;
   @override
   @JsonKey()
   final String minVersion;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Settings(fixedId: $fixedId, apkUrl: $apkUrl, whatsAppPhone: $whatsAppPhone, landtute: $landtute, longtute: $longtute, messageForCoustomer: $messageForCoustomer, messageForVisotr: $messageForVisotr, noteForParts: $noteForParts, minVersion: $minVersion)';
+    return 'Settings(fixedId: $fixedId, apkUrl: $apkUrl, whatsAppPhone: $whatsAppPhone, landtute: $landtute, longtute: $longtute, messageForCoustomer: $messageForCoustomer, messageForVisotr: $messageForVisotr, noteForPartsCustomer: $noteForPartsCustomer, noteFormPartsVistors: $noteFormPartsVistors, minVersion: $minVersion)';
   }
 
   @override
@@ -254,7 +270,8 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
       ..add(DiagnosticsProperty('longtute', longtute))
       ..add(DiagnosticsProperty('messageForCoustomer', messageForCoustomer))
       ..add(DiagnosticsProperty('messageForVisotr', messageForVisotr))
-      ..add(DiagnosticsProperty('noteForParts', noteForParts))
+      ..add(DiagnosticsProperty('noteForPartsCustomer', noteForPartsCustomer))
+      ..add(DiagnosticsProperty('noteFormPartsVistors', noteFormPartsVistors))
       ..add(DiagnosticsProperty('minVersion', minVersion));
   }
 
@@ -275,8 +292,10 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
                 other.messageForCoustomer == messageForCoustomer) &&
             (identical(other.messageForVisotr, messageForVisotr) ||
                 other.messageForVisotr == messageForVisotr) &&
-            (identical(other.noteForParts, noteForParts) ||
-                other.noteForParts == noteForParts) &&
+            (identical(other.noteForPartsCustomer, noteForPartsCustomer) ||
+                other.noteForPartsCustomer == noteForPartsCustomer) &&
+            (identical(other.noteFormPartsVistors, noteFormPartsVistors) ||
+                other.noteFormPartsVistors == noteFormPartsVistors) &&
             (identical(other.minVersion, minVersion) ||
                 other.minVersion == minVersion));
   }
@@ -292,7 +311,8 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
       longtute,
       messageForCoustomer,
       messageForVisotr,
-      noteForParts,
+      noteForPartsCustomer,
+      noteFormPartsVistors,
       minVersion);
 
   @JsonKey(ignore: true)
@@ -318,7 +338,8 @@ abstract class _Settings implements Settings {
       final double? longtute,
       required final String messageForCoustomer,
       required final String messageForVisotr,
-      final String? noteForParts,
+      final String? noteForPartsCustomer,
+      final String? noteFormPartsVistors,
       final String minVersion}) = _$SettingsImpl;
 
   factory _Settings.fromJson(Map<String, dynamic> json) =
@@ -339,7 +360,9 @@ abstract class _Settings implements Settings {
   @override
   String get messageForVisotr;
   @override
-  String? get noteForParts;
+  String? get noteForPartsCustomer;
+  @override
+  String? get noteFormPartsVistors;
   @override
   String get minVersion;
   @override

@@ -16,18 +16,17 @@ class Product with _$Product {
       required String parentGroupId,
       required DateTime createdAt,
       required GroupType groupType,
-       String? productsSearching1,
-       String? productsSearching2,
-       String? productsSearching3,
-       String? productsSearching4,
+      String? productsSearching1,
+      String? productsSearching2,
+      String? productsSearching3,
+      String? productsSearching4,
       required double price,
       @Default(false) bool isHiden,
       double? count,
       String? imageUrl,
       String? type,
       bool? makfol,
-      
-    
+      double? priority,
       String? description}) = _Product;
 
   factory Product.fromJson(Map<String, Object?> json) =>

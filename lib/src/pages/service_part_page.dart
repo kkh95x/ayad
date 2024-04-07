@@ -2,6 +2,8 @@ import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/providers/get_settings_provider.dart';
 import 'package:ayad/src/widgets/whats_app_button.dart';
 import 'package:ayad/theme.dart';
+import 'package:ayad/users/auth/auth_notifier.dart';
+import 'package:ayad/users/domain/user.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,8 +14,9 @@ class ServicePartPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
+    final userType = ref.watch(authNotifierProvider).value?.currentUser?.type;
     return PageTemplate(
-        title:"التوصية على قطع غير موجودة",
+        title: "التوصية على قطع غير موجودة",
         child: Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -44,19 +47,16 @@ class ServicePartPage extends ConsumerWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      Consumer(
-                        builder: (context, ref, child)  {
-                           final setting=ref.watch(getSettingFuture);
-                          return 
-                          
-                           Text(
-                           setting.value?.noteForParts?? "-",
-                           
-                            
-                            style: TextStyle(color: appColor.greyish.shade400,height: 1.5),
-                          );
-                        }
-                      ),
+                      Consumer(builder: (context, ref, child) {
+                        final setting = ref.watch(getSettingFuture);
+                        return Text(
+                          userType == UserType.anon
+                              ? setting.value?.noteFormPartsVistors ?? "-"
+                              : setting.value?.noteForPartsCustomer ?? "-",
+                          style: TextStyle(
+                              color: appColor.greyish.shade400, height: 1.5),
+                        );
+                      }),
                       const SizedBox(
                         height: 40,
                       ),

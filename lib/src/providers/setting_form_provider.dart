@@ -19,8 +19,10 @@ final settingsformProvider =
         value: setting?.messageForVisotr, validators: [Validators.required]),
     "messageForCoustomer": FormControl<String>(
         value: setting?.messageForCoustomer, validators: [Validators.required]),
-    "noteForParts": FormControl<String>(
-        value: setting?.messageForCoustomer, validators: [Validators.required]),
+    "noteFormPartsVistors": FormControl<String>(
+        value: setting?.noteFormPartsVistors, validators: [Validators.required]),
+    "noteForPartsCustomer": FormControl<String>(
+        value: setting?.noteForPartsCustomer, validators: [Validators.required]),
     "whatsAppPhone": FormControl<PhoneNumber>(
         value:
             setting != null ? PhoneNumber.parse(setting.whatsAppPhone) : null,

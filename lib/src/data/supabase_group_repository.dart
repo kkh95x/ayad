@@ -42,7 +42,7 @@ class SupabaseGroupRepository implements GroupRepository {
      query= query.eq("isHiden", isHiden);
     }
     // .eq("type", groupType.name);
-    final response = await query;
+    final response = await query.order("priority",ascending: false);
     return response.map((e) => Group.fromJson(e)).toList();
     // } else {
     //   final response = await _supabaseClient
@@ -73,7 +73,7 @@ class SupabaseGroupRepository implements GroupRepository {
     if(isHidden!=null){
       query=query.eq("isHiden", isHidden);
     }
-    final res = await query;
+    final res = await query.order("priority",ascending: false);
     return res.map((e) => Group.fromJson(e)).toList();
   }
 }

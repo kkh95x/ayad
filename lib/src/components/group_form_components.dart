@@ -5,6 +5,7 @@ import 'package:ayad/src/providers/get_all_main_group_provider.dart';
 import 'package:ayad/src/providers/get_sub_groub_provider.dart';
 import 'package:ayad/src/providers/group_form_provider.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
+import 'package:ayad/src/widgets/image_cropper_widget.dart';
 import 'package:ayad/src/widgets/main_text_input_widget.dart';
 import 'package:ayad/theme.dart';
 import 'package:ayad/users/auth/auth_notifier.dart';
@@ -14,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reactive_color_picker/reactive_color_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -49,6 +51,9 @@ class GroupFormComponent extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (isMain) _imageWidget(appColor),
+                SizedBox(
+                  height: 10.h,
+                ),
                 const Row(
                   children: [
                     Text("اسم المجموعة*"),
@@ -69,6 +74,19 @@ class GroupFormComponent extends ConsumerWidget {
                   ),
                   MainTextFieldWidget(control: "name2", placeholder: ""),
                 ],
+                SizedBox(
+                  height: 10.h,
+                ),
+                const Row(
+                  children: [
+                    Text("الأولوية - الأعلى اولاََ"),
+                  ],
+                ),
+                MainTextFieldWidget(
+                  control: "priority",
+                  placeholder: "",
+                  type: Type.double,
+                ),
                 // SizedBox(
                 //   height: 10.h,
                 // ),
@@ -151,6 +169,15 @@ class GroupFormComponent extends ConsumerWidget {
                     const Text("إخفاء المجموعة")
                   ],
                 ),
+                if (isMain)
+                  Row(
+                    children: [
+                      ReactiveCheckbox(
+                        formControlName: "isSeivce",
+                      ),
+                      const Text("مجموعة توصية على قطع")
+                    ],
+                  ),
                 SizedBox(
                   height: 20.h,
                 ),
@@ -204,21 +231,48 @@ class GroupFormComponent extends ConsumerWidget {
                   DynamicButton(
                     title: "حذف",
                     onPressed: () async {
-                      if (isMain) {
-                        await ref
-                            .read(getAllGroupProvider(groupType).notifier)
-                            .delete(group!);
-                        if (context.mounted) {
-                          context.pop();
-                        }
-                      } else {
-                        await ref
-                            .read(getSubGroupProvider(parentGroup!).notifier)
-                            .delete(group!);
-                        if (context.mounted) {
-                          context.pop();
-                        }
-                      }
+                      await showDialog(
+                        context: context,
+                        builder: (context2) {
+                          return AlertDialog(
+                            title: const Text("تحذير"),
+                            content: const Text(
+                                "أنت على وشك حذف المجموعة نهائياََ , هل تريد المتابعة؟"),
+                            actions: [
+                              TextButton(
+                                  onPressed: () async {
+                                    if (isMain) {
+                                      await ref
+                                          .read(getAllGroupProvider(groupType)
+                                              .notifier)
+                                          .delete(group!);
+                                      if (context.mounted) {
+                                        context.pop();
+                                      }
+                                    } else {
+                                      await ref
+                                          .read(
+                                              getSubGroupProvider(parentGroup!)
+                                                  .notifier)
+                                          .delete(group!);
+                                      if (context.mounted) {
+                                        context.pop();
+                                      }
+                                    }
+                                    if (context2.mounted) {
+                                      context2.pop();
+                                    }
+                                  },
+                                  child: const Text("نعم")),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop(false);
+                                  },
+                                  child: const Text("لا"))
+                            ],
+                          );
+                        },
+                      );
                     },
                   ),
                 ],
@@ -250,16 +304,19 @@ class GroupFormComponent extends ConsumerWidget {
             children: [
               Container(
                 padding: EdgeInsets.all(10.r),
-                height: 200.r,
+                //  constraints: const BoxConstraints(maxHeight: 500),
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: appColor.greyish.shade200,
                     borderRadius: BorderRadius.circular(4.r)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4.r),
-                  child: CachedNetworkImage(
-                    imageUrl: imageUrl,
-                    fit: BoxFit.cover,
+                child: AspectRatio(
+                  aspectRatio: (3 / 2),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(4.r),
+                    child: CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                 ),
               ),
@@ -272,16 +329,19 @@ class GroupFormComponent extends ConsumerWidget {
             children: [
               Container(
                 padding: EdgeInsets.all(10.r),
-                height: 200.r,
+            
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: appColor.greyish.shade200,
                     borderRadius: BorderRadius.circular(4.r)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4.r),
-                  child: Image.file(
-                    File(imageUrl),
-                    fit: BoxFit.cover,
+                child: AspectRatio(
+                   aspectRatio: (3 / 2),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(4.r),
+                    child: Image.file(
+                      File(imageUrl),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -293,18 +353,48 @@ class GroupFormComponent extends ConsumerWidget {
     );
   }
 
-  TextButton _buildReplaceImage(FormGroup formGroup) {
-    return TextButton(
-        onPressed: () async {
-          final ImagePicker picker = ImagePicker();
-          // Pick an image.
-          final XFile? image =
-              await picker.pickImage(source: ImageSource.gallery);
-          if (image != null) {
-            formGroup.control("imageUrl").value = image.path;
-          }
-        },
-        child: const Text("استبدال صورة"));
+  Widget _buildReplaceImage(FormGroup formGroup) {
+    return Row(
+      children: [
+        // const ImageCropperButtonWidget(controle: "imageUrl"),
+        TextButton(
+            onPressed: () async {
+              final ImagePicker picker = ImagePicker();
+              // Pick an image.
+              final XFile? image =
+                  await picker.pickImage(source: ImageSource.gallery);
+              if (image != null) {
+                CroppedFile? croppedFile = await ImageCropper().cropImage(
+              sourcePath: image.path,
+              aspectRatioPresets: [
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ],
+              uiSettings: [
+                AndroidUiSettings(
+                    toolbarTitle: 'Cropper',
+                    toolbarColor: Colors.red,
+                    toolbarWidgetColor: Colors.white,
+                    initAspectRatio: CropAspectRatioPreset.original,
+                    lockAspectRatio: false),
+                IOSUiSettings(
+                  title: 'Cropper',
+                ),
+                
+              ],
+            );
+            if (croppedFile != null) {
+              final imageUrlCropper = croppedFile.path;
+              formGroup.control("imageUrl").value = imageUrlCropper;
+            }
+              }
+            },
+            child: const Text("استبدال صورة")),
+      ],
+    );
   }
 
   bool isUrl(String string) {
@@ -329,7 +419,38 @@ class GroupFormComponent extends ConsumerWidget {
             final XFile? image =
                 await picker.pickImage(source: ImageSource.gallery);
             if (image != null) {
-              formGroup.control("imageUrl").value = image.path;
+             final ImagePicker picker = ImagePicker();
+              // Pick an image.
+              final XFile? image =
+                  await picker.pickImage(source: ImageSource.gallery);
+              if (image != null) {
+                CroppedFile? croppedFile = await ImageCropper().cropImage(
+              sourcePath: image.path,
+              aspectRatioPresets: [
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ],
+              uiSettings: [
+                AndroidUiSettings(
+                    toolbarTitle: 'Cropper',
+                    toolbarColor: Colors.red,
+                    toolbarWidgetColor: Colors.white,
+                    initAspectRatio: CropAspectRatioPreset.original,
+                    lockAspectRatio: false),
+                IOSUiSettings(
+                  title: 'Cropper',
+                ),
+                
+              ],
+            );
+            if (croppedFile != null) {
+              final imageUrlCropper = croppedFile.path;
+              formGroup.control("imageUrl").value = imageUrlCropper;
+            }
+              }
             }
           },
           child: const Text("إختيار صورة")),

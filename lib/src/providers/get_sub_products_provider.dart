@@ -31,22 +31,22 @@ class ProductsNotifer extends StateNotifier<AsyncValue<List<Product>>> {
   final SharedPrefranceServce sharedPrefranceServce;
   final Group parentGroup;
   final AuthState? authState;
-  bool? get isHidden{
-    if(authState?.currentUser?.type==UserType.admin){
-return null;
-
-    }else{
+  bool? get isHidden {
+    if (authState?.currentUser?.type == UserType.admin) {
+      return null;
+    } else {
       return false;
     }
   }
+
   ProductsNotifer(this._supabaseProductRepository, this._storgeService,
       this.sharedPrefranceServce, this.parentGroup, this.authState)
       : super(const AsyncLoading());
   Future<void> init() async {
     state = const AsyncLoading();
     try {
-      final products =
-          await _supabaseProductRepository.getSubProduct(parentGroup.id ?? "",isHiden: isHidden);
+      final products = await _supabaseProductRepository
+          .getSubProduct(parentGroup.id ?? "", isHiden: isHidden);
       state = AsyncData(products);
       sharedPrefranceServce.saveProduct(products, parentGroup.id ?? "3323232");
     } catch (e, s) {
@@ -79,7 +79,7 @@ return null;
 
     final product = Product(
       productName: formGroup.control("productName").value,
-      productFullName: formGroup.control("productFullName").value??"",
+      productFullName: formGroup.control("productFullName").value ?? "",
       parentGroupId: parentGroup.id ?? 'r3424234',
       createdAt: DateTime.now(),
       imageUrl: imageUrlFromSupa,
@@ -88,12 +88,13 @@ return null;
       description: formGroup.control("description").value,
       isHiden: formGroup.control("isHiden").value ?? false,
       makfol: formGroup.control("makfol").value,
+      priority: formGroup.control("priority").value,
       productsSearching1: formGroup.control("productsSearching1").value,
       productsSearching2: formGroup.control("productsSearching2").value,
       productsSearching3: formGroup.control("productsSearching3").value,
       productsSearching4: formGroup.control("productsSearching4").value,
       type: formGroup.control("type").value,
-      price: formGroup.control("price").value??0.0,
+      price: formGroup.control("price").value ?? 0.0,
     );
 
     await _supabaseProductRepository.create(product);
@@ -129,6 +130,7 @@ return null;
       productsSearching4: formGroup.control("productsSearching4").value,
       type: formGroup.control("type").value,
       price: formGroup.control("price").value,
+      priority: formGroup.control("priority").value,
     );
 
     await _supabaseProductRepository.update(newProduct);

@@ -110,6 +110,8 @@ class MainGroupNotifer extends StateNotifier<AsyncValue<List<Group>>> {
         subType: formGroup.control("subType").value,
         parentGroupId: "",
         isMainGroup: true,
+        priority: formGroup.control("priority").value,
+        isSeivce: formGroup.control("isSeivce").value,
         createdAt: DateTime.now(),
         imageUrl: imageUrlFromSupa,
         isHiden: formGroup.control("isHidn").value ?? false);
@@ -139,6 +141,8 @@ class MainGroupNotifer extends StateNotifier<AsyncValue<List<Group>>> {
         parentGroupId: "",
         isMainGroup: true,
         createdAt: DateTime.now(),
+        isSeivce: formGroup.control("isSeivce").value,
+        priority: formGroup.control("priority").value,
         imageUrl: imageUrlFromSupa,
         isHiden: formGroup.control("isHidn").value ?? false);
 

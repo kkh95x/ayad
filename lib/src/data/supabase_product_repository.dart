@@ -31,7 +31,7 @@ class SupabaseProductRepository implements ProductRepository {
     if (isHiden != null) {
       query = query.eq("isHiden", isHiden);
     }
-    final data = await query;
+    final data = await query.order("priority", ascending: false);
 
     return data.map((e) => Product.fromJson(e)).toList();
   }
@@ -53,23 +53,25 @@ class SupabaseProductRepository implements ProductRepository {
     }
     if (text != null && text.isNotEmpty) {
       query = query.or(
-          "productsSearching1.like.%$text%,productsSearching2.like.%$text%,productsSearching3.like.%$text%,productsSearching4.like.%$text%");
+          "productFullName.like.%$text%,productName.like.%$text%,productsSearching1.like.%$text%,productsSearching2.like.%$text%,productsSearching3.like.%$text%,productsSearching4.like.%$text%");
     }
     final res = await query;
     return res.map((e) => Product.fromJson(e)).toList();
   }
-  
+
   @override
-  Future<Product?> get(String id)async {
-   final res= await _client
+  Future<Product?> get(String id, GroupType groupType) async {
+    final res = await _client
         .from(tableName)
         .select()
         .eq("isHiden", false)
-        .eq("id", id).single();
-  if(res.isEmpty){
-    return null;
-  }else{
-    return Product.fromJson(res);
-  }
+        .eq("groupType", groupType.name)
+        .eq("id", id)
+        .single();
+    if (res.isEmpty) {
+      return null;
+    } else {
+      return Product.fromJson(res);
+    }
   }
 }
