@@ -78,12 +78,15 @@ class WhatsAptButton extends ConsumerWidget {
       padding: EdgeInsets.symmetric(horizontal: 20.h),
       child: InkWell(
         onTap: () async {
-          final link = WhatsAppUnilink(
-            phoneNumber: '+31637031781',
-            text: message,
-          );
-          if (await canLaunchUrl(link.asUri())) {
-            launchUrl(link.asUri());
+          final setting = await ref.watch(getSettingFuture.future);
+          if (setting != null) {
+            final link = WhatsAppUnilink(
+              phoneNumber:isFirstNumber? setting.whatsAppPhone: setting.whatsAppPhone2,
+              text: message,
+            );
+            if (await canLaunchUrl(link.asUri())) {
+              launchUrl(link.asUri());
+            }
           }
         },
         child: Row(

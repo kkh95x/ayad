@@ -35,7 +35,7 @@ class WhatsAppProductButton extends ConsumerWidget {
                   ? setting.whatsAppPhone
                   : setting.whatsAppPhone2,
               text:
-                  "مرحبا\nأرغب بشراء المنتج *${product.productFullName}*\n * \n ${product.description ?? ""}",
+                  "مرحبا\nأرغب بشراء المنتج *${product.productFullName}*\n*التفاصيل:*\n${product.description ?? ""}",
             );
             if (await canLaunchUrl(link.asUri())) {
               launchUrl(link.asUri());
