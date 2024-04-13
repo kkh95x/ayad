@@ -5,7 +5,6 @@ import 'package:ayad/src/providers/get_all_main_group_provider.dart';
 import 'package:ayad/src/providers/get_sub_groub_provider.dart';
 import 'package:ayad/src/providers/group_form_provider.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
-import 'package:ayad/src/widgets/image_cropper_widget.dart';
 import 'package:ayad/src/widgets/main_text_input_widget.dart';
 import 'package:ayad/theme.dart';
 import 'package:ayad/users/auth/auth_notifier.dart';
