@@ -90,7 +90,7 @@ class CoustomerHomeListComponent extends ConsumerWidget {
                             },
                             onTap: () {
                               if (data[index].isSeivce == true) {
-                                context.push(ServicePartPage.routePath);
+                                context.push(ServicePartPage.routePath,extra: false);
                               } else {
                                 context.push(SubGroupPage.routePath,
                                     extra: data[index]);

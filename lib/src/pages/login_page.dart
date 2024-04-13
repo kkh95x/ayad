@@ -13,6 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 final formProvider = Provider((ref) => FormGroup({
       "username": FormControl<String>(
@@ -39,17 +40,24 @@ class LoginPage extends ConsumerWidget {
             SizedBox(
               height: 50.h,
             ),
-            LottieBuilder.asset(
-              Assets.json.login,
-              repeat: true,
-              height: 150.h,
-              fit: BoxFit.cover,
-            ),
+            SizedBox(
+              child: LottieBuilder.asset(
+                Assets.json.login,
+                repeat: true,
+                height: 150.h,
+                fit: BoxFit.cover,
+              ),
+            )
+                .animate()
+                .fade(begin: 0, end: 1, duration: 1.seconds)
+                .slideY(begin: -0.1, end: 0, duration: 1.seconds),
             MainTextFieldWidget(
               suffixIcon: const Icon(Icons.person),
               placeholder: "اسم المستخدم",
               control: "username",
-            ),
+            ).animate()
+                .fade(begin: 0, end: 1, duration: 1.seconds,delay: 400.milliseconds)
+                .slideY(begin: -0.1, end: 0, duration: 1.seconds,delay: 400.milliseconds),
             SizedBox(
               height: 10.h,
             ),
@@ -57,7 +65,9 @@ class LoginPage extends ConsumerWidget {
               suffixIcon: const Icon(Icons.password),
               placeholder: "كلمة المرور",
               control: "password",
-            ),
+            ).animate()
+                .fade(begin: 0, end: 1, duration: 1.seconds,delay: 800.milliseconds)
+                .slideY(begin: -0.1, end: 0, duration: 1.seconds,delay: 800.milliseconds),
             SizedBox(
               height: 20.h,
             ),
@@ -76,7 +86,9 @@ class LoginPage extends ConsumerWidget {
                   }
                 },
               );
-            }),
+            }).animate()
+                .fade(begin: 0, end: 1, duration: 1.seconds,delay: 900.milliseconds)
+                .slideY(begin: -0.1, end: 0, duration: 1.seconds,delay: 900.milliseconds),
             SizedBox(
               height: 10.h,
             ),
@@ -87,11 +99,16 @@ class LoginPage extends ConsumerWidget {
                 fontSize: 12,
                 color: ref.read(appColorLightProvider).greyish.shade400,
               ),
-            ),
+            ).animate()
+                .fade(begin: 0, end: 1, duration: 1.seconds,delay: 1.seconds)
+                .slideY(begin: -0.1, end: 0, duration: 1.seconds,delay: 1.seconds),
             TextButton(
-                onPressed: ()async {
+                onPressed: () async {
                   await ref.read(authNotifierProvider.notifier).loginAsVistor();
-                }, child: const Text("تسجيل الدخول كزائر")),
+                },
+                child: const Text("تسجيل الدخول كزائر")).animate()
+                .fade(begin: 0, end: 1, duration: 1.seconds,delay: 1.seconds)
+                .slideY(begin: -0.1, end: 0, duration: 1.seconds,delay: 1.seconds),
             SizedBox(
               width: 335,
               child: Column(
@@ -113,16 +130,24 @@ class LoginPage extends ConsumerWidget {
                     children: [
                       WhatsAptButton(
                         isCircle: true,
-                        color: ref.read(appColorLightProvider).greenish.shade100,
+                        isFirstNumber: false,
+                        color:
+                            ref.read(appColorLightProvider).greenish.shade100,
                         message: "مرحبا هل يمكنني الأشتراك في البرنامج",
                       ),
-                      const SizedBox(width: 10,),
-                      const MapButton(isCircle: true,)
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      const MapButton(
+                        isCircle: true,
+                      )
                     ],
                   )
                 ],
               ),
-            )
+            ).animate()
+                .fade(begin: 0, end: 1, duration: 1.seconds,delay: 1200.milliseconds)
+                .slideY(begin: -0.1, end: 0, duration: 1.seconds,delay: 1200.milliseconds)
           ],
         ),
       ),

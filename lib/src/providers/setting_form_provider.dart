@@ -5,24 +5,18 @@ import 'package:reactive_phone_form_field/reactive_phone_form_field.dart';
 
 final settingsformProvider =
     Provider.family<FormGroup, Settings?>((ref, setting) {
-//   fixedId
-// apkUrl
-// whatsAppPhone
-// landtute
-// longtute
-// messageForCoustomer
-// messageForVisotr
-// noteForParts
-// minVersion
+
   return FormGroup({
     "messageForVisotr": FormControl<String>(
         value: setting?.messageForVisotr, validators: [Validators.required]),
     "messageForCoustomer": FormControl<String>(
         value: setting?.messageForCoustomer, validators: [Validators.required]),
     "noteFormPartsVistors": FormControl<String>(
-        value: setting?.noteFormPartsVistors, validators: [Validators.required]),
+        value: setting?.noteFormPartsVistors,
+        validators: [Validators.required]),
     "noteForPartsCustomer": FormControl<String>(
-        value: setting?.noteForPartsCustomer, validators: [Validators.required]),
+        value: setting?.noteForPartsCustomer,
+        validators: [Validators.required]),
     "whatsAppPhone": FormControl<PhoneNumber>(
         value:
             setting != null ? PhoneNumber.parse(setting.whatsAppPhone) : null,
@@ -35,5 +29,9 @@ final settingsformProvider =
         value: setting?.landtute, validators: [Validators.required]),
     "longtute": FormControl<double>(
         value: setting?.longtute, validators: [Validators.required]),
+    "whatsAppPhone2": FormControl<PhoneNumber>(
+        value:
+            setting != null ? PhoneNumber.parse(setting.whatsAppPhone2) : null,
+        validators: [Validators.required]),
   });
 });

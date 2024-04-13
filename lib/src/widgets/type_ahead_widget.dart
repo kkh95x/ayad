@@ -1,3 +1,4 @@
+import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/models/product.dart';
 import 'package:ayad/src/pages/product_page.dart';
 import 'package:ayad/src/providers/search_provider.dart';
@@ -10,15 +11,15 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:go_router/go_router.dart';
 
 class TextSearchWidget extends ConsumerWidget {
-  const TextSearchWidget({super.key});
-
+  const TextSearchWidget({super.key, this.parentGroup});
+  final Group? parentGroup;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
       height: 40,
       child: TypeAheadField<Product>(
         suggestionsCallback: (search) =>
-            ref.read(searchProvider(search).future),
+            ref.read(searchProvider((parentGroup,search)).future),
         builder: (context, controller, focusNode) {
           return TextField(
               controller: controller,

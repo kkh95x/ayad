@@ -1,3 +1,4 @@
+import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/models/product.dart';
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/src/providers/get_settings_provider.dart';
@@ -30,7 +31,9 @@ class WhatsAppProductButton extends ConsumerWidget {
           final setting = await ref.watch(getSettingFuture.future);
           if (setting != null) {
             final link = WhatsAppUnilink(
-              phoneNumber: setting.whatsAppPhone,
+              phoneNumber: product.groupType == GroupType.customer
+                  ? setting.whatsAppPhone
+                  : setting.whatsAppPhone2,
               text:
                   "مرحبا\nأرغب بشراء المنتج *${product.productFullName}*\n * \n ${product.description ?? ""}",
             );

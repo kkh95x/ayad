@@ -19,6 +19,7 @@ _$GroupImpl _$$GroupImplFromJson(Map<String, dynamic> json) => _$GroupImpl(
       name2: json['name2'] as String?,
       priority: (json['priority'] as num?)?.toDouble(),
       isSeivce: json['isSeivce'] as bool?,
+      referenceId: json['referenceId'] as String?,
       isHiden: json['isHiden'] as bool,
     );
 
@@ -36,6 +37,7 @@ Map<String, dynamic> _$$GroupImplToJson(_$GroupImpl instance) =>
       'name2': instance.name2,
       'priority': instance.priority,
       'isSeivce': instance.isSeivce,
+      'referenceId': instance.referenceId,
       'isHiden': instance.isHiden,
     };
 

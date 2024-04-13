@@ -19,7 +19,7 @@ class ProductsPage extends ConsumerWidget {
           padding: EdgeInsets.all(10.0.r),
           child: Column(
             children: [
-              const TextSearchWidget(),
+               TextSearchWidget(parentGroup: group),
               SizedBox(height: 50.h,),
               ProductsComponent(parentGroup: group,)
             ],

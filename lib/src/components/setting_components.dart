@@ -35,11 +35,20 @@ class SettingsFormComponent extends ConsumerWidget {
                         height: 10.h,
                       ),
                       const Row(
-                        children: [Text("رقم الواتساب")],
+                        children: [Text("رقم الواتساب للزبائن")],
                       ),
                       MainTextFieldWidget(
                           type: Type.phoneNumber,
                           control: "whatsAppPhone",
+                          placeholder: ""),
+                           SizedBox(
+                        height: 10.h,
+                      ),
+                      const Text("رقم الواتساب للزوار وصفحة تسجيل الدخول"),
+                      
+                      MainTextFieldWidget(
+                          type: Type.phoneNumber,
+                          control: "whatsAppPhone2",
                           placeholder: ""),
                       SizedBox(
                         height: 10.h,
@@ -164,6 +173,11 @@ class SettingsFormComponent extends ConsumerWidget {
                               apkUrl: formGroup.control("apkUrl").value,
                               whatsAppPhone: (formGroup
                                           .control("whatsAppPhone")
+                                          .value as PhoneNumber?)
+                                      ?.international ??
+                                  "",
+                              whatsAppPhone2: (formGroup
+                                          .control("whatsAppPhone2")
                                           .value as PhoneNumber?)
                                       ?.international ??
                                   "",

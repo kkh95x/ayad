@@ -17,7 +17,6 @@ class SlidesComponent extends StatefulWidget {
 }
 
 class _SlidesComponentState extends State<SlidesComponent> {
-  
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -163,7 +162,6 @@ class _SlidesComponentState extends State<SlidesComponent> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(4),
                     child: CustomCarouselSlider(
-                         
                         items: <CarouselItem>[
                           CarouselItem(
                             boxDecoration: BoxDecoration(

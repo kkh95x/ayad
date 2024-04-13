@@ -37,6 +37,7 @@ mixin _$Product {
   String? get type => throw _privateConstructorUsedError;
   bool? get makfol => throw _privateConstructorUsedError;
   double? get priority => throw _privateConstructorUsedError;
+  String? get referenceId => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -67,6 +68,7 @@ abstract class $ProductCopyWith<$Res> {
       String? type,
       bool? makfol,
       double? priority,
+      String? referenceId,
       String? description});
 }
 
@@ -100,6 +102,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? type = freezed,
     Object? makfol = freezed,
     Object? priority = freezed,
+    Object? referenceId = freezed,
     Object? description = freezed,
   }) {
     return _then(_value.copyWith(
@@ -171,6 +174,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
               as double?,
+      referenceId: freezed == referenceId
+          ? _value.referenceId
+          : referenceId // ignore: cast_nullable_to_non_nullable
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -204,6 +211,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       String? type,
       bool? makfol,
       double? priority,
+      String? referenceId,
       String? description});
 }
 
@@ -235,6 +243,7 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? type = freezed,
     Object? makfol = freezed,
     Object? priority = freezed,
+    Object? referenceId = freezed,
     Object? description = freezed,
   }) {
     return _then(_$ProductImpl(
@@ -306,6 +315,10 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
               as double?,
+      referenceId: freezed == referenceId
+          ? _value.referenceId
+          : referenceId // ignore: cast_nullable_to_non_nullable
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -335,6 +348,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       this.type,
       this.makfol,
       this.priority,
+      this.referenceId,
       this.description});
 
   factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
@@ -376,11 +390,13 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
   @override
   final double? priority;
   @override
+  final String? referenceId;
+  @override
   final String? description;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Product(id: $id, productName: $productName, productFullName: $productFullName, parentGroupId: $parentGroupId, createdAt: $createdAt, groupType: $groupType, productsSearching1: $productsSearching1, productsSearching2: $productsSearching2, productsSearching3: $productsSearching3, productsSearching4: $productsSearching4, price: $price, isHiden: $isHiden, count: $count, imageUrl: $imageUrl, type: $type, makfol: $makfol, priority: $priority, description: $description)';
+    return 'Product(id: $id, productName: $productName, productFullName: $productFullName, parentGroupId: $parentGroupId, createdAt: $createdAt, groupType: $groupType, productsSearching1: $productsSearching1, productsSearching2: $productsSearching2, productsSearching3: $productsSearching3, productsSearching4: $productsSearching4, price: $price, isHiden: $isHiden, count: $count, imageUrl: $imageUrl, type: $type, makfol: $makfol, priority: $priority, referenceId: $referenceId, description: $description)';
   }
 
   @override
@@ -405,6 +421,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('makfol', makfol))
       ..add(DiagnosticsProperty('priority', priority))
+      ..add(DiagnosticsProperty('referenceId', referenceId))
       ..add(DiagnosticsProperty('description', description));
   }
 
@@ -441,32 +458,36 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
             (identical(other.makfol, makfol) || other.makfol == makfol) &&
             (identical(other.priority, priority) ||
                 other.priority == priority) &&
+            (identical(other.referenceId, referenceId) ||
+                other.referenceId == referenceId) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      productName,
-      productFullName,
-      parentGroupId,
-      createdAt,
-      groupType,
-      productsSearching1,
-      productsSearching2,
-      productsSearching3,
-      productsSearching4,
-      price,
-      isHiden,
-      count,
-      imageUrl,
-      type,
-      makfol,
-      priority,
-      description);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        productName,
+        productFullName,
+        parentGroupId,
+        createdAt,
+        groupType,
+        productsSearching1,
+        productsSearching2,
+        productsSearching3,
+        productsSearching4,
+        price,
+        isHiden,
+        count,
+        imageUrl,
+        type,
+        makfol,
+        priority,
+        referenceId,
+        description
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -501,6 +522,7 @@ abstract class _Product implements Product {
       final String? type,
       final bool? makfol,
       final double? priority,
+      final String? referenceId,
       final String? description}) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
@@ -539,6 +561,8 @@ abstract class _Product implements Product {
   bool? get makfol;
   @override
   double? get priority;
+  @override
+  String? get referenceId;
   @override
   String? get description;
   @override

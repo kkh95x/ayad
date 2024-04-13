@@ -23,6 +23,7 @@ mixin _$Settings {
   String get fixedId => throw _privateConstructorUsedError;
   String get apkUrl => throw _privateConstructorUsedError;
   String get whatsAppPhone => throw _privateConstructorUsedError;
+  String get whatsAppPhone2 => throw _privateConstructorUsedError;
   double? get landtute => throw _privateConstructorUsedError;
   double? get longtute => throw _privateConstructorUsedError;
   String get messageForCoustomer => throw _privateConstructorUsedError;
@@ -46,6 +47,7 @@ abstract class $SettingsCopyWith<$Res> {
       {String fixedId,
       String apkUrl,
       String whatsAppPhone,
+      String whatsAppPhone2,
       double? landtute,
       double? longtute,
       String messageForCoustomer,
@@ -71,6 +73,7 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
     Object? fixedId = null,
     Object? apkUrl = null,
     Object? whatsAppPhone = null,
+    Object? whatsAppPhone2 = null,
     Object? landtute = freezed,
     Object? longtute = freezed,
     Object? messageForCoustomer = null,
@@ -91,6 +94,10 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
       whatsAppPhone: null == whatsAppPhone
           ? _value.whatsAppPhone
           : whatsAppPhone // ignore: cast_nullable_to_non_nullable
+              as String,
+      whatsAppPhone2: null == whatsAppPhone2
+          ? _value.whatsAppPhone2
+          : whatsAppPhone2 // ignore: cast_nullable_to_non_nullable
               as String,
       landtute: freezed == landtute
           ? _value.landtute
@@ -136,6 +143,7 @@ abstract class _$$SettingsImplCopyWith<$Res>
       {String fixedId,
       String apkUrl,
       String whatsAppPhone,
+      String whatsAppPhone2,
       double? landtute,
       double? longtute,
       String messageForCoustomer,
@@ -159,6 +167,7 @@ class __$$SettingsImplCopyWithImpl<$Res>
     Object? fixedId = null,
     Object? apkUrl = null,
     Object? whatsAppPhone = null,
+    Object? whatsAppPhone2 = null,
     Object? landtute = freezed,
     Object? longtute = freezed,
     Object? messageForCoustomer = null,
@@ -179,6 +188,10 @@ class __$$SettingsImplCopyWithImpl<$Res>
       whatsAppPhone: null == whatsAppPhone
           ? _value.whatsAppPhone
           : whatsAppPhone // ignore: cast_nullable_to_non_nullable
+              as String,
+      whatsAppPhone2: null == whatsAppPhone2
+          ? _value.whatsAppPhone2
+          : whatsAppPhone2 // ignore: cast_nullable_to_non_nullable
               as String,
       landtute: freezed == landtute
           ? _value.landtute
@@ -219,6 +232,7 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
       {this.fixedId = "fixedId",
       required this.apkUrl,
       required this.whatsAppPhone,
+      required this.whatsAppPhone2,
       this.landtute,
       this.longtute,
       required this.messageForCoustomer,
@@ -238,6 +252,8 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
   @override
   final String whatsAppPhone;
   @override
+  final String whatsAppPhone2;
+  @override
   final double? landtute;
   @override
   final double? longtute;
@@ -255,7 +271,7 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Settings(fixedId: $fixedId, apkUrl: $apkUrl, whatsAppPhone: $whatsAppPhone, landtute: $landtute, longtute: $longtute, messageForCoustomer: $messageForCoustomer, messageForVisotr: $messageForVisotr, noteForPartsCustomer: $noteForPartsCustomer, noteFormPartsVistors: $noteFormPartsVistors, minVersion: $minVersion)';
+    return 'Settings(fixedId: $fixedId, apkUrl: $apkUrl, whatsAppPhone: $whatsAppPhone, whatsAppPhone2: $whatsAppPhone2, landtute: $landtute, longtute: $longtute, messageForCoustomer: $messageForCoustomer, messageForVisotr: $messageForVisotr, noteForPartsCustomer: $noteForPartsCustomer, noteFormPartsVistors: $noteFormPartsVistors, minVersion: $minVersion)';
   }
 
   @override
@@ -266,6 +282,7 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
       ..add(DiagnosticsProperty('fixedId', fixedId))
       ..add(DiagnosticsProperty('apkUrl', apkUrl))
       ..add(DiagnosticsProperty('whatsAppPhone', whatsAppPhone))
+      ..add(DiagnosticsProperty('whatsAppPhone2', whatsAppPhone2))
       ..add(DiagnosticsProperty('landtute', landtute))
       ..add(DiagnosticsProperty('longtute', longtute))
       ..add(DiagnosticsProperty('messageForCoustomer', messageForCoustomer))
@@ -284,6 +301,8 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
             (identical(other.apkUrl, apkUrl) || other.apkUrl == apkUrl) &&
             (identical(other.whatsAppPhone, whatsAppPhone) ||
                 other.whatsAppPhone == whatsAppPhone) &&
+            (identical(other.whatsAppPhone2, whatsAppPhone2) ||
+                other.whatsAppPhone2 == whatsAppPhone2) &&
             (identical(other.landtute, landtute) ||
                 other.landtute == landtute) &&
             (identical(other.longtute, longtute) ||
@@ -307,6 +326,7 @@ class _$SettingsImpl with DiagnosticableTreeMixin implements _Settings {
       fixedId,
       apkUrl,
       whatsAppPhone,
+      whatsAppPhone2,
       landtute,
       longtute,
       messageForCoustomer,
@@ -334,6 +354,7 @@ abstract class _Settings implements Settings {
       {final String fixedId,
       required final String apkUrl,
       required final String whatsAppPhone,
+      required final String whatsAppPhone2,
       final double? landtute,
       final double? longtute,
       required final String messageForCoustomer,
@@ -351,6 +372,8 @@ abstract class _Settings implements Settings {
   String get apkUrl;
   @override
   String get whatsAppPhone;
+  @override
+  String get whatsAppPhone2;
   @override
   double? get landtute;
   @override

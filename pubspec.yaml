@@ -41,6 +41,7 @@ dependencies:
   firebase_messaging: ^14.7.19
   flutter:
     sdk: flutter
+  flutter_animate: ^4.5.0
   flutter_custom_carousel_slider: ^1.2.0
   flutter_gen: ^5.4.0
   flutter_localizations:

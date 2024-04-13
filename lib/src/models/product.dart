@@ -27,6 +27,8 @@ class Product with _$Product {
       String? type,
       bool? makfol,
       double? priority,
+          String? referenceId,
+
       String? description}) = _Product;
 
   factory Product.fromJson(Map<String, Object?> json) =>

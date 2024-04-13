@@ -78,6 +78,7 @@ class ProductsNotifer extends StateNotifier<AsyncValue<List<Product>>> {
     }
 
     final product = Product(
+      referenceId: "${parentGroup.referenceId ?? ""}${parentGroup.id ?? ""}",
       productName: formGroup.control("productName").value,
       productFullName: formGroup.control("productFullName").value ?? "",
       parentGroupId: parentGroup.id ?? 'r3424234',

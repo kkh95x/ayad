@@ -25,6 +25,7 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String?,
       makfol: json['makfol'] as bool?,
       priority: (json['priority'] as num?)?.toDouble(),
+      referenceId: json['referenceId'] as String?,
       description: json['description'] as String?,
     );
 
@@ -47,6 +48,7 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'type': instance.type,
       'makfol': instance.makfol,
       'priority': instance.priority,
+      'referenceId': instance.referenceId,
       'description': instance.description,
     };
 

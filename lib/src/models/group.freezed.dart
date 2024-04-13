@@ -32,6 +32,7 @@ mixin _$Group {
   String? get name2 => throw _privateConstructorUsedError;
   double? get priority => throw _privateConstructorUsedError;
   bool? get isSeivce => throw _privateConstructorUsedError;
+  String? get referenceId => throw _privateConstructorUsedError;
   bool get isHiden => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -57,6 +58,7 @@ abstract class $GroupCopyWith<$Res> {
       String? name2,
       double? priority,
       bool? isSeivce,
+      String? referenceId,
       bool isHiden});
 }
 
@@ -85,6 +87,7 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
     Object? name2 = freezed,
     Object? priority = freezed,
     Object? isSeivce = freezed,
+    Object? referenceId = freezed,
     Object? isHiden = null,
   }) {
     return _then(_value.copyWith(
@@ -136,6 +139,10 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
           ? _value.isSeivce
           : isSeivce // ignore: cast_nullable_to_non_nullable
               as bool?,
+      referenceId: freezed == referenceId
+          ? _value.referenceId
+          : referenceId // ignore: cast_nullable_to_non_nullable
+              as String?,
       isHiden: null == isHiden
           ? _value.isHiden
           : isHiden // ignore: cast_nullable_to_non_nullable
@@ -164,6 +171,7 @@ abstract class _$$GroupImplCopyWith<$Res> implements $GroupCopyWith<$Res> {
       String? name2,
       double? priority,
       bool? isSeivce,
+      String? referenceId,
       bool isHiden});
 }
 
@@ -190,6 +198,7 @@ class __$$GroupImplCopyWithImpl<$Res>
     Object? name2 = freezed,
     Object? priority = freezed,
     Object? isSeivce = freezed,
+    Object? referenceId = freezed,
     Object? isHiden = null,
   }) {
     return _then(_$GroupImpl(
@@ -241,6 +250,10 @@ class __$$GroupImplCopyWithImpl<$Res>
           ? _value.isSeivce
           : isSeivce // ignore: cast_nullable_to_non_nullable
               as bool?,
+      referenceId: freezed == referenceId
+          ? _value.referenceId
+          : referenceId // ignore: cast_nullable_to_non_nullable
+              as String?,
       isHiden: null == isHiden
           ? _value.isHiden
           : isHiden // ignore: cast_nullable_to_non_nullable
@@ -265,6 +278,7 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
       this.name2,
       this.priority,
       this.isSeivce,
+      this.referenceId,
       required this.isHiden});
 
   factory _$GroupImpl.fromJson(Map<String, dynamic> json) =>
@@ -296,11 +310,13 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
   @override
   final bool? isSeivce;
   @override
+  final String? referenceId;
+  @override
   final bool isHiden;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Group(id: $id, name: $name, type: $type, subType: $subType, parentGroupId: $parentGroupId, createdAt: $createdAt, isMainGroup: $isMainGroup, hexColor: $hexColor, imageUrl: $imageUrl, name2: $name2, priority: $priority, isSeivce: $isSeivce, isHiden: $isHiden)';
+    return 'Group(id: $id, name: $name, type: $type, subType: $subType, parentGroupId: $parentGroupId, createdAt: $createdAt, isMainGroup: $isMainGroup, hexColor: $hexColor, imageUrl: $imageUrl, name2: $name2, priority: $priority, isSeivce: $isSeivce, referenceId: $referenceId, isHiden: $isHiden)';
   }
 
   @override
@@ -320,6 +336,7 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
       ..add(DiagnosticsProperty('name2', name2))
       ..add(DiagnosticsProperty('priority', priority))
       ..add(DiagnosticsProperty('isSeivce', isSeivce))
+      ..add(DiagnosticsProperty('referenceId', referenceId))
       ..add(DiagnosticsProperty('isHiden', isHiden));
   }
 
@@ -347,6 +364,8 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
                 other.priority == priority) &&
             (identical(other.isSeivce, isSeivce) ||
                 other.isSeivce == isSeivce) &&
+            (identical(other.referenceId, referenceId) ||
+                other.referenceId == referenceId) &&
             (identical(other.isHiden, isHiden) || other.isHiden == isHiden));
   }
 
@@ -366,6 +385,7 @@ class _$GroupImpl with DiagnosticableTreeMixin implements _Group {
       name2,
       priority,
       isSeivce,
+      referenceId,
       isHiden);
 
   @JsonKey(ignore: true)
@@ -396,6 +416,7 @@ abstract class _Group implements Group {
       final String? name2,
       final double? priority,
       final bool? isSeivce,
+      final String? referenceId,
       required final bool isHiden}) = _$GroupImpl;
 
   factory _Group.fromJson(Map<String, dynamic> json) = _$GroupImpl.fromJson;
@@ -424,6 +445,8 @@ abstract class _Group implements Group {
   double? get priority;
   @override
   bool? get isSeivce;
+  @override
+  String? get referenceId;
   @override
   bool get isHiden;
   @override

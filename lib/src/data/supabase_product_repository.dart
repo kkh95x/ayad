@@ -45,7 +45,8 @@ class SupabaseProductRepository implements ProductRepository {
   }
 
   @override
-  Future<List<Product>> search(String? text, GroupType? type) async {
+  Future<List<Product>> search(
+      String? text, GroupType? type, Group? group) async {
     PostgrestFilterBuilder<List<Map<String, dynamic>>> query =
         _client.from(tableName).select();
     if (type != null) {
@@ -54,6 +55,10 @@ class SupabaseProductRepository implements ProductRepository {
     if (text != null && text.isNotEmpty) {
       query = query.or(
           "productFullName.like.%$text%,productName.like.%$text%,productsSearching1.like.%$text%,productsSearching2.like.%$text%,productsSearching3.like.%$text%,productsSearching4.like.%$text%");
+    }
+    if (group != null) {
+      query =
+          query.like("referenceId", "${group.referenceId ?? ""}${group.id}%");
     }
     final res = await query;
     return res.map((e) => Product.fromJson(e)).toList();

@@ -25,6 +25,7 @@ class Group with _$Group {
     String? name2,
     double? priority,
     bool? isSeivce,
+    String? referenceId,
     required bool isHiden,
   }) = _Group;
 

@@ -15,10 +15,12 @@ class WhatsAptButton extends ConsumerWidget {
       this.title = "إرسال طلب عبر الوتساب",
       this.message = "",
       this.color,
+      required this.isFirstNumber,
       this.isCircle = false});
   final String title;
   final String message;
   final Color? color;
+  final bool isFirstNumber;
   final bool isCircle;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,7 +31,7 @@ class WhatsAptButton extends ConsumerWidget {
           final setting = await ref.watch(getSettingFuture.future);
           if (setting != null) {
             final link = WhatsAppUnilink(
-              phoneNumber: setting.whatsAppPhone,
+              phoneNumber:isFirstNumber? setting.whatsAppPhone: setting.whatsAppPhone2,
               text: message,
             );
             if (await canLaunchUrl(link.asUri())) {

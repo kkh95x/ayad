@@ -118,6 +118,7 @@ final routeProvider = Provider<GoRouter>((ref) {
             state: state,
             child: ServicePartPage(
               key: state.pageKey,
+              isVistor: state.extra as bool? ??false,
             )),
       ),
       GoRoute(
@@ -177,7 +178,7 @@ CustomTransitionPage buildPageWithDefaultTransition<T>({
       child: child,
       // transitionDuration: const Duration(milliseconds:50),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(-0.1, 0.0);
+        const begin = Offset(-0.02, 0.0);
         const end = Offset.zero;
         const curve = Curves.linear;
 

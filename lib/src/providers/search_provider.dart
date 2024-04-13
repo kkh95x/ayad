@@ -5,7 +5,7 @@ import 'package:ayad/users/auth/auth_notifier.dart';
 import 'package:ayad/users/domain/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final searchProvider = FutureProvider.autoDispose.family<List<Product>, String>(
+final searchProvider = FutureProvider.autoDispose.family<List<Product>, (Group?, String)>(
   (ref, arg) async {
     GroupType? groupType;
     final currentUser = ref.watch(authNotifierProvider).value?.currentUser;
@@ -18,6 +18,6 @@ final searchProvider = FutureProvider.autoDispose.family<List<Product>, String>(
     }
     return await ref
         .read(supabaseProductRepositoryProvider)
-        .search(arg, groupType);
+        .search(arg.$2, groupType,arg.$1);
   },
 );

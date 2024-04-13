@@ -13,6 +13,7 @@ class Settings with _$Settings {
     @Default("fixedId")  String fixedId,
     required String apkUrl,
     required String whatsAppPhone,
+    required String whatsAppPhone2,
      double? landtute,
      double? longtute,
      required String messageForCoustomer,

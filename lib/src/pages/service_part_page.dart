@@ -8,9 +8,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ServicePartPage extends ConsumerWidget {
-  const ServicePartPage({super.key});
+  const ServicePartPage({super.key,required this.isVistor});
   static String get routeName => "parts-service";
   static String get routePath => "/$routeName";
+  final bool isVistor;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
@@ -50,7 +51,7 @@ class ServicePartPage extends ConsumerWidget {
                       Consumer(builder: (context, ref, child) {
                         final setting = ref.watch(getSettingFuture);
                         return Text(
-                          userType == UserType.anon
+                          isVistor
                               ? setting.value?.noteFormPartsVistors ?? "-"
                               : setting.value?.noteForPartsCustomer ?? "-",
                           style: TextStyle(
@@ -60,7 +61,9 @@ class ServicePartPage extends ConsumerWidget {
                       const SizedBox(
                         height: 40,
                       ),
-                      const WhatsAptButton()
+                      WhatsAptButton(
+                        isFirstNumber:!isVistor,
+                      )
                     ],
                   ),
                 ),

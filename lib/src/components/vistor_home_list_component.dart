@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../widgets/child_warpper_animation_widget.dart';
+
 class VistorHomeListComponent extends ConsumerWidget {
   const VistorHomeListComponent({super.key});
 
@@ -54,10 +55,10 @@ class VistorHomeListComponent extends ConsumerWidget {
                       itemCount: data.length,
                       itemBuilder: (context, index) {
                         return ChildWrpperWithAnimation(
-                          animationTypes:const {
+                          animationTypes: const {
                             AnimationType.slide,
                             AnimationType.fade,
-                                AnimationType.scall
+                            AnimationType.scall
                           },
                           wantKeepAlive: true,
                           child: GroupButtonWidget(
@@ -74,7 +75,8 @@ class VistorHomeListComponent extends ConsumerWidget {
                                   },
                             onTap: () {
                               if (data[index].isSeivce == true) {
-                                context.push(ServicePartPage.routePath);
+                                context.push(ServicePartPage.routePath,
+                                    extra: true);
                               } else {
                                 context.push(SubGroupPage.routePath,
                                     extra: data[index]);

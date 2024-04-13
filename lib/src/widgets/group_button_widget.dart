@@ -5,6 +5,7 @@ import 'package:ayad/users/auth/auth_notifier.dart';
 import 'package:ayad/users/domain/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:auto_size_text_plus/auto_size_text.dart';
@@ -18,16 +19,16 @@ class GroupButtonWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
-     final isAdmin=ref.watch(authNotifierProvider).value?.currentUser?.type==UserType.admin;
-    
+    final isAdmin = ref.watch(authNotifierProvider).value?.currentUser?.type ==
+        UserType.admin;
+
     return GestureDetector(
       onTap: () {
         onTap?.call();
       },
       onLongPress: () {
-        if(isAdmin){
-
-        onLongPress?.call();
+        if (isAdmin) {
+          onLongPress?.call();
         }
       },
       child: Container(
@@ -37,13 +38,11 @@ class GroupButtonWidget extends ConsumerWidget {
               ? null
               : EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
           decoration: BoxDecoration(
-           
               boxShadow: [
                 BoxShadow(
                     blurRadius: 4,
                     // spreadRadius: 2,
-                    color: 
-                    (group.isMainGroup || group.hexColor == null)
+                    color: (group.isMainGroup || group.hexColor == null)
                         ? appColor.blackish.withOpacity(.4)
                         : getColorFromHex(group.hexColor ?? "#fffff")
                                 ?.withAlpha(200) ??
@@ -66,6 +65,19 @@ class GroupButtonWidget extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(4),
                           child: CachedNetworkImage(
                               width: double.infinity,
+                              placeholder: (context, url) {
+                                return  Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              color: appColor.greyish.shade400,
+
+                                ).animate(
+                                  onComplete: (controller) => controller.repeat(),
+                                ).shimmer(
+                                  color: appColor.greyish,
+                                  duration:1.seconds
+                                );
+                              },
                               height: double.infinity,
                               fit: BoxFit.cover,
                               imageUrl: group.imageUrl!),
@@ -192,10 +204,9 @@ class GroupButtonWidget extends ConsumerWidget {
                                   .bodyMedium
                                   ?.copyWith(shadows: [
                                 BoxShadow(
-                                     color:
-                                              appColor.blackish,
-                                          spreadRadius: 2,
-                                          blurRadius: 1)
+                                    color: appColor.blackish,
+                                    spreadRadius: 2,
+                                    blurRadius: 1)
                               ], color: appColor.whiteish, fontSize: 12),
                             ),
                           ],
