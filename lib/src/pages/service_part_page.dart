@@ -2,8 +2,6 @@ import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/providers/get_settings_provider.dart';
 import 'package:ayad/src/widgets/whats_app_button.dart';
 import 'package:ayad/theme.dart';
-import 'package:ayad/users/auth/auth_notifier.dart';
-import 'package:ayad/users/domain/user.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,7 +13,6 @@ class ServicePartPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
-    final userType = ref.watch(authNotifierProvider).value?.currentUser?.type;
     return PageTemplate(
         title: "التوصية على قطع غير موجودة",
         child: Container(
