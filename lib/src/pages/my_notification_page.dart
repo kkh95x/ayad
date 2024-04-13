@@ -1,6 +1,5 @@
 import 'package:ayad/src/data/supabase_app_notification_repoository.dart';
 import 'package:ayad/src/data/supabase_product_repository.dart';
-import 'package:ayad/src/models/app_notification.dart';
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/pages/product_page.dart';
