@@ -144,7 +144,7 @@ class CustomAppBar extends ConsumerWidget {
                       context.push(ProfilePage.routePath);
                     },
                     child: Container(
-                      width: 52.r,
+                      width: 45.r,
                       height: 45.r,
                       padding: EdgeInsets.all(5.r),
                       decoration: BoxDecoration(
@@ -161,7 +161,7 @@ class CustomAppBar extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(4),
                           border: Border.all(
                               color: colorProvider.redish, width: 1)),
-                      child: Assets.png.logoS.image(
+                      child: Assets.png.logoWhiteS.image(
                         fit: BoxFit.fitHeight,
                         height: 45.r,
                       ),

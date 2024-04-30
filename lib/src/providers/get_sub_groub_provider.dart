@@ -163,6 +163,7 @@ class SubGroupNotifer extends StateNotifier<AsyncValue<List<Group>>> {
         // parentGroupId: parentGroup.id ?? "",
         // isMainGroup: false,
         // createdAt: DateTime.now(),
+        referenceId:"${parentGroup.referenceId??""}${parentGroup.id??""}" ,
         priority: formGroup.control("priority").value,
         hexColor: colorToHex(formGroup.control("color").value),
         isHiden: formGroup.control("isHidn").value ?? false);

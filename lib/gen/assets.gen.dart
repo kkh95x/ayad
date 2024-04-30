@@ -59,12 +59,16 @@ class $AssetsPngGen {
   AssetGenImage get logoWhite =>
       const AssetGenImage('assets/png/logo_white.png');
 
+  /// File path: assets/png/logo_white_s.png
+  AssetGenImage get logoWhiteS =>
+      const AssetGenImage('assets/png/logo_white_s.png');
+
   /// File path: assets/png/person.png
   AssetGenImage get person => const AssetGenImage('assets/png/person.png');
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [background, groupDefault, logo, logoS, logoWhite, person];
+      [background, groupDefault, logo, logoS, logoWhite, logoWhiteS, person];
 }
 
 class $AssetsSvgGen {
