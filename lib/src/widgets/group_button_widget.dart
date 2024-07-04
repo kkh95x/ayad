@@ -64,6 +64,7 @@ class GroupButtonWidget extends ConsumerWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(4),
                           child: CachedNetworkImage(
+                            errorWidget: (context, url, error) => Assets.png.logoWhiteS.image(),
                               width: double.infinity,
                               placeholder: (context, url) {
                                 return  Container(
