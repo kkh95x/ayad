@@ -1,5 +1,6 @@
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/src/components/dialogs.dart';
+import 'package:ayad/src/pages/eyad_download_page.dart';
 import 'package:ayad/src/pages/my_notification_page.dart';
 import 'package:ayad/src/pages/page_template.dart';
 import 'package:ayad/src/pages/slides_page.dart';
@@ -9,6 +10,7 @@ import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/theme.dart';
 import 'package:ayad/users/auth/auth_notifier.dart';
 import 'package:ayad/users/domain/user.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -118,6 +120,20 @@ class ProfilePage extends ConsumerWidget {
           SizedBox(
             height: 10.h,
           ),
+          if(kIsWeb)...[
+          DynamicButton(
+            // icon: Icon(
+            //   Icons.location_on,
+            //   color: appColor.whiteish,
+            // ),
+            title: "مشاركة التطبيق",
+            onPressed: () async {
+              context.push(EyadDownloadPage.routePath);
+            },
+          ),
+          SizedBox(
+            height: 10.h,
+          ),],
           DynamicButton(
             // icon: Icon(
             //   Icons.location_on,

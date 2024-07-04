@@ -25,6 +25,7 @@ class SharedPrefranceServce {
   }
   Future<void> saveUser(AppUser user) async {
     final data = jsonEncode(user.toJson());
+
     await _sharedPreferences.setString(_userKey, data);
     return;
   }

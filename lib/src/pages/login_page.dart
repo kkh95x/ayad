@@ -31,6 +31,7 @@ class LoginPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final form = ref.read(formProvider);
     return PageTemplate(
+      showDownload: true,
         child: ReactiveForm(
       formGroup: form,
       child: SingleChildScrollView(

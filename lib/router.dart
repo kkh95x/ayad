@@ -1,5 +1,6 @@
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/models/product.dart';
+import 'package:ayad/src/pages/eyad_download_page.dart';
 import 'package:ayad/src/pages/group_page.dart';
 import 'package:ayad/src/pages/home_page.dart';
 import 'package:ayad/src/pages/login_page.dart';
@@ -36,6 +37,13 @@ final routeProvider = Provider<GoRouter>((ref) {
         path: SplashPage.routePath,
         name: SplashPage.routeName,
         builder: (context, state) => SplashPage(
+          key: state.pageKey,
+        ),
+      ),
+      GoRoute(
+        path: EyadDownloadPage.routePath,
+        name: EyadDownloadPage.routeName,
+        builder: (context, state) => EyadDownloadPage(
           key: state.pageKey,
         ),
       ),
@@ -118,7 +126,7 @@ final routeProvider = Provider<GoRouter>((ref) {
             state: state,
             child: ServicePartPage(
               key: state.pageKey,
-              isVistor: state.extra as bool? ??false,
+              isVistor: state.extra as bool? ?? false,
             )),
       ),
       GoRoute(
@@ -149,6 +157,10 @@ final routeProvider = Provider<GoRouter>((ref) {
       final isSplash = state.fullPath == SplashPage.routePath;
       final isAuth = authNotifer?.authStatus == AuthStatus.authorized;
       final isInit = authNotifer?.authStatus == AuthStatus.initial;
+      final isDownload = state.fullPath == EyadDownloadPage.routePath;
+      if (isDownload) {
+        return EyadDownloadPage.routePath;
+      }
       if (versionChecker == VersionStutes.rejected) {
         return RejectedVersionPage.routePath;
       }
@@ -178,7 +190,7 @@ CustomTransitionPage buildPageWithDefaultTransition<T>({
       child: child,
       // transitionDuration: const Duration(milliseconds:50),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(-0.02, 0.0);
+        const begin = Offset(-0.002, 0.0);
         const end = Offset.zero;
         const curve = Curves.linear;
 

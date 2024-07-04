@@ -71,6 +71,25 @@ class $AssetsPngGen {
       [background, groupDefault, logo, logoS, logoWhite, logoWhiteS, person];
 }
 
+class $AssetsScreenGen {
+  const $AssetsScreenGen();
+
+  /// File path: assets/screen/1.jpeg
+  AssetGenImage get a1 => const AssetGenImage('assets/screen/1.jpeg');
+
+  /// File path: assets/screen/2.jpeg
+  AssetGenImage get a2 => const AssetGenImage('assets/screen/2.jpeg');
+
+  /// File path: assets/screen/3.jpeg
+  AssetGenImage get a3 => const AssetGenImage('assets/screen/3.jpeg');
+
+  /// File path: assets/screen/4.jpeg
+  AssetGenImage get a4 => const AssetGenImage('assets/screen/4.jpeg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [a1, a2, a3, a4];
+}
+
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
@@ -97,13 +116,16 @@ class Assets {
       $AssetsCaptchaImagesGen();
   static const $AssetsJsonGen json = $AssetsJsonGen();
   static const $AssetsPngGen png = $AssetsPngGen();
+  static const $AssetsScreenGen screen = $AssetsScreenGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName);
+  const AssetGenImage(this._assetName, {this.size = null});
 
   final String _assetName;
+
+  final Size? size;
 
   Image image({
     Key? key,

@@ -1,4 +1,5 @@
 import 'package:auto_size_text_plus/auto_size_text.dart';
+import 'package:ayad/src/pages/eyad_download_page.dart';
 import 'package:ayad/src/pages/home_page.dart';
 import 'package:ayad/gen/assets.gen.dart';
 import 'package:ayad/router.dart';
@@ -16,11 +17,13 @@ class PageTemplate extends ConsumerWidget {
       this.title,
       this.floatingActionButton,
       this.bottomNavigationBar,
+      this.showDownload = false,
       required this.child});
   final String? title;
   final Widget? floatingActionButton;
   final Widget? bottomNavigationBar;
   final Widget child;
+  final bool showDownload;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorProvider = ref.read(appColorLightProvider);
@@ -46,7 +49,8 @@ class PageTemplate extends ConsumerWidget {
             },
             child: Center(
               child: Container(
-                constraints: !kIsWeb?null:const BoxConstraints(maxWidth: 500),
+                constraints:
+                    !kIsWeb ? null : const BoxConstraints(maxWidth: 500),
                 decoration: kIsWeb
                     ? BoxDecoration(color: colorProvider.whiteish, boxShadow: [
                         BoxShadow(
@@ -67,7 +71,6 @@ class PageTemplate extends ConsumerWidget {
                             offset: const Offset(-.1, 0))
                       ])
                     : null,
-                
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
@@ -81,18 +84,37 @@ class PageTemplate extends ConsumerWidget {
                         SizedBox(
                           height: 10.h,
                         ),
-                        Consumer(
-                          builder: (context, ref, child) {
-                            // print("${list}++++++++++${goRoute.canPop()}+++++++++++++++");
-                            // final router = ref.watch(routeProvider);
+                        if (showDownload && kIsWeb)
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                const Text("تحميل"),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                IconButton(
+                                    onPressed: () {
+                                      context.push(EyadDownloadPage.routePath);
+                                    },
+                                    icon: const Icon(Icons.download)),
+                              ],
+                            ),
+                          )
+                        else
+                          Consumer(
+                            builder: (context, ref, child) {
+                              // print("${list}++++++++++${goRoute.canPop()}+++++++++++++++");
+                              // final router = ref.watch(routeProvider);
 
-                            return CustomAppBar(
-                              title: title,
-                              colorProvider: colorProvider,
-                              canPop: (list.length > 2) ? true : false,
-                            );
-                          },
-                        ),
+                              return CustomAppBar(
+                                title: title,
+                                colorProvider: colorProvider,
+                                canPop: (list.length > 2) ? true : false,
+                              );
+                            },
+                          ),
                         SizedBox(
                           height: 10.h,
                         ),
@@ -128,7 +150,7 @@ class CustomAppBar extends ConsumerWidget {
     // ref.watch(selectedTeacherProvider);
     return Container(
         // width: 335,
-          padding: EdgeInsets.symmetric( horizontal:  10.0.w),
+        padding: EdgeInsets.symmetric(horizontal: 10.0.w),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -170,7 +192,7 @@ class CustomAppBar extends ConsumerWidget {
                     Container(
                       alignment: Alignment.center,
                       height: 25.h,
-                      width:kIsWeb?120: 150.w,
+                      width: kIsWeb ? 120 : 150.w,
                       child: AutoSizeText(
                         title!,
                         minFontSize: 8,
