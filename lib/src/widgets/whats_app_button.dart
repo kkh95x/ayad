@@ -34,7 +34,7 @@ class WhatsAptButton extends ConsumerWidget {
               phoneNumber:isFirstNumber? setting.whatsAppPhone: setting.whatsAppPhone2,
               text: message,
             );
-            if (await canLaunchUrl(link.asUri())) {
+            if (true) {
               launchUrl(link.asUri());
             }
           }
@@ -84,7 +84,7 @@ class WhatsAptButton extends ConsumerWidget {
               phoneNumber:isFirstNumber? setting.whatsAppPhone: setting.whatsAppPhone2,
               text: message,
             );
-            if (await canLaunchUrl(link.asUri())) {
+            if (true) {
               launchUrl(link.asUri());
             }
           }

@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:867858324084:android:bab7d63fcea4e68108cf21",
+        "android_client_info": {
+          "package_name": "com.karimkhatib.ayad"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR_fmAu8lupaAB4qKgzcDvhKh0FHhsdMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:867858324084:android:890688a495f7bfef08cf21",
         "android_client_info": {
           "package_name": "com.karimkhatib.ayad"

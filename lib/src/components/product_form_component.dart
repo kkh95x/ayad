@@ -10,6 +10,7 @@ import 'package:ayad/theme.dart';
 import 'package:ayad/users/auth/auth_notifier.dart';
 import 'package:ayad/users/domain/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -211,7 +212,7 @@ class ProductFormComponent extends ConsumerWidget {
         if (imageUrl == null) {
           return _buildPickImageWidget(appColor, formGroup);
         }
-        if (isUrl(imageUrl)) {
+        if (isUrl(imageUrl)||kIsWeb) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -276,6 +277,10 @@ class ProductFormComponent extends ConsumerWidget {
               final XFile? image =
                   await picker.pickImage(source: ImageSource.gallery);
               if (image != null) {
+                  if(kIsWeb){
+                  formGroup.control("imageUrl").value =image.path;
+                  return;
+                }
                 CroppedFile? croppedFile = await ImageCropper().cropImage(
                   sourcePath: image.path,
                   aspectRatioPresets: [
@@ -330,11 +335,9 @@ class ProductFormComponent extends ConsumerWidget {
             final XFile? image =
                 await picker.pickImage(source: ImageSource.gallery);
             if (image != null) {
-              final ImagePicker picker = ImagePicker();
-              // Pick an image.
-              final XFile? image =
-                  await picker.pickImage(source: ImageSource.gallery);
-              if (image != null) {
+              if(kIsWeb){
+                formGroup.control("imageUrl").value = image.path;
+              }
                 CroppedFile? croppedFile = await ImageCropper().cropImage(
                   sourcePath: image.path,
                   aspectRatioPresets: [
@@ -360,7 +363,7 @@ class ProductFormComponent extends ConsumerWidget {
                   final imageUrlCropper = croppedFile.path;
                   formGroup.control("imageUrl").value = imageUrlCropper;
                 }
-              }
+              
             }
           },
           child: const Text("إختيار صورة")),

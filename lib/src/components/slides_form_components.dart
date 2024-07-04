@@ -9,6 +9,7 @@ import 'package:ayad/theme.dart';
 import 'package:ayad/users/auth/auth_notifier.dart';
 import 'package:ayad/users/domain/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,141 +37,144 @@ class SlidesFormComponent extends ConsumerWidget {
       content: ReactiveForm(
           formGroup: formGroup,
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _imageWidget(appColor),
-                SizedBox(
-                  height: 10.h,
-                ),
-                const Row(
-                  children: [Text("العنوان الرئيسي*")],
-                ),
-                MainTextFieldWidget(
-                  control: "title",
-                  placeholder: "",
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                const Row(
-                  children: [Text("العنوان الفرعي الأيمن*")],
-                ),
-                MainTextFieldWidget(control: "right", placeholder: ""),
-                SizedBox(
-                  height: 10.h,
-                ),
-                const Row(
-                  children: [Text("العنوان الفرعي الأيسر")],
-                ),
-                MainTextFieldWidget(control: "left", placeholder: ""),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Row(
-                  children: [
-                    ReactiveCheckbox(
-                      formControlName: "isHiden",
-                    ),
-                    const Text("إخفاء الإعلان")
-                  ],
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                const Row(
-                  children: [Text("نوع الجمهور")],
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                ReactiveFormConsumer(
-                  builder: (context, formGroup, child) {
-                    final values = [
-                      SlidesType.customer,
-                      SlidesType.vistor,
-                      SlidesType.all
-                    ];
-                    final titles = ["الزبائن", "الزوار", "الكل"];
-                    return Wrap(
-                      children: values
-                          .map((e) => Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Radio<int>(
-                                    value: values.indexOf(e),
-                                    groupValue: values.indexOf(
-                                        formGroup.control("slidesType").value ??
-                                            SlidesType.all),
-                                    onChanged: (value) {
-                                      if (value != null) {
-                                        formGroup.control("slidesType").value =
-                                            values[value];
-                                      }
-                                    },
-                                  ),
-                                  Text(titles[values.indexOf(e)])
-                                ],
-                              ))
-                          .toList(),
+            child: Container(
+              constraints:kIsWeb? const BoxConstraints(maxWidth: 500):null,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _imageWidget(appColor),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  const Row(
+                    children: [Text("العنوان الرئيسي*")],
+                  ),
+                  MainTextFieldWidget(
+                    control: "title",
+                    placeholder: "",
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  const Row(
+                    children: [Text("العنوان الفرعي الأيمن*")],
+                  ),
+                  MainTextFieldWidget(control: "right", placeholder: ""),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  const Row(
+                    children: [Text("العنوان الفرعي الأيسر")],
+                  ),
+                  MainTextFieldWidget(control: "left", placeholder: ""),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Row(
+                    children: [
+                      ReactiveCheckbox(
+                        formControlName: "isHiden",
+                      ),
+                      const Text("إخفاء الإعلان")
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  const Row(
+                    children: [Text("نوع الجمهور")],
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  ReactiveFormConsumer(
+                    builder: (context, formGroup, child) {
+                      final values = [
+                        SlidesType.customer,
+                        SlidesType.vistor,
+                        SlidesType.all
+                      ];
+                      final titles = ["الزبائن", "الزوار", "الكل"];
+                      return Wrap(
+                        children: values
+                            .map((e) => Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Radio<int>(
+                                      value: values.indexOf(e),
+                                      groupValue: values.indexOf(
+                                          formGroup.control("slidesType").value ??
+                                              SlidesType.all),
+                                      onChanged: (value) {
+                                        if (value != null) {
+                                          formGroup.control("slidesType").value =
+                                              values[value];
+                                        }
+                                      },
+                                    ),
+                                    Text(titles[values.indexOf(e)])
+                                  ],
+                                ))
+                            .toList(),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  ReactiveFormConsumer(builder: (context, formGroup, child) {
+                    return DynamicButton(
+                      type: ButtonTypes.Alternative,
+                      title: isEdit ? "تحديث" : "حفظ",
+                      radius: 8,
+                      onPressed: () async {
+                        if (isEdit) {
+                          await ref
+                              .read(slideNotiferProvider.notifier)
+                              .update(formGroup, slide!)
+                              .then((value) {
+                            context.pop();
+                            formGroup.reset();
+                          });
+                        } else {
+                          await ref
+                              .read(slideNotiferProvider.notifier)
+                              .addSlide(formGroup)
+                              .then((value) {
+                            formGroup.reset();
+                          });
+                        }
+                      },
                     );
-                  },
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                ReactiveFormConsumer(builder: (context, formGroup, child) {
-                  return DynamicButton(
-                    type: ButtonTypes.Alternative,
-                    title: isEdit ? "تحديث" : "حفظ",
-                    radius: 8,
-                    onPressed: () async {
-                      if (isEdit) {
+                  }),
+                  if (isEdit) ...[
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    DynamicButton(
+                      title: "حذف",
+                      onPressed: () async {
                         await ref
                             .read(slideNotiferProvider.notifier)
-                            .update(formGroup, slide!)
+                            .delete(slide!)
                             .then((value) {
                           context.pop();
                           formGroup.reset();
                         });
-                      } else {
-                        await ref
-                            .read(slideNotiferProvider.notifier)
-                            .addSlide(formGroup)
-                            .then((value) {
-                          formGroup.reset();
-                        });
-                      }
-                    },
-                  );
-                }),
-                if (isEdit) ...[
+                      },
+                    ),
+                  ],
                   SizedBox(
                     height: 10.h,
                   ),
                   DynamicButton(
-                    title: "حذف",
-                    onPressed: () async {
-                      await ref
-                          .read(slideNotiferProvider.notifier)
-                          .delete(slide!)
-                          .then((value) {
-                        context.pop();
-                        formGroup.reset();
-                      });
+                    title: "العودة",
+                    onPressed: () {
+                      context.pop();
                     },
                   ),
                 ],
-                SizedBox(
-                  height: 10.h,
-                ),
-                DynamicButton(
-                  title: "العودة",
-                  onPressed: () {
-                    context.pop();
-                  },
-                ),
-              ],
+              ),
             ),
           )),
     );
@@ -183,7 +187,7 @@ class SlidesFormComponent extends ConsumerWidget {
         if (imageUrl == null) {
           return _buildPickImageWidget(appColor, formGroup);
         }
-        if (isUrl(imageUrl)) {
+        if (isUrl(imageUrl) || kIsWeb) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -250,6 +254,10 @@ class SlidesFormComponent extends ConsumerWidget {
               final XFile? image =
                   await picker.pickImage(source: ImageSource.gallery);
               if (image != null) {
+                if (kIsWeb) {
+                  formGroup.control("imageUrl").value = image.path;
+                  return;
+                }
                 CroppedFile? croppedFile = await ImageCropper().cropImage(
                   sourcePath: image.path,
                   aspectRatioPresets: [
@@ -305,11 +313,11 @@ class SlidesFormComponent extends ConsumerWidget {
               final XFile? image =
                   await picker.pickImage(source: ImageSource.gallery);
               if (image != null) {
-                final ImagePicker picker = ImagePicker();
-                // Pick an image.
-                final XFile? image =
-                    await picker.pickImage(source: ImageSource.gallery);
-                if (image != null) {
+                 if(kIsWeb){
+                  formGroup.control("imageUrl").value = image.path;
+                  return;
+
+                 }
                   CroppedFile? croppedFile = await ImageCropper().cropImage(
                     sourcePath: image.path,
                     aspectRatioPresets: [
@@ -334,7 +342,7 @@ class SlidesFormComponent extends ConsumerWidget {
                   if (croppedFile != null) {
                     final imageUrlCropper = croppedFile.path;
                     formGroup.control("imageUrl").value = imageUrlCropper;
-                  }
+                  
                 }
               }
             },

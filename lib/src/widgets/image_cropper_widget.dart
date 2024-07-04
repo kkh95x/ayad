@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -14,7 +15,10 @@ class ImageCropperButtonWidget extends StatelessWidget {
       }
       return TextButton.icon(
           onPressed: () async {
-            
+            if (kIsWeb) {
+              formGroup.control("imageUrl").value = imageUrl;
+              return;
+            }
             CroppedFile? croppedFile = await ImageCropper().cropImage(
               sourcePath: imageUrl,
               aspectRatioPresets: [

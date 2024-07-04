@@ -2,6 +2,7 @@ import 'package:ayad/router.dart';
 import 'package:ayad/theme.dart';
 import 'package:ayad/users/auth/shared_prefrance_service.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,9 +26,12 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  try{
 
-  await FirebaseMessaging.instance.requestPermission(
+  
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  if(!kIsWeb){
+await FirebaseMessaging.instance.requestPermission(
     alert: true,
     announcement: false,
     badge: true,
@@ -36,6 +40,8 @@ Future<void> main() async {
     provisional: false,
     sound: true,
   );
+  }
+  
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     if (message.notification != null) {
       BotToast.closeAllLoading();
@@ -49,6 +55,7 @@ Future<void> main() async {
           'Message also contained a notification: ${message.notification?.title} ${message.notification?.body}');
     }
   });
+  }catch(e){}
   runApp(const ProviderScope(child: MyApp()));
 }
 

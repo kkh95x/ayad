@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:ayad/src/components/dialogs.dart';
 import 'package:ayad/src/data/supabase_slides_repository.dart';
@@ -11,6 +11,7 @@ import 'package:ayad/users/domain/user.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 final slideNotiferProvider =
@@ -72,7 +73,7 @@ class SlidesNotifer extends StateNotifier<AsyncValue<List<Slide>>> {
     String? imageUrlFromSupa;
     BotToast.showLoading();
     if (imageUrl != null) {
-      imageUrlFromSupa = await _storgeService.saveGroupsFile(File(imageUrl),
+      imageUrlFromSupa = await _storgeService.saveGroupsFile(XFile(imageUrl),
           "main/${DateTime.now().toIso8601String().replaceAll(" ", "")}.png");
     }
     final group = Slide(
@@ -101,7 +102,7 @@ class SlidesNotifer extends StateNotifier<AsyncValue<List<Slide>>> {
     if (isUrl(imageUrl)) {
       imageUrlFromSupa = imageUrl;
     } else {
-      imageUrlFromSupa = await _storgeService.saveGroupsFile(File(imageUrl),
+      imageUrlFromSupa = await _storgeService.saveGroupsFile(XFile(imageUrl),
           "main/${DateTime.now().toIso8601String().replaceAll(" ", "")}.png");
     }
     final newSlide = slide.copyWith(

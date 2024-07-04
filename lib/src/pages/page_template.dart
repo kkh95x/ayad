@@ -46,6 +46,7 @@ class PageTemplate extends ConsumerWidget {
             },
             child: Center(
               child: Container(
+                constraints: !kIsWeb?null:const BoxConstraints(maxWidth: 500),
                 decoration: kIsWeb
                     ? BoxDecoration(color: colorProvider.whiteish, boxShadow: [
                         BoxShadow(
@@ -66,10 +67,7 @@ class PageTemplate extends ConsumerWidget {
                             offset: const Offset(-.1, 0))
                       ])
                     : null,
-                margin: EdgeInsets.symmetric(
-                    horizontal: kIsWeb
-                        ? (MediaQuery.of(context).size.width - 400) / 2
-                        : 0),
+                
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
@@ -172,7 +170,7 @@ class CustomAppBar extends ConsumerWidget {
                     Container(
                       alignment: Alignment.center,
                       height: 25.h,
-                      width:150.w,
+                      width:kIsWeb?120: 150.w,
                       child: AutoSizeText(
                         title!,
                         minFontSize: 8,
@@ -193,7 +191,7 @@ class CustomAppBar extends ConsumerWidget {
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall
-                          ?.copyWith(fontSize: 10.sp)),
+                          ?.copyWith(fontSize: 10)),
                   IconButton(
                     icon: const Icon(Icons.arrow_forward_ios),
                     onPressed: onPressedBack ??

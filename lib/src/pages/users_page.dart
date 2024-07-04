@@ -11,6 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+final usersTextSearchProvider = StateProvider(
+  (ref) => "",
+);
+
 class UsersPage extends ConsumerWidget {
   const UsersPage({super.key});
   static String get routeName => "users";
@@ -25,10 +29,10 @@ class UsersPage extends ConsumerWidget {
         SizedBox(
           height: 20.h,
         ),
-        // _buildSearchWidget(ref, context),
-        // SizedBox(
-        //   height: 30.h,
-        // ),
+        _buildSearchWidget(ref, context),
+        SizedBox(
+          height: 30.h,
+        ),
         DynamicButton(
           type: ButtonTypes.Alternative,
           title: "إضافة زبون جديد",
@@ -44,7 +48,21 @@ class UsersPage extends ConsumerWidget {
         Expanded(child: Consumer(builder: (context, ref, child) {
           return ref.watch(userManagmentProvider).when(
                 data: (data) {
-                  if (data?.isEmpty ?? true) {
+                  final textSearch = ref.watch(usersTextSearchProvider);
+                  List<AppUser>? users;
+                  if (textSearch.isEmpty) {
+                    users = data;
+                  } else {
+                    users = data
+                        ?.where(
+                          (element) =>
+                              element.fullName.startsWith(textSearch) ||
+                              element.username.startsWith(textSearch)||
+                              element.phone.startsWith(textSearch),
+                        )
+                        .toList();
+                  }
+                  if (users?.isEmpty ?? true) {
                     return const Center(
                       child: Text("لايوجد زبائن"),
                     );
@@ -55,7 +73,7 @@ class UsersPage extends ConsumerWidget {
                         type: ButtonTypes.Secondary,
                         title: "إرسال إشعار لجميع المستخدمين",
                         onPressed: () async {
-                          if ((data ?? []).isNotEmpty) {
+                          if ((users ?? []).isNotEmpty) {
                             await showDialog(
                               context: context,
                               builder: (context) {
@@ -67,10 +85,10 @@ class UsersPage extends ConsumerWidget {
                       ),
                       Expanded(
                         child: ListView.builder(
-                          itemCount: data!.length,
+                          itemCount: users!.length,
                           itemBuilder: (context, index) {
-                            final user = data[index];
-                        
+                            final user = users![index];
+
                             return Card(
                               color: appColor.whiteish,
                               surfaceTintColor: appColor.whiteish,
@@ -86,13 +104,13 @@ class UsersPage extends ConsumerWidget {
                                       //       text:
                                       //           "مستخدم لم يقم بتسجيل الدخول بعد");
                                       // } else {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return UserNotificationComponent(
-                                                user: user);
-                                          },
-                                        );
+                                      await showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return UserNotificationComponent(
+                                              user: user);
+                                        },
+                                      );
                                       // }
                                     },
                                     child: const Text("إرسال إشعار")),
@@ -106,7 +124,8 @@ class UsersPage extends ConsumerWidget {
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall
-                                          ?.copyWith(fontWeight: FontWeight.bold),
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.bold),
                                       children: [
                                         TextSpan(
                                             text: " - ${user.username}",
@@ -159,7 +178,9 @@ class UsersPage extends ConsumerWidget {
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       height: 40.h,
       child: TextField(
-        onChanged: (value) {},
+        onChanged: (value) {
+          ref.read(usersTextSearchProvider.notifier).state = value;
+        },
         decoration: InputDecoration(
           fillColor: ref.read(appColorLightProvider).whiteish,
           filled: true,

@@ -5,20 +5,20 @@ import 'package:ayad/src/models/product.dart';
 import 'package:ayad/src/models/settings.dart';
 import 'package:ayad/src/models/slides.dart';
 import 'package:ayad/users/domain/user.dart';
-import 'package:encrypt_shared_preferences/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final sharedPrefranceServiceProvider =
     Provider((ref) => SharedPrefranceServce());
 
 class SharedPrefranceServce {
-  static late EncryptedSharedPreferences _sharedPreferences;
+  static late SharedPreferences _sharedPreferences;
   final _userKey = "fdskhskjdfbhskjf";
   static Future<void> initial() async {
-    String myKey = "arim@Elkhatib111";
+    // String myKey = "arim@Elkhatib111";
 
-    await EncryptedSharedPreferences.initialize(myKey);
-    _sharedPreferences = EncryptedSharedPreferences.getInstance();
+    await SharedPreferences.getInstance();
+    _sharedPreferences =await SharedPreferences.getInstance();
   }
   Future<void> clearAll() async {
    await _sharedPreferences.clear();
@@ -39,7 +39,7 @@ class SharedPrefranceServce {
       return null;
     }
     try {
-      final data = jsonDecode(datalocal) as Map<String, dynamic>;
+      final data = jsonDecode(datalocal.toString()) as Map<String, dynamic>;
       final user = AppUser.fromJson(data);
       return user;
     } catch (e) {
@@ -60,7 +60,7 @@ class SharedPrefranceServce {
     if (data == null) {
       return null;
     }
-    final mapsData = jsonDecode(data) as List<dynamic>;
+    final mapsData = jsonDecode(data.toString()) as List<dynamic>;
     return mapsData
         .map((e) => Group.fromJson(e as Map<String, dynamic>))
         .toList();
@@ -77,7 +77,7 @@ class SharedPrefranceServce {
     if (data == null) {
       return null;
     }
-    final mapsData = jsonDecode(data) as List<dynamic>;
+    final mapsData = jsonDecode(data.toString()) as List<dynamic>;
     return mapsData
         .map((e) => Group.fromJson(e as Map<String, dynamic>))
         .toList();
@@ -94,7 +94,7 @@ class SharedPrefranceServce {
     if (data == null) {
       return null;
     }
-    final mapsData = jsonDecode(data) as List<dynamic>;
+    final mapsData = jsonDecode(data.toString()) as List<dynamic>;
     return mapsData
         .map((e) => Product.fromJson(e as Map<String, dynamic>))
         .toList();
@@ -110,7 +110,7 @@ class SharedPrefranceServce {
     if (data == null) {
       return null;
     }
-    final mapsData = jsonDecode(data) as Map<String, dynamic>;
+    final mapsData = jsonDecode(data.toString()) as Map<String, dynamic>;
     return Settings.fromJson(mapsData);
   }
 
@@ -126,7 +126,7 @@ class SharedPrefranceServce {
     if (data == null) {
       return null;
     }
-     final mapsData = jsonDecode(data) as List<dynamic>;
+     final mapsData = jsonDecode(data.toString()) as List<dynamic>;
     return mapsData
         .map((e) => Slide.fromJson(e as Map<String, dynamic>))
         .toList();

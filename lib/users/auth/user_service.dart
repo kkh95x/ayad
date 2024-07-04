@@ -71,9 +71,10 @@ class UserService {
 
   Future<AppUser?> getUserByUsenamAndPassword(
       String username, String password) async {
-    await _prefranceServce.deleteUserLocaly();
     AppUser? user = await _supabaseUserRepository.loginIn(username, password);
     if (user != null) {
+      await _prefranceServce.deleteUserLocaly();
+
       try {
         final fcmToken = await FirebaseMessaging.instance.getToken();
         if (fcmToken != null) {
@@ -93,7 +94,7 @@ class UserService {
   Future<AppUser> updateUser(String password, AppUser appUser) async {
     final updatesUser = appUser.copyWith(password: password);
     await _supabaseUserRepository.update(updatesUser);
-    await _prefranceServce.deleteUserLocaly();
+    // await _prefranceServce.deleteUserLocaly();
     await _prefranceServce.saveUser(updatesUser);
     return updatesUser;
   }

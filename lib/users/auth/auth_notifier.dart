@@ -34,7 +34,9 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
             .read(userServiceProvider)
             .getUserByUsenamAndPassword(user.username, user.password);
         if (currentUser == null) {
-          return AuthState(authStatus: AuthStatus.unAuthorized);
+          // BotToast.show
+            return AuthState(
+              authStatus: AuthStatus.authorized, currentUser: user);
         } else {
           ref.read(sharedPrefranceServiceProvider).saveUser(currentUser);
           return AuthState(

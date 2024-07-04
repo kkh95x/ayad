@@ -123,7 +123,7 @@ class ProfilePage extends ConsumerWidget {
             //   Icons.location_on,
             //   color: appColor.whiteish,
             // ),
-            title: "عرض موقع المتجر على الخريطة",
+            title: "عرض موقع",
             onPressed: () async {
               final setting = await ref.read(getSettingFuture.future);
               if (setting != null) {

@@ -82,7 +82,7 @@ class MapButton extends ConsumerWidget {
           children: [
             const SizedBox(),
             Text(
-              "عرض موقع المتجر على الخريطة",
+              "عرض موقع",
               style: Theme.of(context)
                   .textTheme
                   .labelLarge

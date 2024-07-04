@@ -33,23 +33,23 @@ class HomePage extends ConsumerWidget {
                 } else if (user?.type == UserType.customer) {
                   text = setting?.messageForCoustomer ?? " ";
                 } else if (user?.type == UserType.admin) {
-                  text="الزوار: ";
+                  text = "الزوار: ";
                   text += setting?.messageForVisotr ?? " ";
                   text += ", الزبائن:";
                   text += setting?.messageForCoustomer ?? " ";
                 }
                 return Container(
-                  height: 30,
-                  decoration: BoxDecoration(
-                      color: ref.read(appColorLightProvider).redish,
-                      borderRadius: BorderRadius.circular(4)),
-                  child: Marquee(
+                    height: 30,
+                    decoration: BoxDecoration(
+                        color: ref.read(appColorLightProvider).redish,
+                        borderRadius: BorderRadius.circular(4)),
+                    child: Marquee(
                       style: TextStyle(
                           fontSize: 16,
                           color: ref.read(appColorLightProvider).whiteish),
                       blankSpace: MediaQuery.of(context).size.width,
-                      text:text,
-                ));
+                      text: text,
+                    ));
               }),
               SizedBox(
                 height: 2.h,
@@ -59,13 +59,11 @@ class HomePage extends ConsumerWidget {
                 height: 2.h,
               ),
               const TextSearchWidget(),
-
-             
               SizedBox(
                 height: 4.h,
               ),
-             const Expanded(child:  HomeListComponent()),
-               ],
+              const Expanded(child: HomeListComponent()),
+            ],
           ),
         ));
   }
