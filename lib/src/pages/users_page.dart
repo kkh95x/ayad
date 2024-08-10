@@ -56,9 +56,9 @@ class UsersPage extends ConsumerWidget {
                     users = data
                         ?.where(
                           (element) =>
-                              element.fullName.startsWith(textSearch) ||
-                              element.username.startsWith(textSearch)||
-                              element.phone.startsWith(textSearch),
+                              element.fullName.contains(textSearch) ||
+                              element.username.contains(textSearch)||
+                              element.phone.contains(textSearch),
                         )
                         .toList();
                   }

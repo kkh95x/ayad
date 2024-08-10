@@ -26,36 +26,34 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  try{
-
-  
-  await FirebaseMessaging.instance.setAutoInitEnabled(true);
-  if(!kIsWeb){
-await FirebaseMessaging.instance.requestPermission(
-    alert: true,
-    announcement: false,
-    badge: true,
-    carPlay: false,
-    criticalAlert: false,
-    provisional: false,
-    sound: true,
-  );
-  }
-  
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    if (message.notification != null) {
-      BotToast.closeAllLoading();
-      BotToast.showSimpleNotification(
-        title: message.notification!.title!,
-        subTitle: message.notification!.body,
-        duration: const Duration(seconds: 10),
-        backgroundColor: Colors.grey.shade200,
+  try {
+    await FirebaseMessaging.instance.setAutoInitEnabled(true);
+    if (!kIsWeb) {
+      await FirebaseMessaging.instance.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true,
       );
-      print(
-          'Message also contained a notification: ${message.notification?.title} ${message.notification?.body}');
     }
-  });
-  }catch(e){}
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      if (message.notification != null) {
+        BotToast.closeAllLoading();
+        BotToast.showSimpleNotification(
+          title: message.notification!.title!,
+          subTitle: message.notification!.body,
+          duration: const Duration(seconds: 10),
+          backgroundColor: Colors.grey.shade200,
+        );
+        print(
+            'Message also contained a notification: ${message.notification?.title} ${message.notification?.body}');
+      }
+    });
+  } catch (e) {}
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -114,8 +112,10 @@ class _MyAppState extends ConsumerState<MyApp> {
               // );
               return child;
             },
+            locale: const Locale('ar', ''),
             supportedLocales: const [
-              Locale('ar', 'AE'),
+              Locale('ar', ''),
+              Locale('en', ''), // English
             ],
             themeMode: ThemeMode.light,
             theme: lightThemeData,

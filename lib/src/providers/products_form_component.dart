@@ -23,6 +23,7 @@ final productformProvider = Provider.family<FormGroup, Product?>((ref, product) 
     "isHiden": FormControl<bool>(
         value: product?.isHiden,),
     "price": FormControl<double>(value: product?.price),
+    "newPrice": FormControl<double>(value: product?.newPrice),
     "count": FormControl<double>(value: product?.count),
     "imageUrl": FormControl<String>(value: product?.imageUrl),
     "type": FormControl<String>(value: product?.type),

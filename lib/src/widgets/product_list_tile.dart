@@ -1,10 +1,12 @@
 import 'package:ayad/src/models/product.dart';
 import 'package:ayad/gen/assets.gen.dart';
+import 'package:ayad/src/providers/currency_provider.dart';
 import 'package:ayad/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart' as init;
 
 class ProductsListTileWidget extends ConsumerWidget {
   const ProductsListTileWidget(
@@ -15,6 +17,7 @@ class ProductsListTileWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appColor = ref.read(appColorLightProvider);
+  
     return GestureDetector(
       onLongPress: () {
         onLongPress?.call();
@@ -37,7 +40,49 @@ class ProductsListTileWidget extends ConsumerWidget {
       ),
     );
   }
-
+ Widget _buildTitltePricesWidget(BuildContext context, AppColor appColor) {
+    return Consumer(
+      builder: (context,ref,cjild){
+        return Container(
+            margin: EdgeInsets.symmetric(vertical: 5.h),
+            child: Row(
+              children: [
+                Text("السعر : ",style:   Theme.of(context).textTheme.labelLarge,),
+                Text(
+                  ref.read(currencyFormatProvider(product.price)),
+                
+                  // "${fixPrice(product.price)}\$",
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: appColor.redish,
+                        decoration: TextDecoration.lineThrough,
+                        fontSize: 14,
+                      ),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  ref.read(currencyFormatProvider(product.newPrice??0)),
+                //  "${ fixPrice(product.newPrice ?? 0.0)}\$",
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: appColor.greenish,
+                        fontSize: 14,
+                      ),
+                ),
+                
+             
+              ],
+            ));
+      }
+    );}
+        
+  String fixPrice(double number) {
+    if (number.toInt() == number) {
+      return "${number.toInt()}";
+    } else {
+      return number.toString();
+    }
+  }
   Container _buildBackgroundWidget(BuildContext context, AppColor appColor) {
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -125,13 +170,24 @@ class ProductsListTileWidget extends ConsumerWidget {
                         ],
                       ),
                       // if(showReportButton && isScrollshep||eductionPlan !=null)
-                      Text(
-                        "السعر:   ${fixPrice(product.price)}\$",
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: appColor.redish),
-                      ),
+                      if(product.newPrice==null||product.newPrice==0.0)
+                      Consumer(
+                        builder: (context, ref, child) 
+                         {
+                          return Text(
+                            ref.read(currencyFormatProvider(product.price)),
+                            // "السعر:   ${fixPrice(product.price)}\$",
+                            textDirection: TextDirection.ltr,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: appColor.redish),
+                          );
+                        }
+                      )
+                      else
+                      _buildTitltePricesWidget(context, appColor)
+                      ,
                       const SizedBox(),
                     ],
                   ),
@@ -155,13 +211,7 @@ class ProductsListTileWidget extends ConsumerWidget {
         ));
   }
 
-  String fixPrice(double number) {
-    if (number.toInt() == number) {
-      return "${number.toInt()}";
-    } else {
-      return number.toString();
-    }
-  }
+  
 
   Container _buildImageWidget(AppColor appColor) {
     return Container(

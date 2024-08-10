@@ -31,6 +31,7 @@ mixin _$Product {
   String? get productsSearching3 => throw _privateConstructorUsedError;
   String? get productsSearching4 => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
+  double? get newPrice => throw _privateConstructorUsedError;
   bool get isHiden => throw _privateConstructorUsedError;
   double? get count => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
@@ -62,6 +63,7 @@ abstract class $ProductCopyWith<$Res> {
       String? productsSearching3,
       String? productsSearching4,
       double price,
+      double? newPrice,
       bool isHiden,
       double? count,
       String? imageUrl,
@@ -96,6 +98,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? productsSearching3 = freezed,
     Object? productsSearching4 = freezed,
     Object? price = null,
+    Object? newPrice = freezed,
     Object? isHiden = null,
     Object? count = freezed,
     Object? imageUrl = freezed,
@@ -150,6 +153,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      newPrice: freezed == newPrice
+          ? _value.newPrice
+          : newPrice // ignore: cast_nullable_to_non_nullable
+              as double?,
       isHiden: null == isHiden
           ? _value.isHiden
           : isHiden // ignore: cast_nullable_to_non_nullable
@@ -205,6 +212,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       String? productsSearching3,
       String? productsSearching4,
       double price,
+      double? newPrice,
       bool isHiden,
       double? count,
       String? imageUrl,
@@ -237,6 +245,7 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? productsSearching3 = freezed,
     Object? productsSearching4 = freezed,
     Object? price = null,
+    Object? newPrice = freezed,
     Object? isHiden = null,
     Object? count = freezed,
     Object? imageUrl = freezed,
@@ -291,6 +300,10 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      newPrice: freezed == newPrice
+          ? _value.newPrice
+          : newPrice // ignore: cast_nullable_to_non_nullable
+              as double?,
       isHiden: null == isHiden
           ? _value.isHiden
           : isHiden // ignore: cast_nullable_to_non_nullable
@@ -342,6 +355,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       this.productsSearching3,
       this.productsSearching4,
       required this.price,
+      this.newPrice,
       this.isHiden = false,
       this.count,
       this.imageUrl,
@@ -377,6 +391,8 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
   @override
   final double price;
   @override
+  final double? newPrice;
+  @override
   @JsonKey()
   final bool isHiden;
   @override
@@ -396,7 +412,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Product(id: $id, productName: $productName, productFullName: $productFullName, parentGroupId: $parentGroupId, createdAt: $createdAt, groupType: $groupType, productsSearching1: $productsSearching1, productsSearching2: $productsSearching2, productsSearching3: $productsSearching3, productsSearching4: $productsSearching4, price: $price, isHiden: $isHiden, count: $count, imageUrl: $imageUrl, type: $type, makfol: $makfol, priority: $priority, referenceId: $referenceId, description: $description)';
+    return 'Product(id: $id, productName: $productName, productFullName: $productFullName, parentGroupId: $parentGroupId, createdAt: $createdAt, groupType: $groupType, productsSearching1: $productsSearching1, productsSearching2: $productsSearching2, productsSearching3: $productsSearching3, productsSearching4: $productsSearching4, price: $price, newPrice: $newPrice, isHiden: $isHiden, count: $count, imageUrl: $imageUrl, type: $type, makfol: $makfol, priority: $priority, referenceId: $referenceId, description: $description)';
   }
 
   @override
@@ -415,6 +431,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       ..add(DiagnosticsProperty('productsSearching3', productsSearching3))
       ..add(DiagnosticsProperty('productsSearching4', productsSearching4))
       ..add(DiagnosticsProperty('price', price))
+      ..add(DiagnosticsProperty('newPrice', newPrice))
       ..add(DiagnosticsProperty('isHiden', isHiden))
       ..add(DiagnosticsProperty('count', count))
       ..add(DiagnosticsProperty('imageUrl', imageUrl))
@@ -450,6 +467,8 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
             (identical(other.productsSearching4, productsSearching4) ||
                 other.productsSearching4 == productsSearching4) &&
             (identical(other.price, price) || other.price == price) &&
+            (identical(other.newPrice, newPrice) ||
+                other.newPrice == newPrice) &&
             (identical(other.isHiden, isHiden) || other.isHiden == isHiden) &&
             (identical(other.count, count) || other.count == count) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -479,6 +498,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
         productsSearching3,
         productsSearching4,
         price,
+        newPrice,
         isHiden,
         count,
         imageUrl,
@@ -516,6 +536,7 @@ abstract class _Product implements Product {
       final String? productsSearching3,
       final String? productsSearching4,
       required final double price,
+      final double? newPrice,
       final bool isHiden,
       final double? count,
       final String? imageUrl,
@@ -549,6 +570,8 @@ abstract class _Product implements Product {
   String? get productsSearching4;
   @override
   double get price;
+  @override
+  double? get newPrice;
   @override
   bool get isHiden;
   @override

@@ -25,7 +25,7 @@ import 'package:go_router/go_router.dart';
 final _key = GlobalKey<NavigatorState>();
 
 final routeProvider = Provider<GoRouter>((ref) {
-  final authNotifer = ref.watch(authNotifierProvider).value;
+  final authNotifer = ref.watch(authNotifierProvider);
   final versionChecker = ref.watch(versionCheckerProvider);
   return GoRouter(
     observers: [BotToastNavigatorObserver()],
@@ -75,7 +75,7 @@ final routeProvider = Provider<GoRouter>((ref) {
             context: context,
             state: state,
             child:
-                SubGroupPage(key: state.pageKey, group: state.extra as Group)),
+                SubGroupPage(key: state.pageKey, group: state.extra is Map<String, Object?>? Group.fromJson(state.extra as Map<String, Object?>):state.extra  as Group)),
 
         // builder: (context, state) => SubGroupPage(group: state.extra as Group),
       ),
@@ -154,10 +154,13 @@ final routeProvider = Provider<GoRouter>((ref) {
       ),
     ],
     redirect: (context, state) {
-      final isSplash = state.fullPath == SplashPage.routePath;
-      final isAuth = authNotifer?.authStatus == AuthStatus.authorized;
-      final isInit = authNotifer?.authStatus == AuthStatus.initial;
-      final isDownload = state.fullPath == EyadDownloadPage.routePath;
+      return authNotifer.when(data: (data) {
+         final isSplash = state.fullPath == SplashPage.routePath;
+      final isAuth = data.authStatus == AuthStatus.authorized;
+      final isInit = data.authStatus == AuthStatus.initial;
+     final url= Uri.base.fragment;
+      final isDownload = state.fullPath == EyadDownloadPage.routePath||url==EyadDownloadPage.routePath;
+    
       if (isDownload) {
         return EyadDownloadPage.routePath;
       }
@@ -176,6 +179,17 @@ final routeProvider = Provider<GoRouter>((ref) {
         }
       }
       return isAuth ? null : LoginPage.routePath;
+      }, error: (error, stackTrace) {
+        return null;
+      }, loading: () {
+        final isDownload = state.fullPath == EyadDownloadPage.routePath;
+      if (isDownload) {
+        return EyadDownloadPage.routePath;
+      }else{
+        return null;
+      }
+      },);
+     
     },
   );
 });

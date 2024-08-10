@@ -3,6 +3,7 @@ import 'package:ayad/src/data/supabase_product_repository.dart';
 import 'package:ayad/src/models/group.dart';
 import 'package:ayad/src/models/product.dart';
 import 'package:ayad/src/pages/page_template.dart';
+import 'package:ayad/src/providers/currency_provider.dart';
 import 'package:ayad/src/widgets/dynamic_button.dart';
 import 'package:ayad/src/widgets/loading_widget.dart';
 import 'package:ayad/src/widgets/maps_button_widget.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart' as init;
 
 class ProductPage extends ConsumerWidget {
   const ProductPage({super.key, required this.product});
@@ -121,8 +123,27 @@ class ProductPage extends ConsumerWidget {
                         // if (product.productCode != null)
                         //   _buildTitlteInfoWidget(context, appColor,
                         //       "كود المنتج", product.productCode ?? "-"),
-                        _buildTitlteInfoWidget(context, appColor, "سعر المنتج",
-                            "${fixPrice(product.price)}\$"),
+                        if (product.newPrice == null && product.newPrice != 0.0)
+                          Row(
+                            children: [
+                              Text(
+                                "سعر المنتج ",
+                                style: Theme.of(context).textTheme.labelLarge,
+                              ),
+                             Text(
+                               ref.read(currencyFormatProvider(product.price)),
+                                 textDirection: TextDirection.ltr,
+                                 style: Theme.of(context)
+                                     .textTheme
+                                     .labelMedium
+                                     ?.copyWith(color: appColor.redish))
+                            ],
+                          )
+                        // _buildTitlteInfoWidget(context, appColor,
+                        //     "سعر المنتج", init..currency(symbol: "\$").format(product.price))
+
+                        else
+                          _buildTitltePricesWidget(context, appColor),
                         if (product.type != null)
                           _buildTitlteInfoWidget(
                               context, appColor, "النوع", product.type ?? "-"),
@@ -173,7 +194,7 @@ class ProductPage extends ConsumerWidget {
                                                       supabaseProductRepositoryProvider)
                                                   .delete(product.id ?? "");
                                               BotToast.closeAllLoading();
-                                              if(context2.mounted){
+                                              if (context2.mounted) {
                                                 context2.pop();
                                               }
                                               if (context.mounted) {
@@ -196,7 +217,7 @@ class ProductPage extends ConsumerWidget {
                         SizedBox(
                           height: 10.h,
                         ),
-                        if (isAdmin )
+                        if (isAdmin)
                           DynamicButton(
                             type: ButtonTypes.Alternative,
                             title:
@@ -253,5 +274,44 @@ class ProductPage extends ConsumerWidget {
                     ?.copyWith(color: color ?? appColor.redish))
           ])),
     );
+  }
+
+  Widget _buildTitltePricesWidget(BuildContext context, AppColor appColor) {
+    return Container(
+        margin: EdgeInsets.symmetric(vertical: 5.h),
+        child: Row(
+          children: [
+            Text(
+              "السعر : ",
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            Text(
+              "${fixPrice(product.price)}\$",
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: appColor.redish,
+                    decoration: TextDecoration.lineThrough,
+                    fontSize: 18,
+                  ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Icon(
+              Icons.new_releases,
+              color: appColor.greenish,
+              size: 10,
+            ),
+            const SizedBox(
+              width: 3,
+            ),
+            Text(
+              "${fixPrice(product.newPrice ?? 0.0)}\$",
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: appColor.greenish,
+                    fontSize: 18,
+                  ),
+            ),
+          ],
+        ));
   }
 }

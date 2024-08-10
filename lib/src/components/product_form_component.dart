@@ -103,7 +103,14 @@ class ProductFormComponent extends ConsumerWidget {
                 MainTextFieldWidget(
                     type: Type.double,
                     control: "price",
-                    placeholder: "سعر المنتج"),
+                    placeholder: " سعر المنتج الاساسي"),
+                SizedBox(
+                  height: 10.h,
+                ),
+                MainTextFieldWidget(
+                    type: Type.double,
+                    control: "newPrice",
+                    placeholder: "سعر المنتج الجديد "),
                 SizedBox(
                   height: 10.h,
                 ),

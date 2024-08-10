@@ -21,6 +21,7 @@ class Product with _$Product {
       String? productsSearching3,
       String? productsSearching4,
       required double price,
+      double? newPrice,
       @Default(false) bool isHiden,
       double? count,
       String? imageUrl,

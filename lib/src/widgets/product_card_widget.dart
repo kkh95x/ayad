@@ -1,5 +1,6 @@
 import 'package:ayad/src/models/product.dart';
 import 'package:ayad/gen/assets.gen.dart';
+import 'package:ayad/src/providers/currency_provider.dart';
 import 'package:ayad/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,9 @@ class ProductCardWidget extends ConsumerWidget {
                   shape: BoxShape.circle,
                 ),
                 child: Text(
-                  "${product.price}\$",
+                  ref.read(currencyFormatProvider(product.price)),
+                // format.format(product.price),
+                textDirection: TextDirection.ltr,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: appColor.greenish, fontWeight: FontWeight.bold),
                 ),
@@ -103,6 +106,8 @@ class ProductCardWidget extends ConsumerWidget {
       ),
     );
   }
+  
+
 }
 
 class CustomBackgroundPainter extends CustomPainter {

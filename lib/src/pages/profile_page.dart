@@ -120,20 +120,21 @@ class ProfilePage extends ConsumerWidget {
           SizedBox(
             height: 10.h,
           ),
-          if(kIsWeb)...[
+          // if(kIsWeb)...[
           DynamicButton(
             // icon: Icon(
             //   Icons.location_on,
             //   color: appColor.whiteish,
             // ),
-            title: "مشاركة التطبيق",
+            title: "صفحة التحميل",
             onPressed: () async {
               context.push(EyadDownloadPage.routePath);
             },
           ),
           SizedBox(
             height: 10.h,
-          ),],
+          ),
+          // ],
           DynamicButton(
             // icon: Icon(
             //   Icons.location_on,

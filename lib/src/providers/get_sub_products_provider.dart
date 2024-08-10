@@ -132,6 +132,7 @@ class ProductsNotifer extends StateNotifier<AsyncValue<List<Product>>> {
       type: formGroup.control("type").value,
       price: formGroup.control("price").value,
       priority: formGroup.control("priority").value,
+      newPrice:formGroup.control("newPrice").value
     );
 
     await _supabaseProductRepository.update(newProduct);
